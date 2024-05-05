@@ -10,7 +10,7 @@ const g = require('../../gunvals.js');
 //Base for Nesters, this is for creating them so I don't have to go back into bosses for them.
 
 Class.nestBase = {
-    PARENT: ["miniboss"],
+    PARENT: "miniboss",
     LABEL: "Nest Base",
     COLOR: "purple",
     UPGRADE_COLOR: "purple",
@@ -54,7 +54,7 @@ for(let i = 0; i < 5; i++) {
 
 //Undertow Nester.
 Class.nestPurger = {
-    PARENT: ["miniboss"],
+    PARENT: "miniboss",
     LABEL: "Nest Purger",
     COLOR: "purple",
     UPGRADE_COLOR: "purple",
@@ -98,7 +98,7 @@ for(let i = 0; i < 5; i++) {
 
 //Firework Nester.
 Class.nestGrenadier = {
-    PARENT: ["miniboss"],
+    PARENT: "miniboss",
     LABEL: "Nest Grenadier",
     COLOR: "purple",
     UPGRADE_COLOR: "purple",
@@ -137,7 +137,7 @@ for(let i = 0; i < 5; i++) {
 
 // Launcher Nester
 Class.nestBrigadier = {
-    PARENT: ["miniboss"],
+    PARENT: "miniboss",
     LABEL: "Nest Brigadier",
     COLOR: "purple",
     UPGRADE_COLOR: "purple",
@@ -179,7 +179,7 @@ for(let i = 0; i < 5; i++) {
 
 // Spawner nester
 Class.nestIndustry = {
-    PARENT: ["miniboss"],
+    PARENT: "miniboss",
     LABEL: "Nest Industry",
     UPGRADE_LABEL: "Nest Industry",
     UPGRADE_COLOR: 'purple',
@@ -234,7 +234,7 @@ Class.nestIndustry.GUNS[9].PROPERTIES.TYPE = ["sentinelCrossbow", {CLEAR_ON_MAST
 
 // Long range nester
 Class.nestSynthesizer = {
-    PARENT: ["miniboss"],
+    PARENT: "miniboss",
     LABEL: "Nest Synthesizer",
     UPGRADE_LABEL: "Nest Synthesizer",
     UPGRADE_COLOR: 14,

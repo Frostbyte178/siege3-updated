@@ -460,7 +460,7 @@ Class.trueBomb = {
 }
 Class.autoTrap = makeAuto(Class.trap, "autoTrap", 'droneAutoTurret');
 Class.chargerTrap = {
-    PARENT: ["unsetTrap"],
+    PARENT: "unsetTrap",
     LABEL: "Charger",
     GUNS: [],
     TURRETS: [{
@@ -522,7 +522,7 @@ Class.homingMissile = {
     }]
 }
 Class.fireworkRocket = {
-    PARENT: ["missile"],
+    PARENT: "missile",
     LABEL: "Firework Rocket",
     INDEPENDENT: true,
     GUNS: [{
@@ -552,7 +552,7 @@ for(let i = 0; i < 16; i++) {
 
 // Turrets
 Class.fireworkTurret = {
-    PARENT: ["genericTank"],
+    PARENT: "genericTank",
     LABEL: "Skimmer",
     BODY: { FOV: 2 * base.FOV },
     COLOR: -1,
@@ -572,7 +572,7 @@ Class.fireworkTurret = {
     ],
 };
 Class.builderTurret = {
-    PARENT: ["genericTank"],
+    PARENT: "genericTank",
     INDEPENDENT: true,
     COLOR: 'purple',
     GUNS: [
@@ -589,7 +589,7 @@ Class.builderTurret = {
     ],
 };
 Class.superNailgunTurret = {
-    PARENT: ["genericTank"],
+    PARENT: "genericTank",
     LABEL: "Nailgun",
     BODY: { FOV: 2 * base.FOV },
     COLOR: -1,
@@ -621,7 +621,7 @@ Class.superNailgunTurret = {
     ],
 }
 Class.sidewinderTurret = {
-    PARENT: ["genericTank"],
+    PARENT: "genericTank",
     LABEL: "Nailgun",
     BODY: { FOV: 2 * base.FOV },
     COLOR: -1,
@@ -641,7 +641,7 @@ Class.sidewinderTurret = {
     ],
 }
 Class.homingMissileTurret = {
-    PARENT: ["genericTank"],
+    PARENT: "genericTank",
     BODY: { FOV: 2 * base.FOV },
     COLOR: -1,
     INDEPENDENT: true,
@@ -663,7 +663,7 @@ Class.homingMissileTurret = {
     ],
 }
 Class.undertowTurret = {
-    PARENT: ["genericTank"],
+    PARENT: "genericTank",
     BODY: { FOV: 2 * base.FOV },
     COLOR: -1,
     INDEPENDENT: true,
@@ -683,7 +683,7 @@ Class.undertowTurret = {
     ],
 }
 Class.nestIndustryTop = {
-    PARENT: ["genericTank"],
+    PARENT: "genericTank",
     COLOR: 14,
     INDEPENDENT: true,
     CONTROLLERS: [["spin", { independent: true, speed: -0.05 }]],
@@ -701,7 +701,7 @@ for (let i = 0; i < 10; i++) {
     })
 }
 Class.flameTurret = {
-    PARENT: ["genericTank"],
+    PARENT: "genericTank",
     LABEL: "Flamethrower",
     COLOR: 14,
     INDEPENDENT: true,
@@ -719,7 +719,7 @@ Class.flameTurret = {
     ],
 };
 Class.predatorTurret = {
-    PARENT: ["genericTank"],
+    PARENT: "genericTank",
     LABEL: "Flamethrower",
     CONTROLLERS: ["nearestDifferentMaster"],
     COLOR: 14,
@@ -747,7 +747,7 @@ Class.predatorTurret = {
     ],
 };
 Class.culverinTurret = {
-    PARENT: ["genericTank"],
+    PARENT: "genericTank",
     LABEL: "Shotgun",
     CONTROLLERS: ["nearestDifferentMaster"],
     COLOR: 14,

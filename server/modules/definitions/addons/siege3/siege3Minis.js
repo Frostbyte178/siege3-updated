@@ -8,7 +8,7 @@ const g = require('../../gunvals.js');
 // Prebuild weapons
 
 Class.desmosTurret = {
-    PARENT: ["genericTank"],
+    PARENT: "genericTank",
     LABEL: "Turret",
     BODY: {
         FOV: 0.5,
@@ -47,7 +47,7 @@ Class.siege3sentries.PROPS = [{
 
 // Sentries
 Class.sentryThruster = {
-    PARENT: ["sentry"],
+    PARENT: "sentry",
     UPGRADE_LABEL: "Thruster Sentry",
     UPGRADE_COLOR: "pink",
     GUNS: [
@@ -71,7 +71,7 @@ Class.sentryThruster = {
 };
 
 Class.sentryRoadspike = {
-    PARENT: ["sentry"],
+    PARENT: "sentry",
     UPGRADE_LABEL: "Caltrop Sentry",
     UPGRADE_COLOR: "pink",
     GUNS: [
@@ -93,7 +93,7 @@ Class.sentryRoadspike = {
 // makeAuto was being weird.
 
 Class.sentryDesmos = {
-    PARENT: ["sentry"],
+    PARENT: "sentry",
     UPGRADE_LABEL: "Desmos Sentry",
     UPGRADE_COLOR: "pink",
     TURRETS: [
@@ -108,7 +108,7 @@ Class.sentryDesmos = {
 // Sentinels
 
 Class.sentinelTriplex = {
-    PARENT: ["sentinel"],
+    PARENT: "sentinel",
     UPGRADE_LABEL: "Triplex Sentinel",
     UPGRADE_COLOR: "purple",
     GUNS: [
@@ -151,7 +151,7 @@ Class.sentinelTriplex = {
 };
 
 Class.sentinelBees = {
-    PARENT: ["sentinel"],
+    PARENT: "sentinel",
     UPGRADE_LABEL: "Bee Sentinel",
     UPGRADE_COLOR: "purple",
     GUNS: [
@@ -191,7 +191,7 @@ Class.sentinelBees = {
 // It's 12:55am I don't feel like being creative.
 
 Class.sentinelBomber = {
-    PARENT: ["sentinel"],
+    PARENT: "sentinel",
     UPGRADE_LABEL: "Bomb Sentinel",
     UPGRADE_COLOR: "purple",
     GUNS: [

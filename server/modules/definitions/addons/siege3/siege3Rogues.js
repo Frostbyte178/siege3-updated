@@ -118,7 +118,7 @@ Class.rogueBalustrade = {
 
 // Septa rogues
 Class.rogueBattalionTurret = {
-    PARENT: ["genericTank"],
+    PARENT: "genericTank",
     LABEL: "Turret",
     INDEPENDENT: true,
     COLOR: "grey",
@@ -475,7 +475,7 @@ Class.roguePioneerPrimaryTurret = {
     ],
 }
 Class.roguePioneerSecondaryTurret = {
-    PARENT: ["genericTank"],
+    PARENT: "genericTank",
     BODY: { FOV: 2 * base.FOV },
     COLOR: 16,
     INDEPENDENT: true,
