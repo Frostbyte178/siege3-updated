@@ -1,4 +1,4 @@
-const { combineStats, makeAuto } = require('../../facilitators.js');
+const { combineStats, makeAuto, weaponArray } = require('../../facilitators.js');
 const { base, gunCalcNames } = require('../../constants.js');
 const g = require('../../gunvals.js');
 
@@ -581,7 +581,7 @@ Class.builderTurret = {
         }, {
             POSITION: [2, 12, 1.1, 18, 0, 0, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.trap, g.pounder, g.setTrap, { reload: 0.5 }, { reload: 0.5 }, { speed: 2.5 }]),
+                SHOOT_SETTINGS: combineStats([g.trap, g.pounder, g.setTrap, { speed: 2.5 }]),
                 TYPE: "unsetTrap",
                 AUTOFIRE: true,
             },
@@ -687,18 +687,18 @@ Class.nestIndustryTop = {
     COLOR: 14,
     INDEPENDENT: true,
     CONTROLLERS: [["spin", { independent: true, speed: -0.05 }]],
-    GUNS: [],
-};
-for (let i = 0; i < 10; i++) {
-    Class.nestIndustryTop.GUNS.push({
-        POSITION: [7, 7.5, 0.6, 7, 0, 36 * i, i % 2 / 2],
+    GUNS: weaponArray({
+        POSITION: [7, 7.5, 0.6, 7, 0, 0, 0],
         PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.swarm, g.flankGuard]),
-            TYPE: ["swarm", {INDEPENDENT: true}],
+            SHOOT_SETTINGS: combineStats([g.swarm, g.flankGuard, g.flankGuard]),
+            TYPE: 'autoswarm',
             STAT_CALCULATOR: gunCalcNames.swarm,
             AUTOFIRE: true,
         },
-    })
+    }, 10, 0.5),
+};
+for (let i = 0; i < 10; i++) {
+    Class.nestIndustryTop.GUNS.push()
 }
 Class.flameTurret = {
     PARENT: "genericTank",
