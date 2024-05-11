@@ -20,7 +20,7 @@ Class.genericNester = {
     VALUE: 3e5,
     BODY: {
         FOV: 1.3,
-        SPEED: base.SPEED * 0.25,
+        SPEED: base.SPEED * 0.4,
         HEALTH: base.HEALTH * 9,
         SHIELD: base.SHIELD * 1.5,
         REGEN: base.REGEN,

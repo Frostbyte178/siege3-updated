@@ -25,7 +25,7 @@ Class.basicAutoGun = {
         {
             POSITION: [16.5, 8, 1, 0, 0, 0, 0.1],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.tripleShot, {range: 1.15}]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, {range: 1.15}]),
                 TYPE: "bullet"
             }
         }
@@ -164,7 +164,7 @@ Class.eliteAssembler = {
     UPGRADE_COLOR: "pink",
     FACING_TYPE: "toTarget",
     FORCE_TWIGGLE: true,
-    CONTROLLERS: [["drag", {range: 350}], ["assemble", {assembleRange: 350, hideDelay: 2500, ahead: 9}]],
+    CONTROLLERS: [["drag", {range: 350}], ["assemble", {assembleRange: 350, hideDelay: 3100, ahead: 9}]],
     SKILL: skillSet({
         rld: 0.7,
         dam: 0.5,
@@ -179,7 +179,6 @@ Class.eliteAssembler = {
     }),
     BODY: {
         FOV: 2,
-        SPEED: 0.125 * base.SPEED,
     },
     AI: { STRAFE: false, IGNORE_SHAPES: true },
     IGNORED_BY_AI: true,
@@ -201,7 +200,15 @@ Class.eliteAssembler = {
         {
             POSITION: [2.5, 14, 0, 0, 360, 1],
             TYPE: 'assemblerDot'
-        }
+        },
+        {
+            POSITION: [13, 6, 0, 120, 170, 0],
+            TYPE: "basicAutoGun"
+        },
+        {
+            POSITION: [13, 6, 0, -120, 170, 0],
+            TYPE: "basicAutoGun"
+        },
     ]
 }
 

@@ -24,7 +24,7 @@ Class.elite = {
     VALUE: 15e4,
     BODY: {
         FOV: 1.25,
-        SPEED: 0.1 * base.SPEED,
+        SPEED: 0.5 * base.SPEED,
         HEALTH: 7 * base.HEALTH,
         DAMAGE: 2.5 * base.DAMAGE,
     },
@@ -518,7 +518,7 @@ Class.nestKeeper = {
     SIZE: 50,
     BODY: {
         FOV: 1.3,
-        SPEED: base.SPEED * 0.25,
+        SPEED: base.SPEED * 0.4,
         HEALTH: base.HEALTH * 9,
         SHIELD: base.SHIELD * 1.5,
         REGEN: base.REGEN,
@@ -556,7 +556,7 @@ Class.nestWarden = {
     SIZE: 50,
     BODY: {
         FOV: 1.3,
-        SPEED: base.SPEED * 0.25,
+        SPEED: base.SPEED * 0.4,
         HEALTH: base.HEALTH * 9,
         SHIELD: base.SHIELD * 1.5,
         REGEN: base.REGEN,
@@ -595,7 +595,7 @@ Class.nestGuardian = {
     SIZE: 50,
     BODY: {
         FOV: 1.3,
-        SPEED: base.SPEED * 0.25,
+        SPEED: base.SPEED * 0.4,
         HEALTH: base.HEALTH * 9,
         SHIELD: base.SHIELD * 1.5,
         REGEN: base.REGEN,
