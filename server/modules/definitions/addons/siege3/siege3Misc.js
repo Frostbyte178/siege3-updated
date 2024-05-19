@@ -95,7 +95,7 @@ ioTypes.bombingRun = io_bombingRun;
 class io_drag extends IO {
     constructor(body, opts = {}) {
         super(body);
-        this.idealRange = opts.range ?? 140;
+        this.idealRange = opts.range ?? 400;
     }
     think(input) {
         if (input.target != null && input.main) {

@@ -5,7 +5,7 @@ require('./generics.js');
 
 Class.miniboss = {
     PARENT: "genericBoss",
-    CONTROLLERS: ["nearestDifferentMaster", "minion", "canRepel"],
+    CONTROLLERS: ["nearestDifferentMaster", "drag"],
     AI: { NO_LEAD: true, SKYNET: true },
 }
 Class.ramMiniboss = {
