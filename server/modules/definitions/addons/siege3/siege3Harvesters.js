@@ -15,12 +15,12 @@ const harvesterStats = {
     // DAMAGE: 2.5 * base.DAMAGE,
 };
 
-function addThruster(recoilFactor = 4) {
+function addThruster(recoilFactor = 2) {
     return [
         {
             POSITION: [12.5, 14, -0.5, 3, 0, 180, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.machineGun, g.flankGuard, g.triAngle, g.thruster, {reload: 0.5, recoil: recoilFactor, size: 0.45}]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.machineGun, g.flankGuard, g.triAngle, g.thruster, {reload: 0.7, recoil: recoilFactor, size: 0.45}]),
                 TYPE: "bullet",
             },
         }, {
@@ -71,7 +71,7 @@ Class.furrower = {
         }, {
             POSITION: [10, 6.5, 1.4, 1.5, 7, 12, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.launcher, {range: 0.4, speed: 2, maxSpeed: 0.4, size: 1.2, reload: 2.2, damage: 0.8, recoil: 0.15}]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.launcher, {range: 0.3, speed: 2, maxSpeed: 0.4, size: 1.2, reload: 2.2, damage: 0.8, recoil: 0.15}]),
                 TYPE: "trueBomb",
                 STAT_CALCULATOR: gunCalcNames.sustained,
                 ALT_FIRE: true,
@@ -81,7 +81,7 @@ Class.furrower = {
         }, {
             POSITION: [10, 6.5, 1.4, 1.5, -7, -12, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.launcher, {range: 0.4, speed: 2, maxSpeed: 0.4, size: 1.2, reload: 2.2, damage: 0.8, recoil: 0.15}]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.launcher, {range: 0.3, speed: 2, maxSpeed: 0.4, size: 1.2, reload: 2.2, damage: 0.8, recoil: 0.15}]),
                 TYPE: "trueBomb",
                 STAT_CALCULATOR: gunCalcNames.sustained,
                 ALT_FIRE: true,
@@ -94,7 +94,7 @@ Class.furrower = {
                 ALT_FIRE: true,
             },
         },
-        ...addThruster(4),
+        ...addThruster(2),
     ],
     TURRETS: [
         {
@@ -118,7 +118,7 @@ Class.pressurizerTurret = {
         }, {
             POSITION: [13, 12.5, 1.4, 5, 0, 0, 0.1],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.launcher, {range: 0.65, speed: 2.5, maxSpeed: 0.55, size: 1.4, reload: 1.8, recoil: 0.15}]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.launcher, {damage: 0.8, range: 0.65, speed: 2.5, maxSpeed: 0.55, size: 1.4, reload: 1.8, recoil: 0.15}]),
                 TYPE: "trueBomb",
                 STAT_CALCULATOR: gunCalcNames.sustained,
             },
@@ -143,7 +143,7 @@ Class.pressurizer = {
         }, {
             POSITION: [2.5, 8, 1.55, 12.5, 0, 60, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.trap, { speed: 0.7, maxSpeed: 0.7 }, {size: 0.85, damage: 0.8, reload: 0.5}]),
+                SHOOT_SETTINGS: combineStats([g.trap, { speed: 0.7, maxSpeed: 0.7 }, {size: 0.95, damage: 0.8}]),
                 TYPE: "trap",
                 STAT_CALCULATOR: gunCalcNames.trap,
                 AUTOFIRE: true,
@@ -153,13 +153,13 @@ Class.pressurizer = {
         }, {
             POSITION: [2.5, 8, 1.55, 12.5, 0, -60, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.trap, { speed: 0.7, maxSpeed: 0.7 }, {size: 0.85, damage: 0.8, reload: 0.5}]),
+                SHOOT_SETTINGS: combineStats([g.trap, { speed: 0.7, maxSpeed: 0.7 }, {size: 0.95, damage: 0.8}]),
                 TYPE: "trap",
                 STAT_CALCULATOR: gunCalcNames.trap,
                 AUTOFIRE: true,
             }
         },
-        ...addThruster(3.5),
+        ...addThruster(1.8),
     ],
     TURRETS: [
         {
@@ -187,19 +187,19 @@ Class.stockyard = {
         { // Shockwave
             POSITION: [14, 12, -0.7, 3, 0, 0, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.machineGun, g.machineGun, g.machineGun, {speed: 0.25, health: 2, density: 3, spray: 0.5, size: 0.5, shudder: 0.1}]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.machineGun, g.machineGun, {speed: 0.5, health: 2, density: 3, spray: 0.5, size: 0.5, shudder: 0.1}]),
                 TYPE: "bullet",
             }
         }, { // Thrusters
             POSITION: [12.5, 7.5, -0.5, 1, -5, 165, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.machineGun, g.flankGuard, g.triAngle, g.thruster, {reload: 0.5, recoil: 1.8, size: 0.8}]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.machineGun, g.flankGuard, g.triAngle, g.thruster, {reload: 0.7, recoil: 1, size: 0.8}]),
                 TYPE: "bullet",
             },
         }, {
             POSITION: [12.5, 7.5, -0.5, 1, 5, -165, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.machineGun, g.flankGuard, g.triAngle, g.thruster, {reload: 0.5, recoil: 1.8, size: 0.8}]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.machineGun, g.flankGuard, g.triAngle, g.thruster, {reload: 0.7, recoil: 1, size: 0.8}]),
                 TYPE: "bullet",
             },
         }, {
@@ -242,8 +242,8 @@ Class.irrigator = {
         { // BR Missile
             POSITION: [9, 5.5, -0.7, 7, 5, 28, 0.18],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.launcher, g.rocketeer, {speed: 8, damage: 0.3, size: 0.7, range: 1.1, reload: 2.5}]),
-                TYPE: ["homingMissile", {CONTROLLERS: [["missileGuidance", {slowTurnDelay: 800, fastTurnDelay: 1700}]]}],
+                SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.launcher, g.rocketeer, {speed: 8, damage: 0.4, size: 0.7, range: 1.1, reload: 3.5}]),
+                TYPE: ["homingMissile", {BODY: {RECOIL_MULTIPLIER: 0.35}, CONTROLLERS: [["missileGuidance", {slowTurnDelay: 800, fastTurnDelay: 1700}]]}],
                 STAT_CALCULATOR: gunCalcNames.sustained,
                 ALT_FIRE: true,
             },
@@ -254,8 +254,8 @@ Class.irrigator = {
         }, { // BL Missile
             POSITION: [9, 5.5, -0.7, 7, -5, -28, 0.18],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.launcher, g.rocketeer, {speed: 8, damage: 0.3, size: 0.7, range: 1.1, reload: 2.5}]),
-                TYPE: ["homingMissile", {CONTROLLERS: [["missileGuidance", {slowTurnDelay: 800, fastTurnDelay: 1700}]]}],
+                SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.launcher, g.rocketeer, {speed: 8, damage: 0.4, size: 0.7, range: 1.1, reload: 3.5}]),
+                TYPE: ["homingMissile", {BODY: {RECOIL_MULTIPLIER: 0.35}, CONTROLLERS: [["missileGuidance", {slowTurnDelay: 800, fastTurnDelay: 1700}]]}],
                 STAT_CALCULATOR: gunCalcNames.sustained,
                 ALT_FIRE: true,
             },
@@ -266,8 +266,8 @@ Class.irrigator = {
         }, { // FR Missile
             POSITION: [9, 5.5, -0.7, 8.5, 2, 9, 0.06],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.launcher, g.rocketeer, {speed: 8, damage: 0.3, size: 0.7, range: 1.1, reload: 2.5}]),
-                TYPE: ["homingMissile", {CONTROLLERS: [["missileGuidance", {slowTurnDelay: 800, fastTurnDelay: 1400}]]}],
+                SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.launcher, g.rocketeer, {speed: 8, damage: 0.4, size: 0.7, range: 1.1, reload: 3.5}]),
+                TYPE: ["homingMissile", {BODY: {RECOIL_MULTIPLIER: 0.35}, CONTROLLERS: [["missileGuidance", {slowTurnDelay: 800, fastTurnDelay: 1400}]]}],
                 STAT_CALCULATOR: gunCalcNames.sustained,
                 ALT_FIRE: true,
             },
@@ -278,8 +278,8 @@ Class.irrigator = {
         }, { // FL Missile
             POSITION: [9, 5.5, -0.7, 8.5, -2, -9, 0.06],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.launcher, g.rocketeer, {speed: 8, damage: 0.3, size: 0.7, range: 1.1, reload: 2.5}]),
-                TYPE: ["homingMissile", {CONTROLLERS: [["missileGuidance", {slowTurnDelay: 800, fastTurnDelay: 1400}]]}],
+                SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.launcher, g.rocketeer, {speed: 8, damage: 0.5, size: 0.7, range: 1.1, reload: 3.5}]),
+                TYPE: ["homingMissile", {BODY: {RECOIL_MULTIPLIER: 0.35}, CONTROLLERS: [["missileGuidance", {slowTurnDelay: 800, fastTurnDelay: 1400}]]}],
                 STAT_CALCULATOR: gunCalcNames.sustained,
                 ALT_FIRE: true,
             },
@@ -288,7 +288,7 @@ Class.irrigator = {
         }, {
             POSITION: [13.5, 6, -0.55, -1.5, -2, -9, 0],
         }, 
-        ...addThruster(3.5)
+        ...addThruster(2)
     ],
     TURRETS: [
         {
@@ -297,7 +297,7 @@ Class.irrigator = {
         }
     ]
 }
-g.quarterstaff = { reload: 2, health: 1.6, speed: 1.3, spray: 1.5 }
+g.quarterstaff = { reload: 3, health: 1.6, speed: 1.3, spray: 1.5 }
 Class.quarterstaff = {
     PARENT: "genericHarvester",
     LABEL: "Quarterstaff",
@@ -438,13 +438,13 @@ Class.quarterstaff = {
         }, { // Thrusters
             POSITION: [12.5, 7.5, -0.5, 1, -5, 160, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.machineGun, g.flankGuard, g.triAngle, g.thruster, {reload: 0.5, recoil: 2.2, size: 0.8}]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.machineGun, g.flankGuard, g.triAngle, g.thruster, {reload: 0.7, recoil: 1.1, size: 0.8}]),
                 TYPE: "bullet",
             },
         }, {
             POSITION: [12.5, 7.5, -0.5, 1, 5, -160, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.machineGun, g.flankGuard, g.triAngle, g.thruster, {reload: 0.5, recoil: 2.2, size: 0.8}]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.machineGun, g.flankGuard, g.triAngle, g.thruster, {reload: 0.7, recoil: 1.1, size: 0.8}]),
                 TYPE: "bullet",
             },
         }, {
@@ -454,9 +454,9 @@ Class.quarterstaff = {
         }, { // Bomb launcher
             POSITION: [10, 7, 1, 9, 0, 180, 0],
         }, {
-            POSITION: [11, 10.5, 1.4, 5, 0, 180, 0.4],
+            POSITION: [11, 10.5, 1.4, 5, 0, 180, 0.8],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.launcher, {range: 0.25, speed: 1.9, maxSpeed: 0.4, size: 1.4, reload: 3, recoil: 0.6}]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.launcher, {range: 0.22, speed: 1.9, maxSpeed: 0.4, size: 1.4, reload: 3, recoil: 0.6}]),
                 TYPE: "trueBomb",
                 STAT_CALCULATOR: gunCalcNames.sustained,
                 ALT_FIRE: true,
@@ -470,7 +470,7 @@ Class.quarterstaff = {
         }
     ]
 }
-g.shepherd = {range: 0.25, speed: 1.5, maxSpeed: 0.2, size: 1.2, reload: 0.45, damage: 0.5, recoil: 0.15}
+g.shepherd = {range: 0.25, speed: 1.5, maxSpeed: 0.2, size: 1.2, reload: 0.7, recoil: 0.15}
 Class.shepherd = {
     PARENT: "genericHarvester",
     LABEL: "Shepherd",
@@ -482,30 +482,10 @@ Class.shepherd = {
     },
     AI: {IGNORE_SHAPES: true, BLIND: true, SKYNET: true, chase: true},
     GUNS: [
-        { // Bomb launchers
-            POSITION: [5, 6, 1, 7.5, 5, 17, 0],
+        { // Bomb launcher
+            POSITION: [7.5, 7.75, 1, 12.5, 0, 0, 0],
         }, {
-            POSITION: [10, 7.5, 1.4, 0.5, 5, 17, 0.5],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.launcher, g.shepherd]),
-                TYPE: "trueBomb",
-                STAT_CALCULATOR: gunCalcNames.sustained,
-                ALT_FIRE: true,
-            },
-        }, {
-            POSITION: [5, 6, 1, 7.5, -5, -17, 0],
-        }, {
-            POSITION: [10, 7.5, 1.4, 0.5, -5, -17, 0.5],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.launcher, g.shepherd]),
-                TYPE: "trueBomb",
-                STAT_CALCULATOR: gunCalcNames.sustained,
-                ALT_FIRE: true,
-            },
-        }, {
-            POSITION: [5, 6, 1, 12.5, 0, 0, 0],
-        }, {
-            POSITION: [10, 7.5, 1.4, 5.5, 0, 0, 0],
+            POSITION: [12, 10, 1.4, 5.5, 0, 0, 0],
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.launcher, g.shepherd]),
                 TYPE: "trueBomb",
@@ -513,7 +493,7 @@ Class.shepherd = {
                 ALT_FIRE: true,
             },
         },
-        ...addThruster(3.7),
+        ...addThruster(2),
     ],
     TURRETS: [
         {
@@ -533,7 +513,7 @@ Class.sniperPillboxTurret = {
         {
             POSITION: [29, 10, 1, 0, 0, 0, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.sniper, g.assassin, g.minionGun, g.turret, g.power, g.autoTurret, { density: 0.1 }, {health: 1.3, speed: 0.8, maxSpeed: 0.8, range: 1.75}]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.sniper, g.assassin, g.minionGun, g.turret, g.power, g.autoTurret, { density: 0.1 }, {reload: 1.2, health: 1.55, speed: 0.8, maxSpeed: 0.8, range: 1.75}]),
                 TYPE: "bullet",
             },
         }, {
@@ -594,7 +574,7 @@ Class.scarecrow = {
         }, {
             POSITION: [3, 8, 1.5, 13, 0, 60, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.trap, g.setTrap, g.pounder, {speed: 1.3}]),
+                SHOOT_SETTINGS: combineStats([g.trap, g.setTrap, g.pounder, {reload: 1.3, speed: 1.3}]),
                 TYPE: "sniperPillbox",
                 STAT_CALCULATOR: gunCalcNames.trap,
                 AUTOFIRE: true,
@@ -604,13 +584,13 @@ Class.scarecrow = {
         }, {
             POSITION: [3, 8, 1.5, 13, 0, -60, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.trap, g.setTrap, g.pounder, {speed: 1.3}]),
+                SHOOT_SETTINGS: combineStats([g.trap, g.setTrap, g.pounder, {reload: 1.3, speed: 1.3}]),
                 TYPE: "sniperPillbox",
                 STAT_CALCULATOR: gunCalcNames.trap,
                 AUTOFIRE: true,
             }
         },
-        ...addThruster(2.6)
+        ...addThruster(1.6)
     ],
     TURRETS: [
         {
@@ -632,7 +612,7 @@ Class.cultivatorTurret = {
         }, {
             POSITION: [18, 14, 1, 0, 0, 0, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.artillery, g.artillery, g.skimmer, {health: 1.1}]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.artillery, g.artillery, g.skimmer, {reload: 1.2, health: 1.3}]),
                 TYPE: "missile",
                 STAT_CALCULATOR: gunCalcNames.sustained,
             },
@@ -659,13 +639,13 @@ Class.cultivator = {
         }, { // Thrusters
             POSITION: [12.5, 7.5, -0.5, 1, -5, 165, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.machineGun, g.flankGuard, g.triAngle, g.thruster, {reload: 0.5, recoil: 1.7, size: 0.8}]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.machineGun, g.flankGuard, g.triAngle, g.thruster, {reload: 0.7, recoil: 0.85, size: 0.8}]),
                 TYPE: "bullet",
             },
         }, {
             POSITION: [12.5, 7.5, -0.5, 1, 5, -165, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.machineGun, g.flankGuard, g.triAngle, g.thruster, {reload: 0.5, recoil: 1.7, size: 0.8}]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.machineGun, g.flankGuard, g.triAngle, g.thruster, {reload: 0.7, recoil: 0.85, size: 0.8}]),
                 TYPE: "bullet",
             },
         }, {

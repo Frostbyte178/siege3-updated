@@ -200,7 +200,7 @@ Class.sentinelBomber = {
         }, {
             POSITION: [15, 12.5, 1.3, 0, 0, 0, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.artillery, { reload: 1.5 }, {range: 0.8}]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.artillery, { reload: 2 }, {range: 0.8}]),
                 TYPE: "trueBomb",
             },
         },

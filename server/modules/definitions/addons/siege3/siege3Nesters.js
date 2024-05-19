@@ -41,7 +41,7 @@ Class.nestPurger = {
         }, {
             POSITION: [1.5, 8, 1.2, 11, 0, 36, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.trap, g.setTrap, { speed: 0.5, maxSpeed: 0.5 }, { speed: 0.7, maxSpeed: 0.7 }, { reload: 0.5 }, { reload: 0.5 }, { size: 0.5 } ]),
+                SHOOT_SETTINGS: combineStats([g.trap, { reload: 1.75, health: 1.5, range: 0.7, speed: 0.5, maxSpeed: 0.5, size: 0.65, recoil: 0 } ]),
                 TYPE: "autoTrap",
                 STAT_CALCULATOR: gunCalcNames.trap,
             },
@@ -70,7 +70,7 @@ Class.nestGrenadier = {
         }, {
             POSITION: [1.5, 7.5, 1.3, 11, 0, 36, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.machineGun, g.hexaTrapper, { shudder: 0.75, size: 0.25 } ]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.machineGun, g.hexaTrapper, { shudder: 0.75, size: 0.25, recoil: 0 } ]),
                 TYPE: "trap"
             },
         }
@@ -100,7 +100,7 @@ Class.nestBrigadier = {
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.launcher, g.pounder, g.destroyer, { speed: 0.78, maxSpeed: 0.125, reload: 0.7, damage: 0.17, health: 7, size: 0.85, range: 1.3 } ]),
                 TYPE: "bigminimissile",
-                STAT_CALCULATOR: gunCalcNames.block
+                STAT_CALCULATOR: gunCalcNames.sustained
             },
         }
     ], 5),
@@ -166,7 +166,7 @@ Class.nestSynthesizer = {
             POSITION: [12, 11, -1.3, 0, 0, 36, 0],
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.sniper, g.sniper, g.hunter, g.sidewinder, {range: 2, size: 0.55}]),
-                TYPE: "snake",
+                TYPE: "snakeOld",
                 STAT_CALCULATOR: gunCalcNames.sustained,
                 AUTOFIRE: true,
             },
@@ -210,4 +210,4 @@ Class.nestPurifier = {
 }
 
 //Push Nester to Nesters.
-Class.nesters.UPGRADES_TIER_0.push("nestPurger", "nestGrenadier", "nestBrigadier", "nestIndustry", "nestSynthesizer", 'nestPurifier', 'nestBreeder');
+Class.nesters.UPGRADES_TIER_0.push("nestPurger", "nestGrenadier", "nestBrigadier", "nestIndustry", "nestSynthesizer", 'nestPurifier');

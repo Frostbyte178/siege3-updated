@@ -179,7 +179,7 @@ Class.rogueCoalitionTurret = {
         }, {
             POSITION: [17, 15, 1, 0, 0, 0, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.destroyer, g.artillery, g.artillery, g.skimmer, {damage: 0.55}]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.destroyer, g.artillery, g.artillery, g.skimmer, {reload: 2, damage: 1.1}]),
                 TYPE: "missile",
                 STAT_CALCULATOR: gunCalcNames.sustained,
                 AUTOFIRE: true,
@@ -209,7 +209,7 @@ Class.rogueCoalition = {
         }, {
             POSITION: [1, 6, 1.15, 11.5, 0, 360/7*(i+0.5), 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.trap, g.setTrap, g.construct, g.pounder]),
+                SHOOT_SETTINGS: combineStats([g.trap, g.setTrap, g.construct, g.pounder, {range: 0.9}]),
                 TYPE: "unsetTrap",
                 STAT_CALCULATOR: gunCalcNames.block,
             }
@@ -326,7 +326,7 @@ Class.rogueAlchemistSecondaryTurret = {
         {
             POSITION: [11, 13, 1.5, 9, 0, 0, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.machineGun, g.machineGun, {damage: 1.4, reload: 1.4}]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.machineGun]),
                 TYPE: "bullet",
                 AUTOFIRE: true,
             },
@@ -355,7 +355,7 @@ Class.rogueAlchemist = {
         }, {
             POSITION: [12.5, 5.5, 1, 0, 0, 45*i, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.sniper, g.healer, {reload: 2, maxSpeed: 0.1, range: 0.7}]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.sniper, g.healer, {size: 0.8, reload: 4, maxSpeed: 0.1, range: 0.7}]),
                 TYPE: "healerBulletIndicated",
             },
         },
@@ -436,7 +436,7 @@ Class.rogueInventor = {
         }, {
             POSITION: [1.75, 5, 1.5, 12.5, 0, 45*i, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.trap, g.setTrap, g.construct, { speed: 2.5 }, g.hexaTrapper, {reload: 1.8}]),
+                SHOOT_SETTINGS: combineStats([g.trap, g.setTrap, g.construct, { speed: 1.5 }, g.hexaTrapper, {reload: 1.7}]),
                 TYPE: "unsetPillbox",
                 STAT_CALCULATOR: gunCalcNames.block,
             }
@@ -466,7 +466,7 @@ Class.roguePioneerPrimaryTurret = {
         {
             POSITION: [26, 9.5, 1, 0, 0, 0, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.sniper, g.sniper, g.assassin, g.assassin, {range: 1.2}]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.sniper, g.sniper, g.assassin, {range: 1.2}]),
                 TYPE: "bullet",
             },
         }, {

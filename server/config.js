@@ -23,7 +23,7 @@ module.exports = {
 
     // The \modules\setup\gamemodeconfigs\ files to load.
     // To change specific things about specific gamemodes (such as team count for tdm), edit their config file in \modules\setup\gamemodeconfigs\.
-    GAME_MODES: ['tdm', 'domination'],
+    GAME_MODES: ['tdm'],
 
     // The room files to load in the setup/rooms folder.
     // NOTE: If a /gamemodeconfig/ file "replaces" the value of ROOM_SETUP, it just adds its own ROOM_SETUP's content to this array.
@@ -139,7 +139,7 @@ module.exports = {
     FOOD_SPAWN_CHANCE: 0.875, // Likeliness of normal food spawn attempts succeeding.
     FOOD_SPAWN_COOLDOWN: 30, // Cooldown (in game ticks) of food spawn attempts being made.
 
-    FOOD_CAP_NEST: 3, // Max nest food per nest tile.
+    FOOD_CAP_NEST: 0, // Max nest food per nest tile.
     FOOD_SPAWN_CHANCE_NEST: 0.25, // Likeliness of nest food spawn attempts succeeding.
     FOOD_SPAWN_COOLDOWN_NEST: 45, // Cooldown (in game ticks) of nest food spawn attempts being made.
 

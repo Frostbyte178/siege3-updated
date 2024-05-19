@@ -52,7 +52,6 @@ Class.eliteHarbor = {
         FOV: 2
     },
     AI: { STRAFE: false, IGNORE_SHAPES: true },
-    IGNORED_BY_AI: true,
     GUNS: [
         // 2 egg 2 square 2 tri 2 penta 1 hexa
         // hp factors: 0.4 / 0.6 / 0.8 / 1.1 / 1.3
@@ -181,7 +180,6 @@ Class.eliteAssembler = {
         FOV: 2,
     },
     AI: { STRAFE: false, IGNORE_SHAPES: true },
-    IGNORED_BY_AI: true,
     GUNS: [
         {
             POSITION: [18, 12, 1, 0, 0, 0, 0],
@@ -212,4 +210,54 @@ Class.eliteAssembler = {
     ]
 }
 
-Class.elites.UPGRADES_TIER_0.push("eliteHarbor", "eliteAssembler");
+Class.eliteSniper = {
+    PARENT: 'elite',
+    UPGRADE_LABEL: 'Elite Sniper',
+    SHAPE: 3,
+    UPGRADE_COLOR: "pink",
+    FACING_TYPE: "toTarget",
+    FORCE_TWIGGLE: true,
+    CONTROLLERS: [["drag", {range: 700}]],
+    SKILL: skillSet({
+        rld: 0.7,
+        dam: 0.5,
+        pen: 0.8,
+        str: 0.8,
+        spd: 0.5, // default: 0.2
+        atk: 0.3,
+        hlt: 1,
+        shi: 0.7,
+        rgn: 0.7,
+        mob: 0,
+    }),
+    BODY: {
+        FOV: 2,
+    },
+    AI: { STRAFE: false, IGNORE_SHAPES: true, SKYNET: true },
+    GUNS: [
+        {
+            POSITION: [12.5, 12, 1, 0, 0, 180, 0]
+        },
+        {
+            POSITION: [3.5, 12, 1.5, 12.5, 0, 180, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.trap, g.pounder, g.destroyer]),
+                TYPE: "trap",
+                STAT_CALCULATOR: gunCalcNames.trap,
+                AUTOFIRE: true
+            }
+        }
+    ],
+    TURRETS: [
+        {
+            POSITION: [13, 6, 0, 60, 170, 0],
+            TYPE: "eliteSniperTurret"
+        },
+        {
+            POSITION: [13, 6, 0, -60, 170, 0],
+            TYPE: "eliteSniperTurret"
+        },
+    ],
+}
+
+Class.elites.UPGRADES_TIER_0.push("eliteHarbor", "eliteAssembler", "eliteSniper");

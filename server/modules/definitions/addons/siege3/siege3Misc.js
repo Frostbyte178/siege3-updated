@@ -159,7 +159,7 @@ class io_missileGuidance extends IO {
             }
         }
 
-        this.body.facingType = "toTarget";
+        this.body.facingType[0] = "toTarget";
         let angleDifference = util.angleDifference(currentAngle, desiredAngle);
 
         // If it's during the fast turn phase then cancel sideways velocity and activate the primary thruster
@@ -458,26 +458,26 @@ Class.trueBomb = {
         },
     ]
 }
-Class.autoTrap = makeAuto(Class.trap, "autoTrap", 'droneAutoTurret');
-Class.chargerTrap = {
-    PARENT: "unsetTrap",
-    LABEL: "Charger",
-    GUNS: [],
-    TURRETS: [{
-        POSITION: [10, 0, 0, 0, 360, 1],
-        TYPE: ["pentagon", { COLOR: 16 }],
-    }],
-};
-for(let i = 0; i < 8; i++) {
-    Class.chargerTrap.GUNS.push({
-        POSITION: [0, (i % 4) + 1, 0, 0, 0, 0, 9999],
-        PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.basic, g.machineGun, g.shotgun, { spray: 1e6, recoil: 0, range: 0.5 }]),
-            TYPE: ["trap", { PERSISTS_AFTER_DEATH: true }],
-            SHOOT_ON_DEATH: true,
-        }
-    })
+Class.turretAutoTurret = {
+    PARENT: "genericTank",
+    LABEL: "Turret",
+    COLOR: "grey",
+    INDEPENDENT: true,
+    CONTROLLERS: ['nearestDifferentMaster'],
+    BODY: {
+        FOV: 0.8,
+    },
+    GUNS: [
+        {
+            POSITION: [22, 10, 1, 0, 0, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.pelleter, g.power, { recoil: 1.15 }, g.turret, g.overdrive, g.overdrive]),
+                TYPE: "bullet",
+            },
+        },
+    ],
 }
+Class.autoTrap = makeAuto('trap', "Auto-Trap", 'turretAutoTurret');
 Class.bigminimissile = {
     PARENT: "missile",
     GUNS: [
@@ -532,23 +532,31 @@ Class.fireworkRocket = {
             STAT_CALCULATOR: gunCalcNames.thruster,
             SHOOT_SETTINGS: combineStats([g.basic, g.missileTrail, g.rocketeerMissileTrail, {recoil: 1.25}]),
             TYPE: ["bullet", { PERSISTS_AFTER_DEATH: true }],
-        },
-    }],
+        }
+    }, ...weaponArray({
+        POSITION: [8, 2.5, 1, 0, 0, 0, 0],
+        PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.gunner, g.flankGuard, {spray: 0, shudder: 0}]),
+            TYPE: ["bullet", { PERSISTS_AFTER_DEATH: true }],
+            ALT_FIRE: true,
+        }
+    }, 12)],
     TURRETS: [{
-        POSITION: [10, 0, 0, 0, 0, 1],
+        POSITION: [9, 0, 0, 0, 0, 1],
         TYPE: [ "egg", { COLOR: 16 }, ],
     }],
-};
-for(let i = 0; i < 16; i++) {
-    Class.fireworkRocket.GUNS.push({
-        POSITION: [0, (i % 4) + 1, 0, 0, 0, 0, 9999],
-        PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.basic, g.machineGun, g.shotgun, { spray: 1e6, recoil: 0, range: 0.5 }]),
-            TYPE: ["bullet", { PERSISTS_AFTER_DEATH: true }],
-            SHOOT_ON_DEATH: true,
+    ON: [{
+        event: 'death',
+        handler: ({body}) => {
+            if (body.range > 0) return;
+
+            for (let gun of body.guns) {
+                if (!gun.altFire) continue;
+                gun.spawnBullets();
+            }
         }
-    })
-}
+    }]
+};
 
 // Turrets
 Class.fireworkTurret = {
@@ -562,7 +570,7 @@ Class.fireworkTurret = {
         {
             POSITION: [12, 10, 1.4, 8, 0, 0, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.launcher, g.rocketeer, { reload: 1.5 }, {speed: 4, maxSpeed: 3}]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.launcher, g.rocketeer, { range: 0.9, reload: 1.5 }]),
                 TYPE: "fireworkRocket",
                 STAT_CALCULATOR: gunCalcNames.sustained,
             },
@@ -600,19 +608,19 @@ Class.superNailgunTurret = {
             /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
             POSITION: [19, 2, 1, 0, -2.5, 0, 0.25],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.gunner, g.power, g.power, g.twin, g.nailgun, {health: 0.4}]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.pelleter, g.power, g.twin, g.nailgun, {speed: 1.1, maxSpeed: 1.1}]),
                 TYPE: "bullet",
             },
         }, {
             POSITION: [19, 2, 1, 0, 2.5, 0, 0.75],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.gunner, g.power, g.power, g.twin, g.nailgun, {health: 0.4}]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.pelleter, g.power, g.twin, g.nailgun, {speed: 1.1, maxSpeed: 1.1}]),
                 TYPE: "bullet",
             },
         }, {
             POSITION: [20, 2, 1, 0, 0, 0, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.gunner, g.power, g.power, g.twin, g.nailgun, {health: 0.4}]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.pelleter, g.power, g.twin, g.nailgun, {speed: 1.1, maxSpeed: 1.1}]),
                 TYPE: "bullet",
             },
         }, {
@@ -629,12 +637,12 @@ Class.sidewinderTurret = {
     CONTROLLERS: [ "onlyAcceptInArc", "nearestDifferentMaster" ],
     GUNS: [
         {
-            POSITION: [10, 11, -0.5, 14, 0, 0, 0],
+            POSITION: [10, 11.5, -0.5, 14, 0, 0, 0],
         }, {
-            POSITION: [21, 12, -1.3, 0, 0, 0, 0],
+            POSITION: [21, 12.5, -1.2, 0, 0, 0, 0],
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.basic, g.sniper, g.pounder, g.assassin, g.assassin, g.hunter, g.sidewinder, {health: 1.5, reload: 0.65}]),
-                TYPE: "snake",
+                TYPE: "snakeOld",
                 STAT_CALCULATOR: gunCalcNames.sustained,
             },
         },
@@ -650,8 +658,8 @@ Class.homingMissileTurret = {
         {
             POSITION: [10, 12.5, -0.7, 10, 0, 0, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.launcher, g.rocketeer, {speed: 8, maxSpeed: 2, damage: 0.3, size: 0.7, range: 1.25, reload: 2.5}]),
-                TYPE: ["homingMissile", {BODY: {RECOIL_MULTIPLIER: 1.2}}],
+                SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.launcher, g.rocketeer, {speed: 8, maxSpeed: 2, damage: 0.3, size: 0.7, range: 1.25, reload: 3.5}]),
+                TYPE: ["homingMissile", {BODY: {RECOIL_MULTIPLIER: 0.7}}],
                 STAT_CALCULATOR: gunCalcNames.sustained,
                 AUTOFIRE: true,
             },
@@ -697,9 +705,6 @@ Class.nestIndustryTop = {
         },
     }, 10, 0.5),
 };
-for (let i = 0; i < 10; i++) {
-    Class.nestIndustryTop.GUNS.push()
-}
 Class.flameTurret = {
     PARENT: "genericTank",
     LABEL: "Flamethrower",
@@ -711,7 +716,7 @@ Class.flameTurret = {
         }, {
             POSITION: [12, 8, 1.25, 8, 0, 0, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.machineGun, g.machineGun, g.machineGun, {reload: 1.15, spray: 0.2, shudder: 0.1, speed: 3, maxSpeed: 3, range: 0.25, damage: 5, health: 0.2}]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.machineGun, g.machineGun, g.machineGun, {reload: 1.5, spray: 0.2, shudder: 0.1, speed: 3, maxSpeed: 3, range: 0.25, damage: 5, health: 0.2}]),
                 TYPE: "growBullet",
                 AUTOFIRE: true,
             }
@@ -756,61 +761,61 @@ Class.culverinTurret = {
         {
             POSITION: [4, 3, 1, 11, -3, 0, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.machineGun, { speed: 1.2 }, g.shotgun]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.machineGun, g.sniper, {shudder: 3, spray: 2}, g.shotgun]),
                 TYPE: "bullet",
             },
         }, {
             POSITION: [4, 3, 1, 11, 3, 0, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.machineGun, { speed: 1.2 }, g.shotgun]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.machineGun, g.sniper, {shudder: 3, spray: 2}, g.shotgun]),
                 TYPE: "bullet",
             },
         }, {
             POSITION: [4, 4, 1, 13, 0, 0, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.machineGun, { speed: 1.2 }, g.shotgun]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.machineGun, g.sniper, {shudder: 3, spray: 2}, g.shotgun]),
                 TYPE: "casing",
             },
         }, {
             POSITION: [1, 4, 1, 12, -1, 0, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.machineGun, { speed: 1.2 }, g.shotgun]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.machineGun, g.sniper, {shudder: 3, spray: 2}, g.shotgun]),
                 TYPE: "casing",
             },
         }, {
             POSITION: [1, 4, 1, 11, 1, 0, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.machineGun, { speed: 1.2 }, g.shotgun]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.machineGun, g.sniper, {shudder: 3, spray: 2}, g.shotgun]),
                 TYPE: "casing",
             },
         }, {
             POSITION: [1, 3, 1, 13, -1, 0, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.machineGun, { speed: 1.2 }, g.shotgun]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.machineGun, g.sniper, {shudder: 3, spray: 2}, g.shotgun]),
                 TYPE: "bullet",
             },
         }, {
             POSITION: [1, 3, 1, 13, 1, 0, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.machineGun, { speed: 1.2 }, g.shotgun]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.machineGun, g.sniper, {shudder: 3, spray: 2}, g.shotgun]),
                 TYPE: "bullet",
             },
         }, {
             POSITION: [1, 2, 1, 13, 2, 0, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.machineGun, { speed: 1.2 }, g.shotgun]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.machineGun, g.sniper, {shudder: 3, spray: 2}, g.shotgun]),
                 TYPE: "casing",
             },
         }, {
             POSITION: [1, 2, 1, 13, -2, 0, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.machineGun, { speed: 1.2 }, g.shotgun]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.machineGun, g.sniper, {shudder: 3, spray: 2}, g.shotgun]),
                 TYPE: "casing",
             },
         }, {
             POSITION: [17, 14, 1, 6, 0, 0, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.machineGun, g.shotgun, g.fake]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.machineGun, g.sniper, g.shotgun, g.fake]),
                 TYPE: "casing",
             },
         }, {
@@ -845,6 +850,24 @@ Class.topplerTurret = {
                 TYPE: "bullet",
                 AUTOFIRE: true,
             }
+        }
+    ]
+}
+Class.eliteSniperTurret = {
+    PARENT: 'genericTank',
+    CONTROLLERS: ['nearestDifferentMaster', 'onlyAcceptInArc'],
+    LABEL: 'Turret',
+    GUNS: [
+        {
+            POSITION: [28, 9, 1, 0, 0, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.sniper, g.assassin, {reload: 1.2, health: 1.2}]),
+                TYPE: "bullet",
+                ALT_FIRE: true
+            }
+        },
+        {
+            POSITION: [5, 9, -1.4, 8, 0, 0, 0]
         }
     ]
 }
