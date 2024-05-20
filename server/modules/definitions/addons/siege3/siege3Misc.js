@@ -458,26 +458,7 @@ Class.trueBomb = {
         },
     ]
 }
-Class.turretAutoTurret = {
-    PARENT: "genericTank",
-    LABEL: "Turret",
-    COLOR: "grey",
-    INDEPENDENT: true,
-    CONTROLLERS: ['nearestDifferentMaster'],
-    BODY: {
-        FOV: 0.8,
-    },
-    GUNS: [
-        {
-            POSITION: [22, 10, 1, 0, 0, 0, 0],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.pelleter, g.power, { recoil: 1.15 }, g.turret, g.overdrive, g.overdrive]),
-                TYPE: "bullet",
-            },
-        },
-    ],
-}
-Class.autoTrap = makeAuto('trap', "Auto-Trap", 'turretAutoTurret');
+Class.autoTrap = makeAuto('trap', "Auto-Trap", {type: 'droneAutoTurret'});
 Class.bigminimissile = {
     PARENT: "missile",
     GUNS: [
