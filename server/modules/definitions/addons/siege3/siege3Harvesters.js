@@ -474,7 +474,7 @@ g.shepherd = {range: 0.25, speed: 1.5, maxSpeed: 0.2, size: 1.2, reload: 0.7, re
 Class.shepherd = {
     PARENT: "genericHarvester",
     LABEL: "Shepherd",
-    CONTROLLERS: ["nearestDifferentMaster", ["bombingRun", {goAgainRange: 1800, firingRange: 600, breakAwayRange: 450, breakAwayAngle: 6}], ["burstFire", {alt: true, length: 1750}]],
+    CONTROLLERS: ["nearestDifferentMaster", ["bombingRun", {goAgainRange: 1800, firingRange: 525, breakAwayRange: 450, breakAwayAngle: 6}], ["burstFire", {alt: true, length: 1750}]],
     BODY: {
         HEALTH: harvesterStats.HEALTH * 0.8e90,
         SPEED: harvesterStats.SPEED * 1.65,
