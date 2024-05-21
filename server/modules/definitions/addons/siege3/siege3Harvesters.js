@@ -230,7 +230,7 @@ Class.stockyard = {
 Class.irrigator = {
     PARENT: "genericHarvester",
     LABEL: "Irrigator",
-    CONTROLLERS: ["nearestDifferentMaster", ["drag", {range: 1500}]],
+    CONTROLLERS: ["nearestDifferentMaster", ["drag", {range: 1500, useAlt: true}]],
     BODY: {
         HEALTH: harvesterStats.HEALTH * 1.5,
         SPEED: harvesterStats.SPEED,
@@ -539,7 +539,7 @@ Class.sniperPillbox = {
 Class.scarecrow = {
     PARENT: "genericHarvester",
     LABEL: "Scarecrow",
-    CONTROLLERS: ["nearestDifferentMaster", ["drag", {range: 1250}]],
+    CONTROLLERS: ["nearestDifferentMaster", ["drag", {range: 1250, useAlt: true}]],
     BODY: {
         HEALTH: harvesterStats.HEALTH * 1.5,
         SPEED: harvesterStats.SPEED,

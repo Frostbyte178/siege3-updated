@@ -163,7 +163,7 @@ Class.eliteAssembler = {
     UPGRADE_COLOR: "pink",
     FACING_TYPE: "toTarget",
     FORCE_TWIGGLE: true,
-    CONTROLLERS: [["drag", {range: 350}], ["assemble", {assembleRange: 350, hideDelay: 3100, ahead: 9}]],
+    CONTROLLERS: [["drag", {range: 350, useAlt: true}], ["assemble", {assembleRange: 350, hideDelay: 3100, ahead: 9}]],
     SKILL: skillSet({
         rld: 0.7,
         dam: 0.5,

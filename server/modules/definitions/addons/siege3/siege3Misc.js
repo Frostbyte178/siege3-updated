@@ -96,6 +96,7 @@ class io_drag extends IO {
     constructor(body, opts = {}) {
         super(body);
         this.idealRange = opts.range ?? 400;
+        this.useAlt = opts.useAlt ?? false;
     }
     think(input) {
         if (input.target != null && input.main) {
@@ -116,8 +117,8 @@ class io_drag extends IO {
                 }
             }
             return {
-                fire: target.length >= (orbit + 50),
-                alt: target.length <= (orbit + 100),
+                fire: !this.useAlt | target.length >= (orbit + 50),
+                alt: this.useAlt && target.length <= (orbit + 100),
                 goal,
                 power,
             }
@@ -639,7 +640,7 @@ Class.homingMissileTurret = {
         {
             POSITION: [10, 12.5, -0.7, 10, 0, 0, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.launcher, g.rocketeer, {speed: 8, maxSpeed: 2, damage: 0.3, size: 0.7, range: 1.25, reload: 3.5}]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.launcher, g.rocketeer, {speed: 8, maxSpeed: 2, damage: 0.3, size: 0.7, range: 1.4, reload: 3.5}]),
                 TYPE: ["homingMissile", {BODY: {RECOIL_MULTIPLIER: 0.7}}],
                 STAT_CALCULATOR: gunCalcNames.sustained,
                 AUTOFIRE: true,
@@ -851,4 +852,30 @@ Class.eliteSniperTurret = {
             POSITION: [5, 9, -1.4, 8, 0, 0, 0]
         }
     ]
+}
+Class.boomerTurretWeak = {
+    PARENT: "genericTank",
+    DANGER: 7,
+    LABEL: "Turret",
+    CONTROLLERS: ['nearestDifferentMaster'],
+    BODY: {
+        SPEED: base.SPEED * 0.8,
+        FOV: base.FOV * 1.15,
+    },
+    GUNS: [
+        {
+            POSITION: [19, 10, 1, 0, 0, 0, 0],
+        },
+        {
+            POSITION: [6, 10, -1.5, 7, 0, 0, 0],
+        },
+        {
+            POSITION: [2, 10, 1.3, 18, 0, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.trap, g.setTrap, g.boomerang, {reload: 2, speed: 3}]),
+                TYPE: "boomerang",
+                STAT_CALCULATOR: gunCalcNames.block
+            },
+        },
+    ],
 }

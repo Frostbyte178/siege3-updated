@@ -98,7 +98,7 @@ Class.nestBrigadier = {
         }, {
             POSITION: [1.5, 9, 1, 9.5, 0, 36, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.launcher, g.pounder, g.destroyer, { speed: 0.78, maxSpeed: 0.125, reload: 0.7, damage: 0.17, health: 7, size: 0.85, range: 1.3 } ]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.launcher, g.pounder, g.destroyer, { speed: 0.78, maxSpeed: 0.125, reload: 0.7, damage: 0.17, health: 7, size: 0.85, range: 1.3, recoil: 0 } ]),
                 TYPE: "bigminimissile",
                 STAT_CALCULATOR: gunCalcNames.sustained
             },
@@ -209,5 +209,33 @@ Class.nestPurifier = {
     ],
 }
 
+// Boomer nester
+Class.nestWatchman = {
+    PARENT: 'genericNester',
+    LABEL: "Nest Watchman",
+    GUNS: weaponArray([
+        {
+            POSITION: [10.7, 8, 1, 0, 0, 36, 0],
+        }, {
+            POSITION: [1.5, 8, 1.2, 10.7, 0, 36, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.trap, { speed: 1.2 }, g.setTrap, g.constructor, {range: 0.9}]),
+                TYPE: "unsetTrap",
+                STAT_CALCULATOR: gunCalcNames.block,
+            },
+        }
+    ], 5),
+    TURRETS: [
+        {
+            POSITION: [9, 0, 0, 0, 360, 1],
+            TYPE: ['rocketeerTurret', {COLOR: -1}]
+        },
+        ...weaponArray({
+            POSITION: [8, 9, 0, 0, 0, 0],
+            TYPE: 'boomerTurretWeak',
+        }, 5)
+    ]
+}
+
 //Push Nester to Nesters.
-Class.nesters.UPGRADES_TIER_0.push("nestPurger", "nestGrenadier", "nestBrigadier", "nestIndustry", "nestSynthesizer", 'nestPurifier');
+Class.nesters.UPGRADES_TIER_0.push("nestPurger", "nestGrenadier", "nestBrigadier", "nestIndustry", "nestSynthesizer", 'nestPurifier', 'nestWatchman');
