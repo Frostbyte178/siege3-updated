@@ -578,31 +578,30 @@ Class.builderTurret = {
         },
     ],
 };
-Class.superNailgunTurret = {
+Class.eliteNailgunTurret = {
     PARENT: "genericTank",
-    LABEL: "Nailgun",
-    BODY: { FOV: 2 * base.FOV },
+    LABEL: "Turret",
+    BODY: { FOV: 2 },
+    CONTROLLERS: [ "canRepel", "onlyAcceptInArc", "mapAltToFire", "nearestDifferentMaster" ],
     COLOR: -1,
     INDEPENDENT: true,
-    CONTROLLERS: [ "onlyAcceptInArc", "nearestDifferentMaster" ],
-    GUNS: [
-        {
+    GUNS: [{
             /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
             POSITION: [19, 2, 1, 0, -2.5, 0, 0.25],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.pelleter, g.power, g.twin, g.nailgun, {speed: 1.1, maxSpeed: 1.1}]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.pelleter, g.power, g.twin, g.nailgun, {speed: 1.3, maxSpeed: 1.3, reload: 0.75}]),
                 TYPE: "bullet",
             },
         }, {
             POSITION: [19, 2, 1, 0, 2.5, 0, 0.75],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.pelleter, g.power, g.twin, g.nailgun, {speed: 1.1, maxSpeed: 1.1}]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.pelleter, g.power, g.twin, g.nailgun, {speed: 1.3, maxSpeed: 1.3, reload: 0.75}]),
                 TYPE: "bullet",
             },
         }, {
             POSITION: [20, 2, 1, 0, 0, 0, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.pelleter, g.power, g.twin, g.nailgun, {speed: 1.1, maxSpeed: 1.1}]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.pelleter, g.power, g.twin, g.nailgun, {speed: 1.3, maxSpeed: 1.3, reload: 0.75}]),
                 TYPE: "bullet",
             },
         }, {
@@ -644,6 +643,26 @@ Class.homingMissileTurret = {
                 TYPE: ["homingMissile", {BODY: {RECOIL_MULTIPLIER: 0.7}}],
                 STAT_CALCULATOR: gunCalcNames.sustained,
                 AUTOFIRE: true,
+            },
+        }, {
+            POSITION: [17, 18, 0.65, 0, 0, 0, 0],
+        }, {
+            POSITION: [13.5, 13, -0.55, 0, 0, 0, 0],
+        },
+    ],
+}
+Class.irrigatorTurret = {
+    PARENT: "genericTank",
+    COLOR: 16,
+    MIRROR_MASTER_ANGLE: true,
+    GUNS: [
+        {
+            POSITION: [10, 12.5, -0.7, 10, 0, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.launcher, g.rocketeer, {speed: 8, damage: 0.5, size: 0.7, range: 1.1, reload: 3.5}]),
+                TYPE: ["homingMissile", {BODY: {RECOIL_MULTIPLIER: 0.35}, CONTROLLERS: [["missileGuidance", {slowTurnDelay: 800, fastTurnDelay: 1400}]]}],
+                STAT_CALCULATOR: gunCalcNames.sustained,
+                ALT_FIRE: true,
             },
         }, {
             POSITION: [17, 18, 0.65, 0, 0, 0, 0],
@@ -855,13 +874,8 @@ Class.eliteSniperTurret = {
 }
 Class.boomerTurretWeak = {
     PARENT: "genericTank",
-    DANGER: 7,
     LABEL: "Turret",
     CONTROLLERS: ['nearestDifferentMaster'],
-    BODY: {
-        SPEED: base.SPEED * 0.8,
-        FOV: base.FOV * 1.15,
-    },
     GUNS: [
         {
             POSITION: [19, 10, 1, 0, 0, 0, 0],
@@ -878,4 +892,18 @@ Class.boomerTurretWeak = {
             },
         },
     ],
+}
+Class.pounderTurret = {
+    PARENT: "genericTank",
+    LABEL: "Turret",
+    CONTROLLERS: ['nearestDifferentMaster'],
+    GUNS: [
+        {
+            POSITION: [20.5, 12, 1, 0, 0, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.pounder]),
+                TYPE: "bullet"
+            }
+        }
+    ]
 }

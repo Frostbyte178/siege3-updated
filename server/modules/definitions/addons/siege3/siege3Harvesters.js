@@ -37,6 +37,7 @@ Class.genericHarvester = {
     BODY: harvesterStats,
     SHAPE: 6,
     COLOR: "hexagon",
+    UPGRADE_COLOR: "hexagon",
     SIZE: 22,
     VALUE: 3e5,
     FORCE_TWIGGLE: true,
@@ -235,12 +236,12 @@ Class.irrigator = {
         HEALTH: harvesterStats.HEALTH * 1.5,
         SPEED: harvesterStats.SPEED,
         SHIELD: harvesterStats.SHIELD * 1.7,
-        FOV: harvesterStats.FOV * 2,
+        FOV: harvesterStats.FOV * 0.7,
     },
     AI: {IGNORE_SHAPES: true, SKYNET: true},
     GUNS: [
         { // BR Missile
-            POSITION: [9, 5.5, -0.7, 7, 5, 28, 0.18],
+            POSITION: [9, 7, -0.7, 6, 3, 55, 0.18],
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.launcher, g.rocketeer, {speed: 8, damage: 0.4, size: 0.7, range: 1.1, reload: 3.5}]),
                 TYPE: ["homingMissile", {BODY: {RECOIL_MULTIPLIER: 0.35}, CONTROLLERS: [["missileGuidance", {slowTurnDelay: 800, fastTurnDelay: 1700}]]}],
@@ -248,11 +249,11 @@ Class.irrigator = {
                 ALT_FIRE: true,
             },
         }, {
-            POSITION: [17, 8.5, 0.65, -3, 5, 28, 0],
+            POSITION: [17, 10.5, 0.65, -4, 3, 55, 0],
         }, {
-            POSITION: [13.5, 6, -0.55, -3, 5, 28, 0],
+            POSITION: [13.5, 7.5, -0.55, -4, 3, 55, 0],
         }, { // BL Missile
-            POSITION: [9, 5.5, -0.7, 7, -5, -28, 0.18],
+            POSITION: [9, 7, -0.7, 6, -3, -55, 0.18],
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.launcher, g.rocketeer, {speed: 8, damage: 0.4, size: 0.7, range: 1.1, reload: 3.5}]),
                 TYPE: ["homingMissile", {BODY: {RECOIL_MULTIPLIER: 0.35}, CONTROLLERS: [["missileGuidance", {slowTurnDelay: 800, fastTurnDelay: 1700}]]}],
@@ -260,11 +261,11 @@ Class.irrigator = {
                 ALT_FIRE: true,
             },
         }, {
-            POSITION: [17, 8.5, 0.65, -3, -5, -28, 0],
+            POSITION: [17, 10.5, 0.65, -4, -3, -55, 0],
         }, {
-            POSITION: [13.5, 6, -0.55, -3, -5, -28, 0],
+            POSITION: [13.5, 7.5, -0.55, -4, -3, -55, 0],
         }, { // FR Missile
-            POSITION: [9, 5.5, -0.7, 8.5, 2, 9, 0.06],
+            POSITION: [9, 7, -0.7, 7.5, 1, 25, 0.06],
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.launcher, g.rocketeer, {speed: 8, damage: 0.4, size: 0.7, range: 1.1, reload: 3.5}]),
                 TYPE: ["homingMissile", {BODY: {RECOIL_MULTIPLIER: 0.35}, CONTROLLERS: [["missileGuidance", {slowTurnDelay: 800, fastTurnDelay: 1400}]]}],
@@ -272,11 +273,11 @@ Class.irrigator = {
                 ALT_FIRE: true,
             },
         }, {
-            POSITION: [17, 8.5, 0.65, -1.5, 2, 9, 0],
+            POSITION: [17, 10.5, 0.65, -2.5, 1, 25, 0],
         }, {
-            POSITION: [13.5, 6, -0.55, -1.5, 2, 9, 0],
+            POSITION: [13.5, 7.5, -0.55, -2.5, 1, 25, 0],
         }, { // FL Missile
-            POSITION: [9, 5.5, -0.7, 8.5, -2, -9, 0.06],
+            POSITION: [9, 7, -0.7, 7.5, -1, -25, 0.06],
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.launcher, g.rocketeer, {speed: 8, damage: 0.5, size: 0.7, range: 1.1, reload: 3.5}]),
                 TYPE: ["homingMissile", {BODY: {RECOIL_MULTIPLIER: 0.35}, CONTROLLERS: [["missileGuidance", {slowTurnDelay: 800, fastTurnDelay: 1400}]]}],
@@ -284,9 +285,9 @@ Class.irrigator = {
                 ALT_FIRE: true,
             },
         }, {
-            POSITION: [17, 8.5, 0.65, -1.5, -2, -9, 0],
+            POSITION: [17, 10.5, 0.65, -2.5, -1, -25, 0],
         }, {
-            POSITION: [13.5, 6, -0.55, -1.5, -2, -9, 0],
+            POSITION: [13.5, 7.5, -0.55, -2.5, -1, -25, 0],
         }, 
         ...addThruster(2)
     ],

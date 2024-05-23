@@ -1,4 +1,4 @@
-const { combineStats, skillSet } = require('../../facilitators.js');
+const { combineStats, skillSet, weaponArray } = require('../../facilitators.js');
 const { base, gunCalcNames } = require('../../constants.js');
 const g = require('../../gunvals.js');
 
@@ -213,7 +213,6 @@ Class.eliteAssembler = {
 Class.eliteSniper = {
     PARENT: 'elite',
     UPGRADE_LABEL: 'Elite Sniper',
-    SHAPE: 3,
     UPGRADE_COLOR: "pink",
     FACING_TYPE: "toTarget",
     FORCE_TWIGGLE: true,
@@ -250,14 +249,30 @@ Class.eliteSniper = {
     ],
     TURRETS: [
         {
-            POSITION: [13, 6, 0, 60, 170, 0],
+            POSITION: [13, 3.85, -4.6, -10, 170, 0],
             TYPE: "eliteSniperTurret"
         },
         {
-            POSITION: [13, 6, 0, -60, 170, 0],
+            POSITION: [13, 3.85, 4.6, 10, 170, 0],
             TYPE: "eliteSniperTurret"
         },
     ],
 }
+Class.eliteNailgun = {
+    PARENT: 'elite',
+    UPGRADE_LABEL: "Elite Nailgun",
+    UPGRADE_COLOR: "pink",
+    AI: { STRAFE: false, SKYNET: true },
+    TURRETS: [
+        {
+            POSITION: [10.5, 0, 0, 0, 360, 1],
+            TYPE: "pounderTurret"
+        },
+        ...weaponArray({
+            POSITION: [13, 6.5, 0, 60, 170, 0],
+            TYPE: "eliteNailgunTurret"
+        }, 3)
+    ]
+}
 
-Class.elites.UPGRADES_TIER_0.push("eliteHarbor", "eliteAssembler", "eliteSniper");
+Class.elites.UPGRADES_TIER_0.push("eliteHarbor", "eliteAssembler", "eliteSniper", "eliteNailgun");

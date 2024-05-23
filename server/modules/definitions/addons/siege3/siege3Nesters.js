@@ -34,7 +34,6 @@ Class.genericNester = {
 Class.nestPurger = {
     PARENT: "genericNester",
     LABEL: "Nest Purger",
-    UPGRADE_LABEL: "Nest Purger",
     GUNS: weaponArray([
         {
             POSITION: [-1.5, 8, 1.2, 11, 0, 36, 0],
@@ -63,7 +62,6 @@ Class.nestPurger = {
 Class.nestGrenadier = {
     PARENT: "genericNester",
     LABEL: "Nest Grenadier",
-    UPGRADE_LABEL: "Nest Grenadier",
     GUNS: weaponArray([
         {
             POSITION: [11, 7.5, -0.4, 0, 0, 36, 0],
@@ -78,11 +76,11 @@ Class.nestGrenadier = {
     TURRETS: [
         {
             POSITION: [9, 0, 0, 0, 360, 1],
-            TYPE: [ "fireworkTurret" ],
+            TYPE: "fireworkTurret",
         },
         ...weaponArray({
             POSITION: [8, 9, 0, 0, 120, 0],
-            TYPE: [ "superNailgunTurret" ],
+            TYPE: ["nailgunTurret", {COLOR: -1, INDEPENDENT: true}],
         }, 5)
     ],
 };
@@ -91,7 +89,6 @@ Class.nestGrenadier = {
 Class.nestBrigadier = {
     PARENT: "genericNester",
     LABEL: "Nest Brigadier",
-    UPGRADE_LABEL: "Nest Brigadier",
     GUNS: weaponArray([
         {
             POSITION: [2.5, 6.5, 1, 9.5, 0, 36, 0],
@@ -107,11 +104,11 @@ Class.nestBrigadier = {
     TURRETS: [
         {
             POSITION: [9, 0, 0, 0, 360, 1],
-            TYPE: [ "sidewinderTurret" ],
+            TYPE: "sidewinderTurret",
         },
         ...weaponArray({
             POSITION: [8, 9, 0, 0, 25, 0],
-            TYPE: [ "homingMissileTurret" ],
+            TYPE: "homingMissileTurret",
         }, 5)
     ],
 };
@@ -120,7 +117,6 @@ Class.nestBrigadier = {
 Class.nestIndustry = {
     PARENT: "genericNester",
     LABEL: "Nest Industry",
-    UPGRADE_LABEL: "Nest Industry",
     GUNS: weaponArray([
         {
             POSITION: [11.75, 9.5, 1, 0, 0, 36, 0],
@@ -158,7 +154,6 @@ Class.nestIndustry.GUNS[9].PROPERTIES.TYPE[0] = "sentinelLauncher"
 Class.nestSynthesizer = {
     PARENT: "genericNester",
     LABEL: "Nest Synthesizer",
-    UPGRADE_LABEL: "Nest Synthesizer",
     GUNS: weaponArray([
         {
             POSITION: [10, 10, -0.5, 4, 0, 36, 0],
@@ -188,7 +183,6 @@ Class.nestSynthesizer = {
 Class.nestPurifier = {
     PARENT: 'genericNester',
     LABEL: "Nest Purifier",
-    UPGRADE_LABEL: "Nest Purifier",
     GUNS: weaponArray({
         POSITION: [5.5, 7, 1, 6, 0, 36, 0],
         PROPERTIES: {
