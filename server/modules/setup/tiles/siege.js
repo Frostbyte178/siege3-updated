@@ -10,7 +10,7 @@ let spawnPermanentAntiTankMachineGun = (loc) => {
 atmg = new Tile({ color: "white", init: tile => spawnPermanentAntiTankMachineGun(tile.loc) }),
 
 // we are not yet advanced enough to transition between two color codes
-outside = new Tile({ color: "#C5C5C5" }),
+outside = new Tile({ color: "white" }),
 
 bossSpawn = new Tile({
     color: getTeamColor(TEAM_RED),
@@ -34,6 +34,25 @@ bossSpawn = new Tile({
             }
         }
     }
-});
+}),
+killWallTick = tile => {
+    for (let i = 0; i < tile.entities.length; i++) {
+        let entity = tile.entities[i];
+        if (!entity.isBoss && !entity.isArenaCloser && entity.team != TEAM_ENEMIES) entity.kill();
+    }
+},
+bossSpawnNew = new Tile({
+    color: "white",
+    init: tile => {
+        if (!room.spawnable[TEAM_ENEMIES]) room.spawnable[TEAM_ENEMIES] = [];
+        room.spawnable[TEAM_ENEMIES].push(tile);
+    },
+    tick: killWallTick
+}),
+killWall = new Tile({
+    color: getTeamColor(TEAM_RED),
+    tick: killWallTick
+})
 
-module.exports = { bossSpawn, outside, atmg };
+
+module.exports = { bossSpawn, bossSpawnNew, killWall, outside, atmg };

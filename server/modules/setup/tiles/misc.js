@@ -31,6 +31,13 @@ normal = new Tile({
         }
     }
 }),
+normalNoFood = new Tile({ 
+    color: "white",
+    data: {
+        allowMazeWallSpawn: true,
+    },
+    init: tile => room.spawnableDefault.push(tile),
+}),
 
 nestTick = tile => {
     if (++tile.data.enemySpawnCooldown > c.ENEMY_SPAWN_COOLDOWN_NEST) {
@@ -87,4 +94,4 @@ wall = new Tile({
     }
 });
 
-module.exports = { normal, nest, wall, nestNoBoss };
+module.exports = { normal, nest, wall, nestNoBoss, normalNoFood };

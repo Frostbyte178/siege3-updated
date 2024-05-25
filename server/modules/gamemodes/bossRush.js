@@ -94,6 +94,27 @@ class BossRush {
             [100, "kronos"],
             [100, "odin"],
         ];
+        this.bossStatMultipliers = {
+            nestKeeper: 1.2,
+            nestWarden: 1.2,
+            nestGuardian: 1.2,
+
+            ares: 1.75,
+            gersemi: 1.75,
+            ezekiel: 1.75,
+            eris: 1.75,
+            selene: 1.75,
+
+            paladin: 2.5,
+            freyja: 2.5,
+            zaphkiel: 2.5,
+            nyx: 2.5,
+            theia: 2.5,
+
+            legionaryCrasher: 3.5,
+            kronos: 3.5,
+            odin: 3.5,
+        };
         this.friendlyBossChoices = ["roguePalisade", "rogueArmada", "julius", "genghis", "napoleon"];
         this.bigFodderChoices = ["sentryGun", "sentrySwarm", "sentryTrap", "shinySentryGun"];
         this.smallFodderChoices = ["crasher"];
@@ -141,7 +162,7 @@ class BossRush {
         o.color.base = getTeamColor(team);
         o.skill.score = 111069;
         o.name = 'Sanctuary';
-        o.SIZE = room.tileWidth / 10;
+        o.SIZE = room.tileWidth / 15;
         o.isDominator = true;
         o.on('dead', () => {
             /*let isAC;
@@ -173,11 +194,21 @@ class BossRush {
         }
     }
 
+    setEnemyTurretStats(entity, statFactor) {
+        entity.gunStatScale = {health: statFactor};
+        for (let turret of entity.turrets) {
+            this.setEnemyTurretStats(turret, statFactor);
+        }
+    }
+
     spawnEnemyWrapper(loc, type) {
         let enemy = new Entity(loc);
         enemy.define(type);
         enemy.team = TEAM_ENEMIES;
         enemy.FOV = 10;
+        let statFactor = 1.01 ** this.waveId * (this.bossStatMultipliers[type] ?? 1);
+        this.setEnemyTurretStats(enemy, statFactor);
+        enemy.HEALTH *= statFactor;
         enemy.refreshBodyAttributes();
         enemy.controllers.push(new ioTypes.bossRushAI(enemy));
 

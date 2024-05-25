@@ -1,3 +1,5 @@
+const { combineStats } = require('../definitions/facilitators');
+
 let EventEmitter = require('events'),
     events,
     init = g => events = g.events;
@@ -1285,6 +1287,10 @@ class Entity extends EventEmitter {
             }
             this.guns = newGuns;
         }
+        if (set.GUN_STAT_SCALE) {
+            let gunStatScale = set.GUN_STAT_SCALE;
+            this.gunStatScale = gunStatScale;
+        }
         if (set.MAX_CHILDREN != null) this.maxChildren = set.MAX_CHILDREN;
         if (set.RESET_CHILDREN) this.destroyAllChildren();
         if ("function" === typeof set.LEVEL_SKILL_POINT_FUNCTION) {
@@ -1649,6 +1655,18 @@ class Entity extends EventEmitter {
     }
     get yMotion() {
         return (this.velocity.y + this.accel.y) / c.runSpeed;
+    }
+    set gunStatScale(gunStatScale) {
+        if (typeof gunStatScale == "object") {
+            gunStatScale = [gunStatScale];
+        }
+        for (let gun of this.guns) {
+            if (!gun.settings) {
+                continue
+            }
+            gun.settings = combineStats([gun.settings, ...gunStatScale]);
+            gun.trueRecoil = gun.settings.recoil;
+        }
     }
     camera(tur = false) {
         let turretsAndProps = this.turrets.concat(this.props);
