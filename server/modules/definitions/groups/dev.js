@@ -11,10 +11,11 @@ Class.developer = {
     BODY: {
         SHIELD: 1000,
         REGEN: 10,
-        HEALTH: 100,
+        HEALTH: 100e10,
         DAMAGE: 10,
         DENSITY: 20,
-        FOV: 2,
+        FOV: 3,
+        SPEED: base.SPEED * 2
     },
     SKILL_CAP: Array(10).fill(dfltskl),
     IGNORED_BY_AI: true,

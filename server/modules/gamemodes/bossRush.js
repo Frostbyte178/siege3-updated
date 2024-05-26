@@ -1,4 +1,4 @@
-let calculatePoints = wave => 5 + wave * 3 ** 0.85; // Easier until wave 59, much harder afterwards
+let calculatePoints = wave => 5 + Math.floor(wave * 3 ** 0.85); // Easier until wave 59, much harder afterwards
 // Each wave has a certain amount of "points" that it can spend on bosses, calculated above.
 // Each boss costs an amount of points.
 // It will always buy as many bosses until it has no points or else can't spend them.
@@ -124,6 +124,8 @@ class BossRush {
         this.gameActive = true;
         this.timer = 0;
         this.remainingEnemies = 0;
+        this.sanctuaryTier = 1;
+        this.sanctuaries = [];
     }
 
     generateWaves() {
@@ -155,16 +157,21 @@ class BossRush {
     }
 
     spawnSanctuary(tile, team, type = false) {
-        type = type ? type : Class.sanctuaryTier3;
+        type = type ? type : "sanctuaryTier3";
         let o = new Entity(tile.loc);
-        o.define(type);
-        o.team = team;
-        o.color.base = getTeamColor(team);
-        o.skill.score = 111069;
-        o.name = 'Sanctuary';
-        o.SIZE = room.tileWidth / 15;
-        o.isDominator = true;
-        o.on('dead', () => {
+        this.defineSanctuary(o, team, type);
+        this.sanctuaries.push(o);
+    }
+
+    defineSanctuary(entity, team, type) {
+        entity.define(type);
+        entity.team = team;
+        entity.color.base = getTeamColor(team);
+        entity.skill.score = 111069;
+        entity.name = 'Sanctuary';
+        entity.SIZE = room.tileWidth / 17.5;
+        entity.isDominator = true;
+        entity.on('dead', () => {
             /*let isAC;
             for (let instance of o.collisionArray) {
                 if (TEAM_ROOM !== instance.team && instance.type !== 'food' && instance.type !== 'wall') {
@@ -173,12 +180,12 @@ class BossRush {
             }
             if (isAC) {
                 tile.color = 'white';
-            } else */if (o.team === TEAM_ENEMIES) {
-                this.spawnSanctuary(tile, TEAM_BLUE, Class.sanctuaryTier3);
+            } else */if (entity.team === TEAM_ENEMIES) {
+                this.spawnSanctuary(tile, TEAM_BLUE, `sanctuaryTier${this.sanctuaryTier}`);
                 tile.color.interpret(getTeamColor(TEAM_BLUE));
                 sockets.broadcast('A sanctuary has been repaired!');
             } else {
-                this.spawnSanctuary(tile, TEAM_ENEMIES, Class.dominator);
+                this.spawnSanctuary(tile, TEAM_ENEMIES, "dominator");
                 tile.color.interpret(getTeamColor(TEAM_ENEMIES));
                 sockets.broadcast('A sanctuary has been destroyed!');
             }
@@ -255,6 +262,16 @@ class BossRush {
                 setTimeout(() => this.spawnFriendlyBoss(), 5000);
             }
         }
+
+        // Update sanctuary tiers
+        let newSancTier = Math.min(Math.floor(this.waveId / 5) + 1, 6);
+        if (newSancTier != this.sanctuaryTier) {
+            for (let sanc of this.sanctuaries) {
+                this.defineSanctuary(sanc, TEAM_BLUE, `sanctuaryTier${newSancTier}`);
+            }
+            sockets.broadcast(`The sanctuaries have upgraded to tier ${newSancTier}`);
+            this.sanctuaryTier = newSancTier;
+        }
     }
 
     //runs once when the server starts
@@ -262,7 +279,7 @@ class BossRush {
         Class.basic.UPGRADES_TIER_2.push("healer");
         //TODO: filter out tiles that are not of sanctuary type
         for (let tile of room.spawnable[TEAM_BLUE]) {
-            this.spawnSanctuary(tile, TEAM_BLUE);
+            this.spawnSanctuary(tile, TEAM_BLUE, "sanctuaryTier1");
         }
     }
 

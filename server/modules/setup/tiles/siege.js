@@ -38,7 +38,7 @@ bossSpawn = new Tile({
 killWallTick = tile => {
     for (let i = 0; i < tile.entities.length; i++) {
         let entity = tile.entities[i];
-        if (!entity.isBoss && !entity.isArenaCloser && entity.team != TEAM_ENEMIES) entity.kill();
+        if (!entity.isBoss && !entity.isArenaCloser && !entity.master.master.isArenaCloser && entity.team != TEAM_ENEMIES) entity.kill();
     }
 },
 bossSpawnNew = new Tile({
