@@ -141,7 +141,7 @@ Class.genericSmasher = {
 Class.genericBoss = {
     PARENT: "genericTank",
     TYPE: "miniboss",
-    DANGER: 6,
+    DANGER: 9,
     SKILL: skillSet({
         rld: 0.7,
         dam: 0.5,

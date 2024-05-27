@@ -5,7 +5,7 @@ require('./generics.js');
 
 Class.miniboss = {
     PARENT: "genericBoss",
-    CONTROLLERS: ["nearestDifferentMaster", "drag"],
+    CONTROLLERS: ["nearestDifferentMaster", ["drag", {range: 350}]],
     AI: { NO_LEAD: true, SKYNET: true },
 }
 Class.ramMiniboss = {
@@ -634,16 +634,17 @@ Class.roguePalisade = {
     CONTROLLERS: ['nearestDifferentMaster', 'onlyAcceptInArc'],
     BODY: {
         FOV: 1.4,
-        SPEED: 0.05 * base.SPEED,
+        SPEED: 0.35 * base.SPEED,
         HEALTH: 16 * base.HEALTH,
         SHIELD: 3 * base.SHIELD,
         DAMAGE: 3 * base.DAMAGE,
+        REGEN: base.REGEN * 0.3,
     },
     GUNS: weaponArray({
         POSITION: [4, 6, -1.6, 8, 0, 0, 0], 
         PROPERTIES: {
             SHOOT_SETTINGS: combineStats([ g.factory, g.pounder, { reload: 2 }]),
-            TYPE: ["minion", {INDEPENDENT: true}],
+            TYPE: "minion",
             STAT_CALCULATOR: gunCalcNames.drone,
             AUTOFIRE: true,
             MAX_CHILDREN: 3,
@@ -661,16 +662,17 @@ Class.rogueArmada = {
     LABEL: 'Rogue Armada',
     COLOR: "darkGrey",
     UPGRADE_COLOR: "darkGrey",
+    CONTROLLERS: [["drag", {range: 225}]],
     SHAPE: 7,
     SIZE: 28,
     VALUE: 500000,
     BODY: {
         FOV: 1.3,
-        SPEED: base.SPEED * 0.1,
+        SPEED: base.SPEED * 0.4,
         HEALTH: base.HEALTH * 16,
-        SHIELD: base.SHIELD * 3,
-        REGEN: base.REGEN,
-        DAMAGE: base.DAMAGE * 3,
+        SHIELD: base.SHIELD * 4,
+        REGEN: base.REGEN * 0.3,
+        DAMAGE: base.DAMAGE * 4,
     },
     GUNS: weaponArray([
         {
@@ -850,7 +852,7 @@ Class.terrestrial = {
         HEALTH: 1000,
         SHIELD: 2,
         REGEN: base.REGEN * 0.1,
-        SPEED: 0.75,
+        SPEED: base.SPEED * 0.35,
         DAMAGE: 9,
     },
 };
@@ -866,7 +868,7 @@ Class.celestial = {
         HEALTH: 1000,
         SHIELD: 2,
         REGEN: base.REGEN * 0.1,
-        SPEED: 0.75,
+        SPEED: base.SPEED * 0.25,
         DAMAGE: 12,
     },
 };
@@ -887,7 +889,7 @@ Class.eternal = {
         HEALTH: 3000,
         SHIELD: 2,
         REGEN: base.REGEN * 0.1,
-        SPEED: 0.75,
+        SPEED: base.SPEED * 0.25,
         DAMAGE: 18,
     },
 };

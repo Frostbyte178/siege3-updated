@@ -110,12 +110,20 @@ class BossRush {
             zaphkiel: 2.5,
             nyx: 2.5,
             theia: 2.5,
+            julius: 2,
+            genghis: 2,
+            napoleon: 2,
 
             legionaryCrasher: 3.5,
             kronos: 3.5,
             odin: 3.5,
         };
-        this.friendlyBossChoices = ["roguePalisade", "rogueArmada", "julius", "genghis", "napoleon"];
+        this.friendlyBossChoices = [
+            [9, "roguePalisade"], [9, "rogueBarricade"], [9, "rogueBalustrade"],
+            [7, "rogueArmada"], [7, "rogueBattalion"], [7, "rogueCoalition"],
+            [3, "rogueAlchemist"], [3, "rogueInventor"], [3, "roguePioneer"],
+            [1, "julius"], [1, "genghis"], [1, "napoleon"],
+        ];
         this.bigFodderChoices = ["sentryGun", "sentrySwarm", "sentryTrap", "shinySentryGun"];
         this.smallFodderChoices = ["crasher"];
         this.length = c.CLASSIC_SIEGE ? this.waveCodes.length : c.WAVES;
@@ -149,10 +157,17 @@ class BossRush {
 
     spawnFriendlyBoss() {
         let o = new Entity(getSpawnableArea(TEAM_BLUE));
-        o.define(ran.choose(this.friendlyBossChoices));
+        let type = this.friendlyBossChoices[ran.chooseChance(...this.friendlyBossChoices.map((x) => x[0]))][1]
+        o.define(type);
         o.define({ DANGER: 10 });
         o.team = TEAM_BLUE;
         o.controllers.push(new ioTypes.nearestDifferentMaster(o), new ioTypes.wanderAroundMap(0, { lookAtGoal: true }));
+        o.name = ran.chooseBossName('castle');
+        o.FOV = 10;
+        let statFactor = this.bossStatMultipliers[type] ?? 1;
+        this.setTurretStats(o, statFactor);
+        o.HEALTH *= statFactor;
+        o.settings.broadcastMessage = `${o.name} has fallen!`;
         sockets.broadcast(o.name + ' has arrived and joined your team!');
     }
 
@@ -171,6 +186,7 @@ class BossRush {
         entity.name = 'Sanctuary';
         entity.SIZE = room.tileWidth / 17.5;
         entity.isDominator = true;
+        entity.define({ DANGER: 11 })
         entity.on('dead', () => {
             /*let isAC;
             for (let instance of o.collisionArray) {
@@ -201,10 +217,10 @@ class BossRush {
         }
     }
 
-    setEnemyTurretStats(entity, statFactor) {
+    setTurretStats(entity, statFactor) {
         entity.gunStatScale = {health: statFactor};
         for (let turret of entity.turrets) {
-            this.setEnemyTurretStats(turret, statFactor);
+            this.setTurretStats(turret, statFactor);
         }
     }
 
@@ -214,7 +230,7 @@ class BossRush {
         enemy.team = TEAM_ENEMIES;
         enemy.FOV = 10;
         let statFactor = 1.01 ** this.waveId * (this.bossStatMultipliers[type] ?? 1);
-        this.setEnemyTurretStats(enemy, statFactor);
+        this.setTurretStats(enemy, statFactor);
         enemy.HEALTH *= statFactor;
         enemy.refreshBodyAttributes();
         enemy.controllers.push(new ioTypes.bossRushAI(enemy));
@@ -257,8 +273,8 @@ class BossRush {
                 this.spawnEnemyWrapper(getSpawnableArea(TEAM_ENEMIES), ran.choose(this.smallFodderChoices));
             }
 
-            //spawn a friendly boss every 20 waves
-            if (waveId % 20 == 19) {
+            //spawn a friendly boss every 15 waves
+            if (waveId % 15 == 14) {
                 setTimeout(() => this.spawnFriendlyBoss(), 5000);
             }
         }
@@ -269,7 +285,7 @@ class BossRush {
             for (let sanc of this.sanctuaries) {
                 this.defineSanctuary(sanc, TEAM_BLUE, `sanctuaryTier${newSancTier}`);
             }
-            sockets.broadcast(`The sanctuaries have upgraded to tier ${newSancTier}`);
+            sockets.broadcast(`The sanctuaries have upgraded to tier ${newSancTier}.`);
             this.sanctuaryTier = newSancTier;
         }
     }

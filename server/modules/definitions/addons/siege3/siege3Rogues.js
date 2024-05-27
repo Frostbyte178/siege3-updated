@@ -1,6 +1,6 @@
 const { base, gunCalcNames } = require("../../constants");
 const g = require('../../gunvals.js');
-const { combineStats } = require("../../facilitators");
+const { combineStats, weaponArray } = require("../../facilitators");
 
 // Hex rogues
 Class.rogueBarricadeTurret = {
@@ -32,31 +32,28 @@ Class.rogueBarricade = {
     VALUE: 5e5,
     BODY: {
         FOV: 1.4,
-        SPEED: 0.1 * base.SPEED,
+        SPEED: 0.35 * base.SPEED,
         HEALTH: 16 * base.HEALTH,
         SHIELD: 3 * base.SHIELD,
         DAMAGE: 3 * base.DAMAGE,
+        REGEN: base.REGEN * 0.3,
     },
-    GUNS: Array(6).fill().map((_, i) => (
-        {
-            POSITION: [5, 6, 1.3, 8, 0, 60*i, 0],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.drone, g.destroyer, { reload: 1.5 }, {size: 1.5}]),
-                TYPE: ["drone", {INDEPENDENT: true}],
-                STAT_CALCULATOR: gunCalcNames.drone,
-                WAIT_TO_CYCLE: true,
-                AUTOFIRE: true,
-                MAX_CHILDREN: 2,
-                SYNCS_SKILLS: true
-            }
+    GUNS: weaponArray({
+        POSITION: [5, 6, 1.3, 8, 0, 0, 0],
+        PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.drone, g.pounder, { reload: 1.5 }, {size: 1.5}]),
+            TYPE: "drone",
+            STAT_CALCULATOR: gunCalcNames.drone,
+            WAIT_TO_CYCLE: true,
+            AUTOFIRE: true,
+            MAX_CHILDREN: 2,
+            SYNCS_SKILLS: true
         }
-    )),
-    TURRETS: Array(6).fill().map((_, i) => (
-        {
-            POSITION: [5, 10, 0, 60*i+30, 0, 0],
-            TYPE: "rogueBarricadeTurret",
-        }
-    )),
+    }, 6),
+    TURRETS: weaponArray({
+        POSITION: [5, 10, 0, 30, 0, 0],
+        TYPE: "rogueBarricadeTurret",
+    }, 6),
 }
 Class.rogueBalustradeTurret = {
     PARENT: "genericTank",
@@ -86,18 +83,19 @@ Class.rogueBalustrade = {
     SIZE: 30,
     VALUE: 5e5,
     BODY: {
-        FOV: 1.7,
-        SPEED: 0.13 * base.SPEED,
-        HEALTH: 11 * base.HEALTH,
-        SHIELD: 2 * base.SHIELD,
-        DAMAGE: 4 * base.DAMAGE,
+        FOV: 1.4,
+        SPEED: 0.35 * base.SPEED,
+        HEALTH: 16 * base.HEALTH,
+        SHIELD: 3 * base.SHIELD,
+        DAMAGE: 3 * base.DAMAGE,
+        REGEN: base.REGEN * 0.3,
     },
-    GUNS: Array(6).fill().map((_, i) => ([
+    GUNS: weaponArray([
         {
-            POSITION: [4, 6, 1.3, 8, 0, 60*i, 0],
+            POSITION: [4, 6, 1.3, 8, 0, 0, 0],
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.drone, g.pounder, {size: 1.3}]),
-                TYPE: ["turretedDrone", {INDEPENDENT: true}],
+                TYPE: "turretedDrone",
                 STAT_CALCULATOR: gunCalcNames.drone,
                 WAIT_TO_CYCLE: true,
                 AUTOFIRE: true,
@@ -105,68 +103,44 @@ Class.rogueBalustrade = {
                 SYNCS_SKILLS: true
             }
         }, {
-            POSITION: [2.6, 3.5, 1, 8, 0, 60*i, 0],
+            POSITION: [2.6, 3.5, 1, 8, 0, 0, 0],
         }
-    ])).flat(),
-    TURRETS: Array(6).fill().map((_, i) => (
-        {
-            POSITION: [5, 10, 0, 60*i+30, 0, 0],
-            TYPE: "rogueBalustradeTurret",
-        }
-    )),
+    ], 6),
+    TURRETS: weaponArray({
+        POSITION: [5, 10, 0, 30, 0, 0],
+        TYPE: "rogueBalustradeTurret",
+    }, 6),
 }
 
 // Septa rogues
-Class.rogueBattalionTurret = {
-    PARENT: "genericTank",
-    LABEL: "Turret",
-    INDEPENDENT: true,
-    COLOR: "grey",
-    GUNS: [
-        {
-            POSITION: [16, 14, 1, 0, 0, 0, 0],
-        }, {
-            POSITION: [4, 14, 1.6, 16, 0, 0, 0],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.trap, g.pounder, g.destroyer, g.hexaTrapper, { speed: 1.2 }, {size: 2, shudder: 0.6, damage: 0.6}]),
-                TYPE: "trap",
-                STAT_CALCULATOR: gunCalcNames.trap,
-                AUTOFIRE: true,
-            },
-        },
-    ],
-}
 Class.rogueBattalion = {
     PARENT: "miniboss",
     LABEL: "Rogue Battalion",
     COLOR: "darkGrey",
     UPGRADE_COLOR: "darkGrey",
+    CONTROLLERS: [["drag", {range: 225}]],
     SHAPE: 7,
     SIZE: 32,
     VALUE: 5e5,
     BODY: {
         FOV: 1.3,
-        SPEED: base.SPEED * 0.13,
-        HEALTH: base.HEALTH * 18,
+        SPEED: base.SPEED * 0.4,
+        HEALTH: base.HEALTH * 16,
         SHIELD: base.SHIELD * 4,
-        REGEN: base.REGEN * 1.5,
+        REGEN: base.REGEN * 0.3,
         DAMAGE: base.DAMAGE * 4,
     },
-    GUNS: Array(7).fill().map((_, i) => (
-        {
-            POSITION: [13, 6, 1, 0, 0, 360/7*(i+0.5), 0],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.pounder, g.destroyer]),
-                TYPE: "bullet",
-            }
+    GUNS: weaponArray({
+        POSITION: [13, 6, 1, 0, 0, 360/14, 0],
+        PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.pounder, g.destroyer, {speed: 1.1, maxSeed: 1.1, health: 1.25}]),
+            TYPE: "bullet",
         }
-    )),
-    TURRETS: Array(7).fill().map((_, i) => (
-        {
-            POSITION: [5, 10, 0, 360/7*i, 0, 0],
-            TYPE: "baseTrapTurret",
-        }
-    )),
+    }, 7),
+    TURRETS: weaponArray({
+        POSITION: [5, 10, 0, 0, 0, 0],
+        TYPE: "baseTrapTurret",
+    }, 7),
 }
 Class.rogueCoalitionTurret = {
     PARENT: "genericTank",
@@ -192,35 +166,34 @@ Class.rogueCoalition = {
     LABEL: "Rogue Coalition",
     COLOR: "darkGrey",
     UPGRADE_COLOR: "darkGrey",
+    CONTROLLERS: [["drag", {range: 225}]],
     SHAPE: 7,
     SIZE: 32,
     VALUE: 5e5,
     BODY: {
-        FOV: 1.5,
-        SPEED: base.SPEED * 0.14,
-        HEALTH: base.HEALTH * 11,
-        SHIELD: base.SHIELD * 2.5,
-        REGEN: base.REGEN * 0.7,
-        DAMAGE: base.DAMAGE * 2.5,
+        FOV: 1.3,
+        SPEED: base.SPEED * 0.4,
+        HEALTH: base.HEALTH * 16,
+        SHIELD: base.SHIELD * 4,
+        REGEN: base.REGEN * 0.3,
+        DAMAGE: base.DAMAGE * 4,
     },
-    GUNS: Array(7).fill().map((_, i) => ([
+    GUNS: weaponArray([
         {
-            POSITION: [11.5, 6, 1, 0, 0, 360/7*(i+0.5), 0],
+            POSITION: [11.5, 6, 1, 0, 0, 360/14, 0],
         }, {
-            POSITION: [1, 6, 1.15, 11.5, 0, 360/7*(i+0.5), 0],
+            POSITION: [1, 6, 1.15, 11.5, 0, 360/14, 0],
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.trap, g.setTrap, g.construct, g.pounder, {range: 0.9}]),
                 TYPE: "unsetTrap",
                 STAT_CALCULATOR: gunCalcNames.block,
             }
         }
-    ])).flat(),
-    TURRETS: Array(7).fill().map((_, i) => (
-        {
-            POSITION: [5, 10, 0, 360/7*i, 0, 0],
-            TYPE: "rogueCoalitionTurret",
-        }
-    )),
+    ], 7),
+    TURRETS: weaponArray({
+        POSITION: [5, 10, 0, 0, 0, 0],
+        TYPE: "rogueCoalitionTurret",
+    }, 7)
 }
 
 // Octo rogues
@@ -343,34 +316,28 @@ Class.rogueAlchemist = {
     VALUE: 5e5,
     BODY: {
         FOV: 1.6,
-        SPEED: base.SPEED * 0.2,
-        HEALTH: base.HEALTH * 12,
-        SHIELD: base.SHIELD * 3,
+        SPEED: base.SPEED * 0.25,
+        HEALTH: base.HEALTH * 16,
+        SHIELD: base.SHIELD * 4.5,
         REGEN: base.REGEN * 0.3,
-        DAMAGE: base.DAMAGE * 3.5,
+        DAMAGE: base.DAMAGE * 4.5,
     },
-    GUNS: Array(8).fill().map((_, i) => ([
+    GUNS: weaponArray([
         {
-            POSITION: [6, 5, -0.5, 7.5, 0, 45*i, 0],
+            POSITION: [6, 5, -0.5, 7.5, 0, 0, 0],
         }, {
-            POSITION: [12.5, 5.5, 1, 0, 0, 45*i, 0],
+            POSITION: [12.5, 5.5, 1, 0, 0, 0, 0],
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.basic, g.sniper, g.healer, {size: 0.8, reload: 4, maxSpeed: 0.1, range: 0.7}]),
                 TYPE: "healerBulletIndicated",
             },
         },
-    ])).flat(),
-    TURRETS: Array(8).fill().map((_, i) => (
-        {
-            POSITION: [5, 10, 0, 45*(i+0.5), 0, 0],
-            TYPE: "rogueAlchemistSecondaryTurret",
-        }
-    )),
+    ], 8),
+    TURRETS: weaponArray({
+        POSITION: [5, 10, 0, 22.5, 0, 0],
+        TYPE: "rogueAlchemistSecondaryTurret",
+    }, 8),
 }
-Class.rogueAlchemist.TURRETS.push({
-    POSITION: [10, 0, 0, 0, 360, 1],
-    TYPE: "rogueAlchemistPrimaryTurret",
-});
 
 Class.rogueInventorPrimaryTurret = {
     PARENT: "genericTank",
@@ -407,7 +374,7 @@ Class.rogueInventorSecondaryTurret = {
             POSITION: [9, 10, 0.6, 7, 0, 0, 0],
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.swarm, { speed: 1.3, maxSeed: 1.3 }, {range: 1.8, reload: 1.6}]),
-                TYPE: ["swarm", {INDEPENDENT: true}],
+                TYPE: "autoswarm",
                 AUTOFIRE: true,
                 STAT_CALCULATOR: gunCalcNames.swarm,
             },
@@ -424,35 +391,29 @@ Class.rogueInventor = {
     VALUE: 5e5,
     BODY: {
         FOV: 1.6,
-        SPEED: base.SPEED * 0.14,
-        HEALTH: base.HEALTH * 18,
-        SHIELD: base.SHIELD * 4,
-        REGEN: base.REGEN * 0.65,
-        DAMAGE: base.DAMAGE * 3.5,
+        SPEED: base.SPEED * 0.25,
+        HEALTH: base.HEALTH * 16,
+        SHIELD: base.SHIELD * 4.5,
+        REGEN: base.REGEN * 0.3,
+        DAMAGE: base.DAMAGE * 4.5,
     },
-    GUNS: Array(8).fill().map((_, i) => ([
+    GUNS: weaponArray([
         {
-            POSITION: [12.5, 5, 1, 0, 0, 45*i, 0],
+            POSITION: [12.5, 5, 1, 0, 0, 0, 0],
         }, {
-            POSITION: [1.75, 5, 1.5, 12.5, 0, 45*i, 0],
+            POSITION: [1.75, 5, 1.5, 12.5, 0, 0, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.trap, g.setTrap, g.construct, { speed: 1.5 }, g.hexaTrapper, {reload: 1.7}]),
+                SHOOT_SETTINGS: combineStats([g.trap, g.setTrap, g.construct, { speed: 1.5 }, g.hexaTrapper, {reload: 1.7, range: 0.85}]),
                 TYPE: "unsetPillbox",
                 STAT_CALCULATOR: gunCalcNames.block,
             }
         }
-    ])).flat(),
-    TURRETS: Array(8).fill().map((_, i) => (
-        {
-            POSITION: [5, 10, 0, 45*(i+0.5), 0, 0],
-            TYPE: "rogueInventorSecondaryTurret",
-        }
-    )),
+    ], 8, 1/2),
+    TURRETS: weaponArray({
+        POSITION: [5, 10, 0, 22.5, 0, 0],
+        TYPE: "rogueInventorSecondaryTurret",
+    }, 8),
 }
-Class.rogueInventor.TURRETS.push({
-    POSITION: [10, 0, 0, 0, 360, 1],
-    TYPE: "rogueInventorPrimaryTurret",
-});
 
 Class.roguePioneerPrimaryTurret = {
     PARENT: "genericTank",
@@ -484,7 +445,7 @@ Class.roguePioneerSecondaryTurret = {
         {
             POSITION: [10, 12.5, -0.7, 10, 0, 0, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.launcher, g.rocketeer, {speed: 8, maxSpeed: 2, damage: 0.25, size: 0.7, range: 1.45, reload: 2.5}]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.launcher, g.rocketeer, {speed: 3, maxSpeed: 2, damage: 0.25, size: 0.7, range: 1.45, reload: 2.5}]),
                 TYPE: ["homingMissile", {BODY: {RECOIL_MULTIPLIER: 0.2}}],
                 STAT_CALCULATOR: gunCalcNames.sustained,
                 AUTOFIRE: true,
@@ -506,37 +467,31 @@ Class.roguePioneer = {
     VALUE: 5e5,
     BODY: {
         FOV: 1.6,
-        SPEED: base.SPEED * 0.14,
+        SPEED: base.SPEED * 0.25,
         HEALTH: base.HEALTH * 16,
-        SHIELD: base.SHIELD * 3,
-        REGEN: base.REGEN * 1,
-        DAMAGE: base.DAMAGE * 3.5,
+        SHIELD: base.SHIELD * 4.5,
+        REGEN: base.REGEN * 0.3,
+        DAMAGE: base.DAMAGE * 4.5,
     },
-    GUNS: Array(8).fill().map((_, i) => ([
+    GUNS: weaponArray([
         {
-            POSITION: [12.75, 5, 1, 0, 0, 45*i, 0],
+            POSITION: [12.75, 5, 1, 0, 0, 0, 0],
         }, {
-            POSITION: [1.75, 5, 1.5, 12.75, 0, 45*i, 0],
+            POSITION: [1.75, 5, 1.5, 12.75, 0, 0, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.trap, g.setTrap, g.construct, { speed: 1.2 }, g.hexaTrapper, {health: 1.5, reload: 3}]),
+                SHOOT_SETTINGS: combineStats([g.trap, g.setTrap, g.construct, { speed: 1.2 }, g.hexaTrapper, {health: 1.5, reload: 3.2}]),
                 TYPE: "unsetSurgeonPillbox",
                 STAT_CALCULATOR: gunCalcNames.block,
                 DESTROY_OLDEST_CHILD: true,
                 MAX_CHILDREN: 2,
             }
         }
-    ])).flat(),
-    TURRETS: Array(8).fill().map((_, i) => (
-        {
-            POSITION: [5, 10, 0, 45*(i+0.5), 0, 0],
-            TYPE: "roguePioneerSecondaryTurret",
-        }
-    )),
+    ], 8, 1/2),
+    TURRETS: weaponArray({
+        POSITION: [5, 10, 0, 22.5, 0, 0],
+        TYPE: "roguePioneerSecondaryTurret",
+    }, 8),
 }
-Class.roguePioneer.TURRETS.push({
-    POSITION: [10, 0, 0, 0, 360, 1],
-    TYPE: "roguePioneerPrimaryTurret",
-});
 
 
 Class.rogues.UPGRADES_TIER_0.splice(1, 0, "rogueBarricade", "rogueBalustrade");
