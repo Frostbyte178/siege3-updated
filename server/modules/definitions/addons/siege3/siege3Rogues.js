@@ -184,7 +184,7 @@ Class.rogueCoalition = {
         }, {
             POSITION: [1, 6, 1.15, 11.5, 0, 360/14, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.trap, g.setTrap, g.construct, g.pounder, {range: 0.9}]),
+                SHOOT_SETTINGS: combineStats([g.trap, g.setTrap, g.construct, g.pounder, {health: 1.2, range: 0.8}]),
                 TYPE: "unsetTrap",
                 STAT_CALCULATOR: gunCalcNames.block,
             }
