@@ -10,7 +10,7 @@ let spawnPermanentAntiTankMachineGun = (loc) => {
 atmg = new Tile({ color: "white", init: tile => spawnPermanentAntiTankMachineGun(tile.loc) }),
 
 // we are not yet advanced enough to transition between two color codes
-outside = new Tile({ color: "white" }),
+outside = new Tile({ color: "white", data: {allowMazeWallSpawn: true} }),
 
 bossSpawn = new Tile({
     color: getTeamColor(TEAM_RED),
@@ -51,6 +51,7 @@ bossSpawnNew = new Tile({
 }),
 killWall = new Tile({
     color: getTeamColor(TEAM_RED),
+    data: {allowMazeWallSpawn: true},
     tick: killWallTick
 })
 

@@ -7,6 +7,6 @@ module.exports = {
     CLASSIC_SIEGE: false,
     TILE_WIDTH: 400,
     TILE_HEIGHT: 400,
-    ROOM_SETUP: ['map_siege_citadel'],
+    ROOM_SETUP: ['map_siege_blitz'],
     BOT_XP: 500,
 };

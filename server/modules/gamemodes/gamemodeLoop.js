@@ -8,7 +8,10 @@ let hunt;
 if (c.HUNT) hunt = new ManHunt();
 
 if (c.MOTHERSHIP_LOOP) mothershipLoop.spawn();
-if (c.SPECIAL_BOSS_SPAWNS) bossRush.init();
+if (c.SPECIAL_BOSS_SPAWNS) {
+    bossRush.init();
+    generateSiegeMaze(c.ROOM_SETUP[1]);
+}
 if (c.MAZE > 0) generateMaze(c.MAZE);
 
 let logger = new LagLogger();

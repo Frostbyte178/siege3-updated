@@ -188,15 +188,7 @@ class BossRush {
         entity.isDominator = true;
         entity.define({ DANGER: 11 })
         entity.on('dead', () => {
-            /*let isAC;
-            for (let instance of o.collisionArray) {
-                if (TEAM_ROOM !== instance.team && instance.type !== 'food' && instance.type !== 'wall') {
-                    isAC = true;
-                }
-            }
-            if (isAC) {
-                tile.color = 'white';
-            } else */if (entity.team === TEAM_ENEMIES) {
+            if (entity.team === TEAM_ENEMIES) {
                 this.spawnSanctuary(tile, TEAM_BLUE, `sanctuaryTier${this.sanctuaryTier}`);
                 tile.color.interpret(getTeamColor(TEAM_BLUE));
                 sockets.broadcast('A sanctuary has been repaired!');

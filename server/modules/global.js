@@ -176,6 +176,7 @@ const requires = [
     "./debug/speedLoop.js", // The speed check loop lmao.
     "./gamemodes/bossRush.js", // Boss Rush
     "./gamemodes/maze.js", // Maze
+    "./gamemodes/siegeMaze.js", // Siege wall templates
     "./gamemodes/mothership.js", // The mothership mode
     "./gamemodes/manhunt.js", // The Manhunt mode
     "./gamemodes/trainwars.js", // The Train Wars mode
