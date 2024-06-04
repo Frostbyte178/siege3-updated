@@ -24,24 +24,24 @@ let checkMazeForBlocks = (initX, initY, size) => {
         const fullWalls = [1, 2, 3, 4, size - 5, size - 4, size - 3, size - 2];
         const outerWalls = [0, size - 1];
         const innerWalls = [5, size - 6];
-        for (let i = 9; i < size - 9; i++) {
+        for (let i = 10; i < size - 10; i++) {
             for (let pos of fullWalls) {
                 maze[pos][i] = true;
                 maze[i][pos] = true;
             }
             for (let pos of outerWalls) {
-                maze[pos][i] = rollMazeSpawn(0.4);
-                maze[i][pos] = rollMazeSpawn(0.4);
+                maze[pos][i] ||= rollMazeSpawn(0.4);
+                maze[i][pos] ||= rollMazeSpawn(0.4);
             }
             for (let pos of innerWalls) {
-                maze[pos][i] = rollMazeSpawn(0.65);
-                maze[i][pos] = rollMazeSpawn(0.65);
+                maze[pos][i] ||= rollMazeSpawn(0.65);
+                maze[i][pos] ||= rollMazeSpawn(0.65);
             }
         }
         // Forced walls
         // In red
         let forcedX = [9];
-        let forcedY = [2, 3];
+        let forcedY = [1, 2, 3];
         for (let x of forcedX) {
             for (let y of forcedY) {
                 let inverseX = size - x - 1;
@@ -80,8 +80,8 @@ let checkMazeForBlocks = (initX, initY, size) => {
         const innerWalls = [2, size - 3];
         for (let i = 1; i < size - 1; i++) {
             for (let pos of outerWalls) {
-                maze[pos][i] = rollMazeSpawn(0.4);
-                maze[i][pos] = rollMazeSpawn(0.4);
+                maze[pos][i] ||= rollMazeSpawn(0.4);
+                maze[i][pos] ||= rollMazeSpawn(0.4);
             }
         }
         for (let i = 1; i < size - 1; i++) {
@@ -92,10 +92,15 @@ let checkMazeForBlocks = (initX, initY, size) => {
         }
         for (let i = 2; i < size - 2; i++) {
             for (let pos of innerWalls) {
-                maze[pos][i] = rollMazeSpawn(0.8);
-                maze[i][pos] = rollMazeSpawn(0.8);
+                maze[pos][i] ||= rollMazeSpawn(0.8);
+                maze[i][pos] ||= rollMazeSpawn(0.8);
             }
         }
+        // Forced walls
+        maze[2][2] = true;
+        maze[2][size - 3] = true;
+        maze[size - 3][2] = true;
+        maze[size - 3][size - 3] = true;
     }
     generateSiegeMaze = (mode) => {
         switch (mode) {
