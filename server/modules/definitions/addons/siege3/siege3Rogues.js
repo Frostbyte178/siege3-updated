@@ -138,7 +138,7 @@ Class.rogueBattalion = {
         }
     }, 7),
     TURRETS: weaponArray({
-        POSITION: [5, 10, 0, 0, 0, 0],
+        POSITION: [5, 10, 0, 0, 160, 0],
         TYPE: "baseTrapTurret",
     }, 7),
 }
@@ -166,7 +166,7 @@ Class.rogueCoalition = {
     LABEL: "Rogue Coalition",
     COLOR: "darkGrey",
     UPGRADE_COLOR: "darkGrey",
-    CONTROLLERS: [["drag", {range: 225}]],
+    CONTROLLERS: [["drag", {range: 200}]],
     SHAPE: 7,
     SIZE: 32,
     VALUE: 5e5,
@@ -191,7 +191,7 @@ Class.rogueCoalition = {
         }
     ], 7),
     TURRETS: weaponArray({
-        POSITION: [5, 10, 0, 0, 0, 0],
+        POSITION: [5, 10, 0, 0, 160, 0],
         TYPE: "rogueCoalitionTurret",
     }, 7)
 }
@@ -364,6 +364,11 @@ Class.rogueInventorPrimaryTurret = {
         },
     ],
 }
+Class.healerSwarm = {
+    PARENT: "swarm",
+    HEALER: true,
+    INDEPENDENT: true,
+}
 Class.rogueInventorSecondaryTurret = {
     PARENT: "genericTank",
     LABEL: "Turret",
@@ -374,12 +379,16 @@ Class.rogueInventorSecondaryTurret = {
             POSITION: [9, 10, 0.6, 7, 0, 0, 0],
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.swarm, { speed: 1.3, maxSeed: 1.3 }, {range: 1.8, reload: 1.6}]),
-                TYPE: "autoswarm",
+                TYPE: "healerSwarm",
                 AUTOFIRE: true,
                 STAT_CALCULATOR: gunCalcNames.swarm,
             },
         },
     ],
+    PROPS: [{
+        POSITION: [12, 0, 0, 0, 1],
+        TYPE: "healerSymbol"
+    }]
 }
 Class.rogueInventor = {
     PARENT: "miniboss",

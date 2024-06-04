@@ -753,6 +753,7 @@ Class.napoleonLowerTurret = {
                 SHOOT_SETTINGS: combineStats([g.swarm, g.bee, g.pounder, { speed: 1.3, maxSpeed: 1.3 }]),
                 TYPE: ["bee", { INDEPENDENT: true }],
                 STAT_CALCULATOR: gunCalcNames.swarm,
+                AUTOFIRE: true,
             },
         }, {
             POSITION: [8, 8, 0.6, 6, 0, -30, 0.5],
@@ -760,6 +761,7 @@ Class.napoleonLowerTurret = {
                 SHOOT_SETTINGS: combineStats([g.swarm, g.bee, g.pounder, { speed: 1.3, maxSpeed: 1.3 }]),
                 TYPE: ["bee", { INDEPENDENT: true }],
                 STAT_CALCULATOR: gunCalcNames.swarm,
+                AUTOFIRE: true,
             },
         },
     ],
@@ -943,7 +945,7 @@ Class.napoleonUpperTurret = {
         }, {
             POSITION: [16, 12, 1, 0, 0, 0, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.pounder, { speed: 0.93, maxSpeed: 0.93 }]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.pounder, {reload: 0.5}]),
                 TYPE: ["turretedBullet", {COLOR: "veryLightGrey"}],
             },
         },
