@@ -185,7 +185,7 @@ Class.terrestrialTrapTurret = {
     ],
 }
 let makeshottrapTurretProps = () => ({
-    SHOOT_SETTINGS: combineStats([g.trap, g.setTrap, g.shotgun, g.machineGun, { speed: 0.7, maxSpeed: 0.2, damage: 1.5, range: 0.6 }]),
+    SHOOT_SETTINGS: combineStats([g.trap, g.setTrap, g.shotgun, g.machineGun, { speed: 0.7, maxSpeed: 0.2, damage: 1.2, range: 0.6 }]),
     AUTOFIRE: true,
     TYPE: "shotTrapBox",
     STAT_CALCULATOR: gunCalcNames.block,
@@ -194,7 +194,7 @@ Class.shottrapTurret = {
     PARENT: "genericTank",
     LABEL: 'Turret',
     BODY: {
-        FOV: 0,
+        FOV: 2,
     },
     INDEPENDENT: true,
     CONTROLLERS: ['nearestDifferentMaster', 'onlyAcceptInArc'], 
@@ -945,7 +945,7 @@ Class.napoleonUpperTurret = {
         }, {
             POSITION: [16, 12, 1, 0, 0, 0, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.pounder, {reload: 0.5}]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.pounder, {health: 1.2}]),
                 TYPE: ["turretedBullet", {COLOR: "veryLightGrey"}],
             },
         },

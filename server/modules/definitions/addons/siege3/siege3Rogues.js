@@ -138,7 +138,7 @@ Class.rogueBattalion = {
         }
     }, 7),
     TURRETS: weaponArray({
-        POSITION: [5, 10, 0, 0, 160, 0],
+        POSITION: [5, 10, 0, 0, 130, 0],
         TYPE: "baseTrapTurret",
     }, 7),
 }
@@ -191,7 +191,7 @@ Class.rogueCoalition = {
         }
     ], 7),
     TURRETS: weaponArray({
-        POSITION: [5, 10, 0, 0, 160, 0],
+        POSITION: [5, 10, 0, 0, 130, 0],
         TYPE: "rogueCoalitionTurret",
     }, 7)
 }
@@ -454,8 +454,8 @@ Class.roguePioneerSecondaryTurret = {
         {
             POSITION: [10, 12.5, -0.7, 10, 0, 0, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.launcher, g.rocketeer, {speed: 3, maxSpeed: 2, damage: 0.25, size: 0.7, range: 1.45, reload: 2.5}]),
-                TYPE: ["homingMissile", {BODY: {RECOIL_MULTIPLIER: 0.2}}],
+                SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.launcher, g.rocketeer, {speed: 3, maxSpeed: 2, damage: 0.32, size: 0.7, range: 1.45, reload: 2.5}]),
+                TYPE: ["homingMissile", {BODY: {RECOIL_MULTIPLIER: 0.18}}],
                 STAT_CALCULATOR: gunCalcNames.sustained,
                 AUTOFIRE: true,
             },
@@ -488,7 +488,7 @@ Class.roguePioneer = {
         }, {
             POSITION: [1.75, 5, 1.5, 12.75, 0, 0, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.trap, g.setTrap, g.construct, { speed: 1.2 }, g.hexaTrapper, {health: 1.5, reload: 3.2}]),
+                SHOOT_SETTINGS: combineStats([g.trap, g.setTrap, g.construct, { speed: 1.2 }, g.hexaTrapper, {health: 1.5, reload: 5}]),
                 TYPE: "unsetSurgeonPillbox",
                 STAT_CALCULATOR: gunCalcNames.block,
                 DESTROY_OLDEST_CHILD: true,

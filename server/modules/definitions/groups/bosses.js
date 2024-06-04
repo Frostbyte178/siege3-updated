@@ -569,7 +569,7 @@ Class.nestWarden = {
         }, {
             POSITION: [1.5, 8, 1.2, 10.7, 0, 36, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.trap, { speed: 1.2 }, g.setTrap, g.constructor]),
+                SHOOT_SETTINGS: combineStats([g.trap, { speed: 1.2 }, g.setTrap, g.constructor, {range: 0.5}]),
                 TYPE: "unsetTrap",
                 STAT_CALCULATOR: gunCalcNames.block
             },
@@ -734,7 +734,7 @@ Class.rogueArmada = {
         }
     ], 7),
     TURRETS: weaponArray({
-        POSITION: [5, 10, 0, 0, 160, 0],
+        POSITION: [5, 10, 0, 0, 130, 0],
         TYPE: "shottrapTurret"
     }, 7),
 }
