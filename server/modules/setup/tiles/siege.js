@@ -43,6 +43,7 @@ killWallTick = tile => {
 },
 bossSpawnNew = new Tile({
     color: "white",
+    data: {allowMazeWallSpawn: true},
     init: tile => {
         if (!room.spawnable[TEAM_ENEMIES]) room.spawnable[TEAM_ENEMIES] = [];
         room.spawnable[TEAM_ENEMIES].push(tile);

@@ -39,7 +39,7 @@ let checkMazeForBlocks = (initX, initY, size) => {
             }
         }
         // Forced walls
-        // In red
+        // Lip on walls
         let forcedX = [9];
         let forcedY = [1, 2, 3];
         for (let x of forcedX) {
@@ -56,7 +56,7 @@ let checkMazeForBlocks = (initX, initY, size) => {
                 maze[inverseY][inverseX] = -1;
             }
         }
-        // Out of red
+        // Inner corners
         maze[10][5] = -1;
         maze[size - 11][5] = -1;
         maze[10][size - 6] = -1;
@@ -67,9 +67,67 @@ let checkMazeForBlocks = (initX, initY, size) => {
         maze[size - 6][size - 11] = -1;
     }
     generateFortressMaze = () => {
-        size = 24;
-        padding = 2;
+        size = 32;
+        padding = 3;
         maze = JSON.parse(JSON.stringify(Array(size).fill(Array(size).fill(false))));
+        const fullWalls = [1, 2, 3, size - 4, size - 3, size - 2];
+        const outerWalls = [0, size - 1];
+        const innerWalls = [4, size - 5];
+        for (let i = 4; i < size / 2 - 4; i++) {
+            for (let pos of fullWalls) {
+                maze[pos][i] = true;
+                maze[i][pos] = true;
+                maze[pos][size - i - 1] = true;
+                maze[size - i - 1][pos] = true;
+            }
+            for (let pos of outerWalls) {
+                maze[pos][i] ||= rollMazeSpawn(0.55);
+                maze[i][pos] ||= rollMazeSpawn(0.55);
+                maze[pos][size - i - 1] ||= rollMazeSpawn(0.55);
+                maze[size - i - 1][pos] ||= rollMazeSpawn(0.55);
+            }
+            for (let pos of innerWalls) {
+                maze[pos][i] ||= rollMazeSpawn(0.65);
+                maze[i][pos] ||= rollMazeSpawn(0.65);
+                maze[pos][size - i - 1] ||= rollMazeSpawn(0.65);
+                maze[size - i - 1][pos] ||= rollMazeSpawn(0.65);
+            }
+        }
+        // Corners
+        maze[2][2] = rollMazeSpawn(0.4);
+        maze[2][3] = rollMazeSpawn(0.5);
+        maze[3][2] = rollMazeSpawn(0.5);
+        maze[3][3] = -1;
+        maze[size - 3][2] = rollMazeSpawn(0.4);
+        maze[size - 3][3] = rollMazeSpawn(0.5);
+        maze[size - 4][2] = rollMazeSpawn(0.5);
+        maze[size - 4][3] = -1;
+        maze[2][size - 3] = rollMazeSpawn(0.4);
+        maze[2][size - 4] = rollMazeSpawn(0.5);
+        maze[3][size - 3] = rollMazeSpawn(0.5);
+        maze[3][size - 4] = -1;
+        maze[size - 3][size - 3] = rollMazeSpawn(0.4);
+        maze[size - 3][size - 4] = rollMazeSpawn(0.5);
+        maze[size - 4][size - 3] = rollMazeSpawn(0.5);
+        maze[size - 4][size - 4] = -1;
+        
+        // Edges of red
+        let forcedX = [10, 11];
+        let forcedY = [4];
+        for (let x of forcedX) {
+            for (let y of forcedY) {
+                let inverseX = size - x - 1;
+                let inverseY = size - y - 1;
+                maze[x][y] = -1;
+                maze[inverseX][y] = -1;
+                maze[x][inverseY] = -1;
+                maze[inverseX][inverseY] = -1;
+                maze[y][x] = -1;
+                maze[y][inverseX] = -1;
+                maze[inverseY][x] = -1;
+                maze[inverseY][inverseX] = -1;
+            }
+        }
     }
     generateBlitzMaze = () => {
         size = 36;
