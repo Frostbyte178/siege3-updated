@@ -1,3 +1,4 @@
+let map = ran.choose(['fortress', 'citadel', 'blitz']);
 module.exports = {
     MODE: "tdm",
     TEAMS: 1,
@@ -7,6 +8,6 @@ module.exports = {
     CLASSIC_SIEGE: false,
     TILE_WIDTH: 400,
     TILE_HEIGHT: 400,
-    ROOM_SETUP: ['map_siege_fortress'],
+    ROOM_SETUP: [`map_siege_${map}`],
     BOT_XP: 500,
 };

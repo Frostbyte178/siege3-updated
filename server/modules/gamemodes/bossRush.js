@@ -133,6 +133,7 @@ class BossRush {
         this.timer = 0;
         this.remainingEnemies = 0;
         this.sanctuaryTier = 1;
+        this.friendlyBossCooldown = 15;
         this.sanctuaries = [];
     }
 
@@ -169,11 +170,18 @@ class BossRush {
         o.HEALTH *= statFactor;
         o.settings.broadcastMessage = `${o.name} has fallen!`;
         sockets.broadcast(o.name + ' has arrived and joined your team!');
+        playerTeamEntities.push(o);
+        o.on('dead', () => {
+            // Remove from array of player team tanks
+            let removeId = o.id;
+            playerTeamEntities = playerTeamEntities.filter((x) => x.id != removeId);
+        })
     }
 
     spawnSanctuary(tile, team, type = false) {
         type = type ? type : "sanctuaryTier3";
         let o = new Entity(tile.loc);
+        playerTeamEntities.push(o);
         this.defineSanctuary(o, team, type);
         this.sanctuaries.push(o);
     }
@@ -226,6 +234,7 @@ class BossRush {
         enemy.HEALTH *= statFactor;
         enemy.refreshBodyAttributes();
         enemy.controllers.push(new ioTypes.bossRushAI(enemy));
+        enemyTeamEntities.push(enemy);
 
         this.remainingEnemies++;
         enemy.on('dead', () => {
@@ -235,6 +244,9 @@ class BossRush {
                 sockets.broadcast(`Wave ${this.waveId + 1} has been defeated!`);
                 sockets.broadcast(`The next wave will start shortly.`);
             }
+            // Remove from array of enemy bosses
+            let removeId = enemy.id;
+            enemyTeamEntities = enemyTeamEntities.filter((x) => x.id != removeId);
         });
         return enemy;
     }
@@ -265,8 +277,8 @@ class BossRush {
                 this.spawnEnemyWrapper(getSpawnableArea(TEAM_ENEMIES), ran.choose(this.smallFodderChoices));
             }
 
-            //spawn a friendly boss every 15 waves
-            if (waveId % 15 == 14) {
+            //spawn a friendly boss every [this.friendlyBossCooldown] waves
+            if (waveId % this.friendlyBossCooldown == (this.friendlyBossCooldown - 1)) {
                 setTimeout(() => this.spawnFriendlyBoss(), 5000);
             }
         }

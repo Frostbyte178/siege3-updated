@@ -197,6 +197,7 @@ function incoming(message, socket) {
             }
             //socket.view.gazeUpon();
             //socket.lastUptime = Infinity;
+            playerTeamEntities.push(socket.player.body);
             // Give it the room state
             socket.talk("R", room.width, room.height, JSON.stringify(room.setup.map(x => x.map(t => t.color.compiled))), JSON.stringify(util.serverStartTime), c.runSpeed, c.ARENA_TYPE);
             // Log it
@@ -1091,6 +1092,9 @@ const eyes = (socket) => {
                 // But I just died...
                 if (player.body.isDead()) {
                     socket.status.deceased = true;
+                    // Remove from array of players
+                    let removeId = socket.player.body.id;
+                    playerTeamEntities = playerTeamEntities.filter((x) => x.id != removeId);
                     // Let the client know it died
                     socket.talk("F", ...player.records());
                     // Remove the body

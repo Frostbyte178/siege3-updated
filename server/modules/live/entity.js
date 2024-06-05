@@ -862,6 +862,7 @@ class Entity extends EventEmitter {
         })();
         this.autoOverride = false;
         this.healer = false;
+        this.isHealer = false;
         this.controllers = [];
         this.definitionEvents = [];
         this.blend = {
@@ -1130,6 +1131,7 @@ class Entity extends EventEmitter {
                 recursion: set.GLOW.RECURSION ?? 1
             };
         }
+        if (set.RESET_CONTROLLERS) this.controllers = [];
         if (set.CONTROLLERS != null) {
             let toAdd = [];
             for (let i = 0; i < set.CONTROLLERS.length; i++) {
@@ -1170,6 +1172,7 @@ class Entity extends EventEmitter {
         if (set.BROADCAST_MESSAGE != null) this.settings.broadcastMessage = set.BROADCAST_MESSAGE === "" ? undefined : set.BROADCAST_MESSAGE;
         if (set.DEFEAT_MESSAGE) this.settings.defeatMessage = true;
         if (set.HEALER) this.healer = true;
+        if (set.IS_HEALER) this.isHealer = true; // marks an entity as being able to heal, not doing the healing directly
         if (set.DAMAGE_CLASS != null) this.settings.damageClass = set.DAMAGE_CLASS;
         if (set.BUFF_VS_FOOD != null) this.settings.buffVsFood = set.BUFF_VS_FOOD;
         if (set.CAN_BE_ON_LEADERBOARD != null) this.settings.leaderboardable = set.CAN_BE_ON_LEADERBOARD;
@@ -1202,6 +1205,10 @@ class Entity extends EventEmitter {
         if (set.BORDERLESS != null) this.borderless = set.BORDERLESS;
         if (set.DRAW_FILL != null) this.drawFill = set.DRAW_FILL;
         if (set.TEAM != null) {
+            // remove from player team array
+            let removeId = this.id;
+            playerTeamEntities = playerTeamEntities.filter((x) => x.id != removeId);
+
             this.team = set.TEAM;
             if (!sockets.players.length) {
                 const _entity = this;
@@ -1593,6 +1600,7 @@ class Entity extends EventEmitter {
         this.bond = bond;
         this.source = bond;
         this.bond.turrets.push(this);
+        this.team = this.bond.team;
         this.skill = this.bond.skill;
         this.label = this.label.length ? this.bond.label + " " + this.label : this.bond.label;
         // It will not be in collision calculations any more nor shall it be seen or continue to run independently.

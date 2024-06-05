@@ -191,6 +191,7 @@ Class.healer = {
     PARENT: "genericTank",
     LABEL: "Healer",
     STAT_NAMES: statnames.heal,
+    IS_HEALER: true,
     TURRETS: [
         {
             POSITION: [13, 0, 0, 0, 360, 1],
@@ -3261,6 +3262,7 @@ Class.landmine = {
 Class.medic = {
     PARENT: "genericTank",
     LABEL: "Medic",
+    IS_HEALER: true,
     BODY: {
         FOV: base.FOV * 1.2,
     },
@@ -3287,6 +3289,7 @@ Class.medic = {
 Class.ambulance = {
     PARENT: "genericTank",
     LABEL: "Ambulance",
+    IS_HEALER: true,
     BODY: {
         HEALTH: base.HEALTH * 0.8,
         SHIELD: base.SHIELD * 0.8,
@@ -3332,6 +3335,7 @@ Class.ambulance = {
 Class.surgeon = {
     PARENT: "genericTank",
     LABEL: "Surgeon",
+    IS_HEALER: true,
     STAT_NAMES: statnames.trap,
     BODY: {
         SPEED: base.SPEED * 0.75,
@@ -3369,6 +3373,7 @@ Class.surgeon = {
 Class.paramedic = {
     PARENT: "genericTank",
     LABEL: "Paramedic",
+    IS_HEALER: true,
     BODY: {
         SPEED: base.SPEED * 0.9,
     },

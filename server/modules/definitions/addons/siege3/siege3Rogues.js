@@ -366,6 +366,20 @@ Class.rogueInventorPrimaryTurret = {
 }
 Class.healerSwarm = {
     PARENT: "swarm",
+    RESET_CONTROLLERS: true,
+    CONTROLLERS: [["targetSelection", {
+        health: -250,
+        score: 0.05, 
+        danger: 2, 
+        isBoss: 5,
+        isHealer: 0.25,
+        isSanctuary: -1e80,
+        killCount: 1.5,
+        cluster: 0,
+        
+        sameTeam: true
+    }], "mapTargetToGoal"],
+    AI: {BLIND: true},
     HEALER: true,
     INDEPENDENT: true,
 }
