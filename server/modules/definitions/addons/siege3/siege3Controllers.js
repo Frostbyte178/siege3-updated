@@ -449,7 +449,7 @@ class io_targetSelection extends IO {
         };
         this.targetsSameTeam = opts.sameTeam ?? false; // if we're a healer we should aim at allies
         this.targetedEntity = undefined;
-        this.tick = Infinity;
+        this.tick = ran.irandom(20);
     }
     baseValidation(e) {
         return (e.health.amount > 0) && // is alive
@@ -545,9 +545,57 @@ class io_targetSelection extends IO {
         }
 
         return {
-            target: {x: this.targetedEntity.x - this.body.x, y: this.targetedEntity.y - this.body.y},
+            target: {x: this.targetedEntity.x - this.body.x, y: this.targetedEntity.y - this.body.y, velocity: this.targetedEntity.velocity},
+            fire: true,
             main: true
         }
     }
 }
 ioTypes.targetSelection = io_targetSelection;
+
+class io_targetPrediction extends IO {
+    constructor(body, opts = {}) {
+        super(body);
+        // Always accounts for movement - simply omit this controller for no prediction
+        this.tick = ran.irandom(4);
+        this.leadTime = undefined;
+    }
+    think(input) {
+        let target = input.target;
+        if (!target) return;
+        // if (!target instanceof Entity) throw "controller io_targetPrediction must receive an Entity as its target.";
+        if (this.leadTime === undefined || this.tick % 4 == 0) {
+            let targetVelocity = target.velocity;
+            let relativePosition = {
+                x: target.x - this.body.x,
+                y: target.y - this.body.y,
+            }
+            let interceptSpeed = this.body.topSpeed;
+            if (!this.body.aiSettings.chase) {
+                for (let i = 0; i < this.body.guns.length; i++) {
+                    if (!this.body.guns[i].canShoot) continue;
+
+                    let v = this.body.guns[i].getTracking();
+                    if (v.speed == 0 || v.range == 0) continue;
+
+                    interceptSpeed = v.speed;
+                    break;
+                }
+            }
+            if (!Number.isFinite(interceptSpeed)) {
+                interceptSpeed = this.body.topSpeed + 0.01;
+            }
+
+            this.leadTime = timeOfImpact(relativePosition, targetVelocity, interceptSpeed)
+        }
+
+        return {
+            target: {
+                x: relativePosition.x + this.leadTime * targetVelocity.x,
+                y: relativePosition.y + this.leadTime * targetVelocity.y,
+            },
+            fire: true,
+            main: true
+        };
+    }
+}
