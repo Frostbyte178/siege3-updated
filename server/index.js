@@ -363,8 +363,8 @@ function calculateClusterScore(entityArray) {
             // Ignore if >750 units away (~1/10 of the map)
             if (distance > 750) continue;
 
-            // 300 divided by the euclidean distance, capped at 100
-            entity.clusterScore += 300 / Math.max(3, distance);
+            // 2000 divided by the euclidean distance, score increment capped at 100
+            entity.clusterScore += 2000 / Math.max(20, distance);
         }
     }
 }
