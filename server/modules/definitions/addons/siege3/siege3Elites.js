@@ -35,7 +35,16 @@ Class.eliteHarbor = {
     PARENT: 'elite',
     UPGRADE_LABEL: "Elite Harbor",
     UPGRADE_COLOR: "pink",
-    CONTROLLERS: [["minion", {orbit: 600, repel: 610}], ["underseerRepel", {trigger: 825, repelDrones: 31, minDrones: 12, repelCenterDistance: -0.25}]],
+    CONTROLLERS: [["targetSelection", {
+        health: 125, // 150
+        score: 0.00125, // 0.00075
+        danger: 5, // 5
+        isBoss: 10, // 75
+        isHealer: 20, // -25
+        isSanctuary: -100, // 100
+        killCount: 3, // 2.5
+        cluster: 3, // 2
+    }], ["drag", {range: 450}], ["underseerRepel", {trigger: 825, repelDrones: 31, minDrones: 12, repelCenterDistance: -0.25}]],
     SKILL: skillSet({
         rld: 0.7,
         dam: 0.5,
@@ -163,7 +172,16 @@ Class.eliteAssembler = {
     UPGRADE_COLOR: "pink",
     FACING_TYPE: "toTarget",
     FORCE_TWIGGLE: true,
-    CONTROLLERS: [["drag", {range: 350, useAlt: true}], ["assemble", {assembleRange: 350, hideDelay: 3100, ahead: 9}]],
+    CONTROLLERS: [["targetSelection", {
+        health: 250, // 150
+        score: 0.0015, // 0.00075
+        danger: 5, // 5
+        isBoss: 150, // 75
+        isHealer: -50, // -25
+        isSanctuary: 50, // 100
+        killCount: 4, // 2.5
+        cluster: 10, // 2
+    }], ["drag", {range: 350, useAlt: true}], ["assemble", {assembleRange: 350, hideDelay: 3100, ahead: 9}]],
     SKILL: skillSet({
         rld: 0.7,
         dam: 0.5,
@@ -216,7 +234,16 @@ Class.eliteSniper = {
     UPGRADE_COLOR: "pink",
     FACING_TYPE: "toTarget",
     FORCE_TWIGGLE: true,
-    CONTROLLERS: [["drag", {range: 700}]],
+    CONTROLLERS: [["targetSelection", {
+        health: 125, // 150
+        score: 0.0015, // 0.00075
+        danger: 7.5, // 5
+        isBoss: 10, // 75
+        isHealer: 20, // -25
+        isSanctuary: -25, // 100
+        killCount: 3, // 2.5
+        cluster: -0.5, // 2
+    }], ["drag", {range: 600}]],
     SKILL: skillSet({
         rld: 0.7,
         dam: 0.5,
@@ -262,6 +289,16 @@ Class.eliteNailgun = {
     PARENT: 'elite',
     UPGRADE_LABEL: "Elite Nailgun",
     UPGRADE_COLOR: "pink",
+    CONTROLLERS: [["targetSelection", {
+        health: 175, // 150
+        score: 0.002, // 0.00075
+        danger: 5, // 5
+        isBoss: 25, // 75
+        isHealer: 40, // -25
+        isSanctuary: 25, // 100
+        killCount: 3, // 2.5
+        cluster: 3, // 2
+    }], ["drag", {range: 500}]],
     AI: { STRAFE: false, SKYNET: true },
     TURRETS: [
         {

@@ -30,9 +30,19 @@ Class.rogueBarricade = {
     SHAPE: 6,
     SIZE: 30,
     VALUE: 5e5,
+    CONTROLLERS: [["targetSelection", {
+        health: 125, // 150
+        score: 0.001, // 0.00075
+        danger: 7.5, // 5
+        isBoss: 10, // 75
+        isHealer: 20, // -25
+        isSanctuary: -25, // 100
+        killCount: 3, // 2.5
+        cluster: 0.5, // 2
+    }], ["drag", {range: 450}]],
     BODY: {
         FOV: 1.4,
-        SPEED: 0.35 * base.SPEED,
+        SPEED: 0.4 * base.SPEED,
         HEALTH: 16 * base.HEALTH,
         SHIELD: 3 * base.SHIELD,
         DAMAGE: 3 * base.DAMAGE,
@@ -82,9 +92,19 @@ Class.rogueBalustrade = {
     SHAPE: 6,
     SIZE: 30,
     VALUE: 5e5,
+    CONTROLLERS: [["targetSelection", {
+        health: 125, // 150
+        score: 0.001, // 0.00075
+        danger: 7.5, // 5
+        isBoss: 10, // 75
+        isHealer: 20, // -25
+        isSanctuary: -25, // 100
+        killCount: 3, // 2.5
+        cluster: 0.5, // 2
+    }], ["drag", {range: 450}]],
     BODY: {
         FOV: 1.4,
-        SPEED: 0.35 * base.SPEED,
+        SPEED: 0.4 * base.SPEED,
         HEALTH: 16 * base.HEALTH,
         SHIELD: 3 * base.SHIELD,
         DAMAGE: 3 * base.DAMAGE,
@@ -118,13 +138,22 @@ Class.rogueBattalion = {
     LABEL: "Rogue Battalion",
     COLOR: "darkGrey",
     UPGRADE_COLOR: "darkGrey",
-    CONTROLLERS: [["drag", {range: 225}]],
+    CONTROLLERS: [["targetSelection", {
+        health: 250, // 150
+        score: 0.0015, // 0.00075
+        danger: 7.5, // 5
+        isBoss: 125, // 75
+        isHealer: -50, // -25
+        isSanctuary: 50, // 100
+        killCount: 4, // 2.5
+        cluster: 4, // 2
+    }], ["drag", {range: 225}]],
     SHAPE: 7,
     SIZE: 32,
     VALUE: 5e5,
     BODY: {
         FOV: 1.3,
-        SPEED: base.SPEED * 0.4,
+        SPEED: base.SPEED * 0.5,
         HEALTH: base.HEALTH * 16,
         SHIELD: base.SHIELD * 4,
         REGEN: base.REGEN * 0.3,
@@ -153,7 +182,7 @@ Class.rogueCoalitionTurret = {
         }, {
             POSITION: [17, 15, 1, 0, 0, 0, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.destroyer, g.artillery, g.artillery, g.skimmer, {reload: 2, damage: 1.1}]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.destroyer, g.artillery, g.artillery, g.skimmer, {damage: 0.9}]),
                 TYPE: "missile",
                 STAT_CALCULATOR: gunCalcNames.sustained,
                 AUTOFIRE: true,
@@ -166,13 +195,22 @@ Class.rogueCoalition = {
     LABEL: "Rogue Coalition",
     COLOR: "darkGrey",
     UPGRADE_COLOR: "darkGrey",
-    CONTROLLERS: [["drag", {range: 200}]],
+    CONTROLLERS: [["targetSelection", {
+        health: 250, // 150
+        score: 0.0015, // 0.00075
+        danger: 7.5, // 5
+        isBoss: 125, // 75
+        isHealer: -50, // -25
+        isSanctuary: 50, // 100
+        killCount: 4, // 2.5
+        cluster: 4, // 2
+    }], ["drag", {range: 225}]],
     SHAPE: 7,
     SIZE: 32,
     VALUE: 5e5,
     BODY: {
         FOV: 1.3,
-        SPEED: base.SPEED * 0.4,
+        SPEED: base.SPEED * 0.5,
         HEALTH: base.HEALTH * 16,
         SHIELD: base.SHIELD * 4,
         REGEN: base.REGEN * 0.3,
@@ -214,7 +252,7 @@ Class.unsetSurgeonPillboxTurret = {
         FOV: 3,
     },
     HAS_NO_RECOIL: true,
-    CONTROLLERS: [["spin", { independent: true, speed: 0.08 }]],
+    FACING_TYPE: ["spin", {speed: 0.08}],
     TURRETS: [
         {
             POSITION: [13, 0, 0, 0, 360, 1],
@@ -245,7 +283,6 @@ Class.unsetSurgeonPillbox = {
     LABEL: "Pillbox",
     SHAPE: -6,
     MOTION_TYPE: "motor",
-    CONTROLLERS: ["nearestDifferentMaster"],
     INDEPENDENT: true,
     BODY: {
         SPEED: 1,
@@ -264,16 +301,19 @@ Class.unsetSurgeonPillbox = {
 Class.rogueAlchemistSecondaryTurret = {
     PARENT: "genericTank",
     LABEL: "Turret",
+    CONTROLLERS: ["onlyAcceptInArc", "nearestDifferentMaster"],
     COLOR: "grey",
     GUNS: [
         {
-            POSITION: [11, 13, 1.4, 9, 0, 0, 0],
+            POSITION: [27, 9, 1, 0, 0, 0, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.machineGun, {health: 1.3, damage: 1.2, spray: 1.3, shudder: 1.3}]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.sniper, g.assassin, g.pounder]),
                 TYPE: "bullet",
                 AUTOFIRE: true,
             },
-        },
+        }, {
+            POSITION: [5, 9, -1.4, 8, 0, 0, 0]
+        }
     ],
 }
 Class.rogueAlchemist = {
@@ -284,9 +324,19 @@ Class.rogueAlchemist = {
     SHAPE: 8,
     SIZE: 34,
     VALUE: 5e5,
+    CONTROLLERS: [["targetSelection", {
+        health: 125, // 150
+        score: 0.0015, // 0.00075
+        danger: 7.5, // 5
+        isBoss: 10, // 75
+        isHealer: 20, // -25
+        isSanctuary: -25, // 100
+        killCount: 3, // 2.5
+        cluster: -0.5, // 2
+    }], ["drag", {range: 500}]],
     BODY: {
         FOV: 1.6,
-        SPEED: base.SPEED * 0.25,
+        SPEED: base.SPEED * 0.35,
         HEALTH: base.HEALTH * 16,
         SHIELD: base.SHIELD * 4.5,
         REGEN: base.REGEN * 0.3,
@@ -300,6 +350,7 @@ Class.rogueAlchemist = {
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.basic, g.sniper, g.healer, {size: 0.8, reload: 4, maxSpeed: 0.1, range: 0.7}]),
                 TYPE: "healerBulletIndicated",
+                AUTOFIRE: true,
             },
         },
     ], 8),
@@ -314,7 +365,7 @@ Class.healerSwarm = {
     RESET_CONTROLLERS: true,
     CONTROLLERS: [["targetSelection", {
         health: -250, // target low hp
-        score: 0.05, // target higher score
+        score: 0.001, // target higher score
         danger: 2, // target more dangerous
         isBoss: 50, // target rogues
         isHealer: 25, // target healers slightly
@@ -357,9 +408,19 @@ Class.rogueInventor = {
     SHAPE: 8,
     SIZE: 34,
     VALUE: 5e5,
+    CONTROLLERS: [["targetSelection", {
+        health: 125, // 150
+        score: 0.0015, // 0.00075
+        danger: 7.5, // 5
+        isBoss: 10, // 75
+        isHealer: 20, // -25
+        isSanctuary: -25, // 100
+        killCount: 3, // 2.5
+        cluster: -0.5, // 2
+    }], ["drag", {range: 500}]],
     BODY: {
         FOV: 1.6,
-        SPEED: base.SPEED * 0.25,
+        SPEED: base.SPEED * 0.35,
         HEALTH: base.HEALTH * 16,
         SHIELD: base.SHIELD * 4.5,
         REGEN: base.REGEN * 0.3,
@@ -413,9 +474,19 @@ Class.roguePioneer = {
     SHAPE: 8,
     SIZE: 34,
     VALUE: 5e5,
+    CONTROLLERS: [["targetSelection", {
+        health: 175, // 150
+        score: 0.00175, // 0.00075
+        danger: 7.5, // 5
+        isBoss: 10, // 75
+        isHealer: 20, // -25
+        isSanctuary: -25, // 100
+        killCount: 3, // 2.5
+        cluster: 0.5, // 2
+    }], ["drag", {range: 500}]],
     BODY: {
         FOV: 1.6,
-        SPEED: base.SPEED * 0.25,
+        SPEED: base.SPEED * 0.35,
         HEALTH: base.HEALTH * 16,
         SHIELD: base.SHIELD * 4.5,
         REGEN: base.REGEN * 0.3,

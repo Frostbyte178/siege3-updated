@@ -60,7 +60,16 @@ Class.genericHarvester = {
 Class.furrower = {
     PARENT: "genericHarvester",
     LABEL: "Furrower",
-    CONTROLLERS: ["nearestDifferentMaster", "bombingRun"],
+    CONTROLLERS: [["targetSelection", {
+        health: 125, // 150
+        score: 0.0015, // 0.00075
+        danger: 7.5, // 5
+        isBoss: -25, // 75
+        isHealer: 0, // -25
+        isSanctuary: -1e80, // 100
+        killCount: 2.5, // 2.5
+        cluster: -0.5, // 2
+    }], "bombingRun"],
     BODY: {
         HEALTH: harvesterStats.HEALTH * 0.75,
         SPEED: harvesterStats.SPEED * 1.75,
@@ -129,7 +138,16 @@ Class.pressurizerTurret = {
 Class.pressurizer = {
     PARENT: "genericHarvester",
     LABEL: "Pressurizer",
-    CONTROLLERS: ["nearestDifferentMaster", "circleTarget"],
+    CONTROLLERS: [["targetSelection", {
+        health: 150, // 150
+        score: 0.00125, // 0.00075
+        danger: 5, // 5
+        isBoss: 25, // 75
+        isHealer: 0, // -25
+        isSanctuary: -125, // 100
+        killCount: 2.5, // 2.5
+        cluster: 3, // 2
+    }], "circleTarget"],
     BODY: {
         HEALTH: harvesterStats.HEALTH * 0.8,
         SPEED: harvesterStats.SPEED * 1.5,
@@ -177,7 +195,16 @@ Class.pressurizer = {
 Class.stockyard = {
     PARENT: "genericHarvester",
     LABEL: "Stockyard",
-    CONTROLLERS: ["nearestDifferentMaster", ["bombingRun", {breakAwayAngle: 10, alwaysFireInRange: true}]],
+    CONTROLLERS: [["targetSelection", {
+        health: 125, // 150
+        score: 0.0015, // 0.00075
+        danger: 7.5, // 5
+        isBoss: -25, // 75
+        isHealer: 0, // -25
+        isSanctuary: -1e80, // 100
+        killCount: 2.5, // 2.5
+        cluster: -0.5, // 2
+    }], ["bombingRun", {breakAwayAngle: 10, alwaysFireInRange: true}]],
     BODY: {
         HEALTH: harvesterStats.HEALTH * 0.75,
         SPEED: harvesterStats.SPEED * 1.6,
@@ -231,7 +258,16 @@ Class.stockyard = {
 Class.irrigator = {
     PARENT: "genericHarvester",
     LABEL: "Irrigator",
-    CONTROLLERS: ["nearestDifferentMaster", ["drag", {range: 1500, useAlt: true}]],
+    CONTROLLERS: [["targetSelection", {
+        health: 100, // 150
+        score: 0.00175, // 0.00075
+        danger: 5, // 5
+        isBoss: 100, // 75
+        isHealer: 25, // -25
+        isSanctuary: -75, // 100
+        killCount: 3, // 2.5
+        cluster: 1.5, // 2
+    }], ["drag", {range: 1250, useAlt: true}]],
     BODY: {
         HEALTH: harvesterStats.HEALTH * 1.5,
         SPEED: harvesterStats.SPEED,
@@ -302,7 +338,16 @@ g.quarterstaff = { reload: 3, health: 1.6, speed: 1.3, spray: 1.5 }
 Class.quarterstaff = {
     PARENT: "genericHarvester",
     LABEL: "Quarterstaff",
-    CONTROLLERS: ["nearestDifferentMaster", ["bombingRun", {goAgainRange: 1600, firingRange: 550, breakAwayRange: 400, alwaysFireInRange: true}]],
+    CONTROLLERS: [["targetSelection", {
+        health: 125, // 150
+        score: 0.0015, // 0.00075
+        danger: 7.5, // 5
+        isBoss: -25, // 75
+        isHealer: 0, // -25
+        isSanctuary: -1e80, // 100
+        killCount: 2.5, // 2.5
+        cluster: -0.5, // 2
+    }], ["bombingRun", {goAgainRange: 1600, firingRange: 550, breakAwayRange: 400, alwaysFireInRange: true}]],
     BODY: {
         HEALTH: harvesterStats.HEALTH * 0.7,
         SPEED: harvesterStats.SPEED * 1.8,
@@ -475,7 +520,16 @@ g.shepherd = {range: 0.25, speed: 1.5, maxSpeed: 0.2, size: 1.2, reload: 0.7, re
 Class.shepherd = {
     PARENT: "genericHarvester",
     LABEL: "Shepherd",
-    CONTROLLERS: ["nearestDifferentMaster", ["bombingRun", {goAgainRange: 1800, firingRange: 525, breakAwayRange: 450, breakAwayAngle: 6}], ["burstFire", {alt: true, length: 1750}]],
+    CONTROLLERS: [["targetSelection", {
+        health: 125, // 150
+        score: 0.0015, // 0.00075
+        danger: 7.5, // 5
+        isBoss: -25, // 75
+        isHealer: 0, // -25
+        isSanctuary: -1e80, // 100
+        killCount: 2.5, // 2.5
+        cluster: -0.5, // 2
+    }], ["bombingRun", {goAgainRange: 1800, firingRange: 525, breakAwayRange: 450, breakAwayAngle: 6}], ["burstFire", {alt: true, length: 1750}]],
     BODY: {
         HEALTH: harvesterStats.HEALTH * 0.8e90,
         SPEED: harvesterStats.SPEED * 1.65,
@@ -540,7 +594,16 @@ Class.sniperPillbox = {
 Class.scarecrow = {
     PARENT: "genericHarvester",
     LABEL: "Scarecrow",
-    CONTROLLERS: ["nearestDifferentMaster", ["drag", {range: 1250, useAlt: true}]],
+    CONTROLLERS: [["targetSelection", {
+        health: 125, // 150
+        score: 0.0015, // 0.00075
+        danger: 7.5, // 5
+        isBoss: 10, // 75
+        isHealer: 20, // -25
+        isSanctuary: -25, // 100
+        killCount: 3, // 2.5
+        cluster: -0.5, // 2
+    }], ["drag", {range: 1250, useAlt: true}]],
     BODY: {
         HEALTH: harvesterStats.HEALTH * 1.5,
         SPEED: harvesterStats.SPEED,
@@ -623,7 +686,16 @@ Class.cultivatorTurret = {
 Class.cultivator = {
     PARENT: "genericHarvester",
     LABEL: "Cultivator",
-    CONTROLLERS: ["nearestDifferentMaster", "circleTarget"],
+    CONTROLLERS: [["targetSelection", {
+        health: 150, // 150
+        score: 0.00125, // 0.00075
+        danger: 5, // 5
+        isBoss: 25, // 75
+        isHealer: 0, // -25
+        isSanctuary: -125, // 100
+        killCount: 2.5, // 2.5
+        cluster: 3, // 2
+    }], "circleTarget"],
     BODY: {
         HEALTH: harvesterStats.HEALTH * 0.8,
         SPEED: harvesterStats.SPEED * 1.4,

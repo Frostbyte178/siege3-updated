@@ -105,9 +105,28 @@ Class.fireworkRocket = {
 };
 
 // Turrets
+Class.assassinTurret = {
+    PARENT: "genericTank",
+    LABEL: "Turret",
+    BODY: { FOV: 2 * base.FOV },
+    COLOR: -1,
+    INDEPENDENT: true,
+    CONTROLLERS: [ "onlyAcceptInArc", "nearestDifferentMaster" ],
+    GUNS: [
+        {
+            POSITION: [27, 8, 1, 0, 0, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.sniper, g.assassin]),
+                TYPE: "bullet"
+            }
+        }, {
+            POSITION: [5, 8, -1.4, 8, 0, 0, 0]
+        }
+    ]
+}
 Class.fireworkTurret = {
     PARENT: "genericTank",
-    LABEL: "Skimmer",
+    LABEL: "Turret",
     BODY: { FOV: 2 * base.FOV },
     COLOR: -1,
     INDEPENDENT: true,
@@ -175,7 +194,7 @@ Class.eliteNailgunTurret = {
 }
 Class.sidewinderTurret = {
     PARENT: "genericTank",
-    LABEL: "Nailgun",
+    LABEL: "Turret",
     BODY: { FOV: 2 * base.FOV },
     COLOR: -1,
     INDEPENDENT: true,
@@ -273,7 +292,7 @@ Class.nestIndustryTop = {
 Class.flameTurret = {
     PARENT: "genericTank",
     LABEL: "Flamethrower",
-    COLOR: 14,
+    COLOR: -1,
     INDEPENDENT: true,
     GUNS: [
         {
@@ -292,7 +311,8 @@ Class.predatorTurret = {
     PARENT: "genericTank",
     LABEL: "Flamethrower",
     CONTROLLERS: ["nearestDifferentMaster"],
-    COLOR: 14,
+    BODY: {FOV: 3 * base.FOV},
+    COLOR: -1,
     INDEPENDENT: true,
     GUNS: [
         {

@@ -34,6 +34,16 @@ Class.genericNester = {
 Class.nestPurger = {
     PARENT: "genericNester",
     LABEL: "Nest Purger",
+    CONTROLLERS: [["targetSelection", {
+        health: 125, // 150
+        score: 0.00125, // 0.00075
+        danger: 7.5, // 5
+        isBoss: 100, // 75
+        isHealer: 0, // -25
+        isSanctuary: -100, // 100
+        killCount: 3, // 2.5
+        cluster: 5, // 2
+    }], ["drag", {range: 500}]],
     GUNS: weaponArray([
         {
             POSITION: [-1.5, 8, 1.2, 11, 0, 36, 0],
@@ -53,7 +63,7 @@ Class.nestPurger = {
         },
         ...weaponArray({
             POSITION: [8, 10, 0, 0, 120, 0],
-            TYPE: [ "assassin", { INDEPENDENT: true, COLOR: -1 }, {CONTROLLERS: ["onlyAcceptInArc", "nearestDifferentMaster"]}, ],
+            TYPE: "assassinTurret"
         }, 5)
     ],
 };
@@ -62,6 +72,16 @@ Class.nestPurger = {
 Class.nestGrenadier = {
     PARENT: "genericNester",
     LABEL: "Nest Grenadier",
+    CONTROLLERS: [["targetSelection", {
+        health: 175, // 150
+        score: 0.001, // 0.00075
+        danger: 7.5, // 5
+        isBoss: 50, // 75
+        isHealer: 20, // -25
+        isSanctuary: -50, // 100
+        killCount: 3.5, // 2.5
+        cluster: 4, // 2
+    }], ["drag", {range: 425}]],
     GUNS: weaponArray([
         {
             POSITION: [11, 7.5, -0.4, 0, 0, 36, 0],
@@ -89,6 +109,16 @@ Class.nestGrenadier = {
 Class.nestBrigadier = {
     PARENT: "genericNester",
     LABEL: "Nest Brigadier",
+    CONTROLLERS: [["targetSelection", {
+        health: 175, // 150
+        score: 0.001, // 0.00075
+        danger: 7.5, // 5
+        isBoss: 50, // 75
+        isHealer: 20, // -25
+        isSanctuary: -50, // 100
+        killCount: 3.5, // 2.5
+        cluster: 4, // 2
+    }], ["drag", {range: 450}]],
     GUNS: weaponArray([
         {
             POSITION: [2.5, 6.5, 1, 9.5, 0, 36, 0],
@@ -117,6 +147,16 @@ Class.nestBrigadier = {
 Class.nestIndustry = {
     PARENT: "genericNester",
     LABEL: "Nest Industry",
+    CONTROLLERS: [["targetSelection", {
+        health: 125, // 150
+        score: 0.001, // 0.00075
+        danger: 7.5, // 5
+        isBoss: 10, // 75
+        isHealer: 20, // -25
+        isSanctuary: -25, // 100
+        killCount: 3, // 2.5
+        cluster: 0.5, // 2
+    }], ["drag", {range: 450}]],
     GUNS: weaponArray([
         {
             POSITION: [11.75, 9.5, 1, 0, 0, 36, 0],
@@ -154,6 +194,16 @@ Class.nestIndustry.GUNS[9].PROPERTIES.TYPE[0] = "sentinelLauncher"
 Class.nestSynthesizer = {
     PARENT: "genericNester",
     LABEL: "Nest Synthesizer",
+    CONTROLLERS: [["targetSelection", {
+        health: 125, // 150
+        score: 0.0015, // 0.00075
+        danger: 7.5, // 5
+        isBoss: 50, // 75
+        isHealer: 15, // -25
+        isSanctuary: -75, // 100
+        killCount: 3, // 2.5
+        cluster: 1, // 2
+    }], ["drag", {range: 500}]],
     GUNS: weaponArray([
         {
             POSITION: [10, 10, -0.5, 4, 0, 36, 0],
@@ -183,6 +233,16 @@ Class.nestSynthesizer = {
 Class.nestPurifier = {
     PARENT: 'genericNester',
     LABEL: "Nest Purifier",
+    CONTROLLERS: [["targetSelection", {
+        health: 250, // 150
+        score: 0.0015, // 0.00075
+        danger: 7.5, // 5
+        isBoss: 125, // 75
+        isHealer: -50, // -25
+        isSanctuary: 50, // 100
+        killCount: 4, // 2.5
+        cluster: 4, // 2
+    }], ["drag", {range: 225}]],
     GUNS: weaponArray({
         POSITION: [5.5, 7, 1, 6, 0, 36, 0],
         PROPERTIES: {

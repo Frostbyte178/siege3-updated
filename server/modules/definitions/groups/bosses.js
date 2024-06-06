@@ -7,27 +7,27 @@ Class.miniboss = {
     PARENT: "genericBoss",
     CONTROLLERS: [["targetSelection", {
         health: 150, // target high hp
-        score: 0.15, // target higher score
+        score: 0.00075, // target higher score
         danger: 5, // target more dangerous
         isBoss: 75, // target rogues
         isHealer: -25, // target healers slightly
         isSanctuary: 100, // target sanctuaries
         killCount: 2.5, // target higher kill count
         cluster: 2, // target clusters
-    }], ["drag", {range: 350}]],
+    }], ["drag", {range: 325}]],
     AI: { NO_LEAD: true, SKYNET: true },
 }
 Class.ramMiniboss = {
     PARENT: "genericBoss",
     CONTROLLERS: [["targetSelection", {
         health: 100, // target high hp
-        score: 0.25, // target higher score
+        score: 0.00125, // target higher score
         danger: 5, // target more dangerous
-        isBoss: 100, // target rogues
+        isBoss: 150, // target rogues
         isHealer: -25, // target healers slightly
         isSanctuary: 80, // target sanctuaries
         killCount: 3.5, // target higher kill count
-        cluster: 5, // target clusters
+        cluster: 4, // target clusters
     }], "canRepel", "mapTargetToGoal"],
 }
 
@@ -49,6 +49,16 @@ Class.elite = {
 }
 Class.eliteDestroyer = {
     PARENT: "elite",
+    CONTROLLERS: [["targetSelection", {
+        health: 125, // 150
+        score: 0.00125, // 0.00075
+        danger: 10, // 5
+        isBoss: 90, // 75
+        isHealer: -35, // -25
+        isSanctuary: 70, // 100
+        killCount: 2, // 2.5
+        cluster: 4, // 2
+    }], ["drag", {range: 250}]],
     UPGRADE_LABEL: "Elite Destroyer",
     UPGRADE_COLOR: "pink",
     GUNS: weaponArray({
@@ -129,6 +139,16 @@ Class.eliteBattleship = {
     PARENT: "elite",
     UPGRADE_LABEL: "Elite Battleship",
     UPGRADE_COLOR: "pink",
+    CONTROLLERS: [["targetSelection", {
+        health: 75, // 150
+        score: 0.00125, // 0.00075
+        danger: 7.5, // 5
+        isBoss: -25, // 75
+        isHealer: 40, // -25
+        isSanctuary: -100, // 100
+        killCount: 2, // 2.5
+        cluster: -2, // 2
+    }], ["drag", {range: 450}]],
     GUNS: weaponArray([
         {
             POSITION: [4, 6, 0.6, 7, -8, 60, 0],
@@ -162,6 +182,16 @@ Class.eliteSpawner = {
     PARENT: "elite",
     UPGRADE_LABEL: "Elite Spawner",
     UPGRADE_COLOR: "pink",
+    CONTROLLERS: [["targetSelection", {
+        health: 125, // 150
+        score: 0.001, // 0.00075
+        danger: 7.5, // 5
+        isBoss: 10, // 75
+        isHealer: 20, // -25
+        isSanctuary: -25, // 100
+        killCount: 3, // 2.5
+        cluster: 0.5, // 2
+    }], ["drag", {range: 450}]],
     MAX_CHILDREN: 9,
     AI: { STRAFE: false },
     GUNS: [
@@ -324,6 +354,16 @@ Class.legionaryCrasher = {
     PARENT: "elite",
     LABEL: "Legionary Crasher",
     UPGRADE_COLOR: "pink",
+    CONTROLLERS: [["targetSelection", {
+        health: 200, // 150
+        score: 0.0005, // 0.00075
+        danger: 7.5, // 5
+        isBoss: 100, // 75
+        isHealer: -50, // -25
+        isSanctuary: 150, // 100
+        killCount: 2.5, // 2.5
+        cluster: 4, // 2
+    }], ["drag", {range: 350}]],
     AI: { STRAFE: false, NO_LEAD: false },
     HAS_NO_RECOIL: true,
     VALUE: 5e6,
@@ -581,6 +621,16 @@ Class.nestWarden = {
         DAMAGE: base.DAMAGE * 2.5,
     },
     VALUE: 3e5,
+    CONTROLLERS: [["targetSelection", {
+        health: 200, // 150
+        score: 0.0005, // 0.00075
+        danger: 7.5, // 5
+        isBoss: 100, // 75
+        isHealer: -50, // -25
+        isSanctuary: 150, // 100
+        killCount: 2.5, // 2.5
+        cluster: 3.5, // 2
+    }], ["drag", {range: 350}]],
     GUNS: weaponArray([
         {
             POSITION: [10.7, 8, 1, 0, 0, 36, 0],
@@ -620,6 +670,16 @@ Class.nestGuardian = {
         DAMAGE: base.DAMAGE * 2.5,
     },
     VALUE: 3e5,
+    CONTROLLERS: [["targetSelection", {
+        health: 200, // 150
+        score: 0.00125, // 0.00075
+        danger: 7.5, // 5
+        isBoss: 125, // 75
+        isHealer: -25, // -25
+        isSanctuary: 50, // 100
+        killCount: 4, // 2.5
+        cluster: 4, // 2
+    }], ["drag", {range: 275}]],
     GUNS: weaponArray({
         POSITION: [5.5, 7, 1, 6, 0, 36, 0],
         PROPERTIES: {
@@ -649,10 +709,19 @@ Class.roguePalisade = {
     SHAPE: 6,
     SIZE: 30,
     VALUE: 5e5,
-    CONTROLLERS: ['nearestDifferentMaster', 'onlyAcceptInArc'],
+    CONTROLLERS: [["targetSelection", {
+        health: 125, // 150
+        score: 0.001, // 0.00075
+        danger: 7.5, // 5
+        isBoss: 10, // 75
+        isHealer: 20, // -25
+        isSanctuary: -25, // 100
+        killCount: 3, // 2.5
+        cluster: 0.5, // 2
+    }], ["drag", {range: 450}]],
     BODY: {
         FOV: 1.4,
-        SPEED: 0.35 * base.SPEED,
+        SPEED: 0.4 * base.SPEED,
         HEALTH: 16 * base.HEALTH,
         SHIELD: 3 * base.SHIELD,
         DAMAGE: 3 * base.DAMAGE,
@@ -680,13 +749,22 @@ Class.rogueArmada = {
     LABEL: 'Rogue Armada',
     COLOR: "darkGrey",
     UPGRADE_COLOR: "darkGrey",
-    CONTROLLERS: [["drag", {range: 225}]],
+    CONTROLLERS: [["targetSelection", {
+        health: 250, // 150
+        score: 0.0015, // 0.00075
+        danger: 7.5, // 5
+        isBoss: 125, // 75
+        isHealer: -50, // -25
+        isSanctuary: 50, // 100
+        killCount: 4, // 2.5
+        cluster: 4, // 2
+    }], ["drag", {range: 225}]],
     SHAPE: 7,
     SIZE: 28,
     VALUE: 500000,
     BODY: {
         FOV: 1.3,
-        SPEED: base.SPEED * 0.4,
+        SPEED: base.SPEED * 0.5,
         HEALTH: base.HEALTH * 16,
         SHIELD: base.SHIELD * 4,
         REGEN: base.REGEN * 0.3,

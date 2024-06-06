@@ -108,7 +108,7 @@ class io_drag extends IO {
                     y: this.body.y + target.y - orbit * Math.sin(dir),
                 }
                 if (Math.abs(target.length - orbit) < this.body.size * 2) {
-                    power = 0.7
+                    power = Math.abs(target.length - orbit) / this.body.size / 2;
                 }
             }
             return {
@@ -439,7 +439,7 @@ class io_targetSelection extends IO {
         // go through all entities, assign their priority based on these weights, then shoot at the highest priorty one
         this.weights = {
             health: opts.health ?? 50, // health fraction 0-1
-            score: opts.score ?? 0.01, // raw score
+            score: opts.score ?? 0.001, // raw score
             danger: opts.danger ?? 5, // danger level
             isBoss: opts.isBoss ?? 50, // if it's a boss (includes rogues)
             isHealer: opts.isHealer ?? 25, // if it's a healer (geneva suggestion!)
