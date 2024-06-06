@@ -554,7 +554,7 @@ class io_targetSelection extends IO {
 ioTypes.targetSelection = io_targetSelection;
 
 class io_targetPrediction extends IO {
-    constructor(body, opts = {}) {
+    constructor(body) {
         super(body);
         // Always accounts for movement - simply omit this controller for no prediction
         this.tick = ran.irandom(4);
@@ -563,13 +563,10 @@ class io_targetPrediction extends IO {
     think(input) {
         let target = input.target;
         if (!target) return;
-        // if (!target instanceof Entity) throw "controller io_targetPrediction must receive an Entity as its target.";
-        if (this.leadTime === undefined || this.tick % 4 == 0) {
-            let targetVelocity = target.velocity;
-            let relativePosition = {
-                x: target.x - this.body.x,
-                y: target.y - this.body.y,
-            }
+
+        let targetVelocity = target.velocity;
+        // Update lead time occasonally
+        if (this.leadTime === undefined || this.tick++ % 4 == 0) {
             let interceptSpeed = this.body.topSpeed;
             if (!this.body.aiSettings.chase) {
                 for (let i = 0; i < this.body.guns.length; i++) {
@@ -586,16 +583,16 @@ class io_targetPrediction extends IO {
                 interceptSpeed = this.body.topSpeed + 0.01;
             }
 
-            this.leadTime = timeOfImpact(relativePosition, targetVelocity, interceptSpeed)
+            this.leadTime = timeOfImpact(target, targetVelocity, interceptSpeed)
         }
-
         return {
             target: {
-                x: relativePosition.x + this.leadTime * targetVelocity.x,
-                y: relativePosition.y + this.leadTime * targetVelocity.y,
+                x: target.x + this.leadTime * targetVelocity.x,
+                y: target.y + this.leadTime * targetVelocity.y,
             },
             fire: true,
             main: true
         };
     }
 }
+ioTypes.targetPrediction = io_targetPrediction;
