@@ -185,7 +185,7 @@ Class.rogueBattalion = {
     GUNS: weaponArray({
         POSITION: [13, 6, 1, 0, 0, 360/14, 0],
         PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.pounder, g.destroyer, {speed: 1.1, maxSeed: 1.1, health: 1.1}]),
+            SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.pounder, g.destroyer, {speed: 1.1, maxSeed: 1.1}]),
             TYPE: "bullet",
         }
     }, 7),
@@ -325,7 +325,7 @@ Class.unsetSurgeonPillbox = {
     ],
 }
 
-Class.rogueAlchemistSecondaryTurret = {
+Class.rogueAlchemistTurret = {
     PARENT: "genericTank",
     LABEL: "Turret",
     CONTROLLERS: ["onlyAcceptInArc", "nearestDifferentMaster"],
@@ -383,7 +383,7 @@ Class.rogueAlchemist = {
     ], 8),
     TURRETS: weaponArray({
         POSITION: [5, 10, 0, 22.5, 120, 0],
-        TYPE: "rogueAlchemistSecondaryTurret",
+        TYPE: "rogueAlchemistTurret",
     }, 8),
 }
 
@@ -406,7 +406,7 @@ Class.healerSwarm = {
     HEALER: true,
     INDEPENDENT: true,
 }
-Class.rogueInventorSecondaryTurret = {
+Class.rogueInventorTurret = {
     PARENT: "genericTank",
     LABEL: "Turret",
     INDEPENDENT: true,
@@ -467,11 +467,11 @@ Class.rogueInventor = {
     ], 8, 1/2),
     TURRETS: weaponArray({
         POSITION: [5, 10, 0, 22.5, 0, 0],
-        TYPE: "rogueInventorSecondaryTurret",
+        TYPE: "rogueInventorTurret",
     }, 8),
 }
 
-Class.roguePioneerSecondaryTurret = {
+Class.roguePioneerTurret = {
     PARENT: "genericTank",
     BODY: { FOV: 2 * base.FOV },
     COLOR: 16,
@@ -481,7 +481,7 @@ Class.roguePioneerSecondaryTurret = {
         {
             POSITION: [10, 12.5, -0.7, 10, 0, 0, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.launcher, g.rocketeer, {speed: 3, maxSpeed: 2, damage: 0.32, size: 0.7, range: 1.45, reload: 2.5}]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.launcher, g.rocketeer, {speed: 3, maxSpeed: 2, damage: 0.38, size: 0.7, range: 1.45, reload: 2.5}]),
                 TYPE: ["homingMissile", {BODY: {RECOIL_MULTIPLIER: 0.18}}],
                 STAT_CALCULATOR: gunCalcNames.sustained,
                 AUTOFIRE: true,
@@ -535,7 +535,7 @@ Class.roguePioneer = {
     ], 8, 1/2),
     TURRETS: weaponArray({
         POSITION: [5, 10, 0, 22.5, 0, 0],
-        TYPE: "roguePioneerSecondaryTurret",
+        TYPE: "roguePioneerTurret",
     }, 8),
 }
 
