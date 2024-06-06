@@ -261,45 +261,15 @@ Class.unsetSurgeonPillbox = {
     ],
 }
 
-Class.rogueAlchemistPrimaryTurret = {
-    PARENT: "genericTank",
-    LABEL: "Turret",
-    INDEPENDENT: true,
-    CONTROLLERS: ['nearestDifferentMaster'],
-    COLOR: "darkGrey",
-    SHAPE: 8,
-    GUNS: [
-        {
-            POSITION: [24, 7, 1, 0, 0, 0, 0],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.gunner, g.machineGun, { speed: 1.3, maxSeed: 1.3 }, {damage: 0.75}]),
-                TYPE: "bullet",
-            },
-        }, {
-            POSITION: [21, 10, 1, 0, 0, 0, 0.5],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.gunner, g.machineGun, { speed: 1.3, maxSeed: 1.3 }, {damage: 0.75}]),
-                TYPE: "bullet",
-            },
-        }, {
-            POSITION: [12, 10, 1.4, 6, 0, 0, 0],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.machineGun, { speed: 1.3, maxSeed: 1.3 }, {damage: 0.75}]),
-                TYPE: "bullet",
-            },
-        },
-    ],
-}
 Class.rogueAlchemistSecondaryTurret = {
     PARENT: "genericTank",
     LABEL: "Turret",
-    INDEPENDENT: true,
     COLOR: "grey",
     GUNS: [
         {
-            POSITION: [11, 13, 1.5, 9, 0, 0, 0],
+            POSITION: [11, 13, 1.4, 9, 0, 0, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.machineGun]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.machineGun, {health: 1.3, damage: 1.2, spray: 1.3, shudder: 1.3}]),
                 TYPE: "bullet",
                 AUTOFIRE: true,
             },
@@ -334,51 +304,26 @@ Class.rogueAlchemist = {
         },
     ], 8),
     TURRETS: weaponArray({
-        POSITION: [5, 10, 0, 22.5, 0, 0],
+        POSITION: [5, 10, 0, 22.5, 120, 0],
         TYPE: "rogueAlchemistSecondaryTurret",
     }, 8),
 }
 
-Class.rogueInventorPrimaryTurret = {
-    PARENT: "genericTank",
-    LABEL: "Turret",
-    INDEPENDENT: true,
-    CONTROLLERS: ['nearestDifferentMaster'],
-    COLOR: "darkGrey",
-    SHAPE: 8,
-    GUNS: [
-        {
-            POSITION: [20.5, 13.5, 1, 0, 0, 0, 0]
-        }, {
-            POSITION: [24.5, 8.5, 1, 0, 0, 0, 0],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.sniper, g.rifle, g.healer, { speed: 1.3, maxSeed: 1.3 }]),
-                TYPE: "healerBulletIndicated"
-            }
-        }
-    ],
-    TURRETS: [
-        {
-            POSITION: [13, 0, 0, 0, 360, 1],
-            TYPE: "healerSymbol",
-        },
-    ],
-}
 Class.healerSwarm = {
     PARENT: "swarm",
     RESET_CONTROLLERS: true,
     CONTROLLERS: [["targetSelection", {
-        health: -250,
-        score: 0.05, 
-        danger: 2, 
-        isBoss: 5,
-        isHealer: 0.25,
-        isSanctuary: -1e80,
-        killCount: 1.5,
-        cluster: 0,
+        health: -250, // target low hp
+        score: 0.05, // target higher score
+        danger: 2, // target more dangerous
+        isBoss: 50, // target rogues
+        isHealer: 25, // target healers slightly
+        isSanctuary: -1e80, // ignore sanctuaries
+        killCount: 1.5, // target higher kill count
+        cluster: 0, // ignore cluster
         
-        sameTeam: true
-    }], "mapTargetToGoal"],
+        sameTeam: true // go for same team
+    }], "targetPrediction", "mapTargetToGoal"],
     AI: {BLIND: true},
     HEALER: true,
     INDEPENDENT: true,
@@ -438,26 +383,6 @@ Class.rogueInventor = {
     }, 8),
 }
 
-Class.roguePioneerPrimaryTurret = {
-    PARENT: "genericTank",
-    LABEL: "Turret",
-    INDEPENDENT: true,
-    BODY: {FOV: 10},
-    CONTROLLERS: ['nearestDifferentMaster'],
-    COLOR: "darkGrey",
-    SHAPE: 8,
-    GUNS: [
-        {
-            POSITION: [26, 9.5, 1, 0, 0, 0, 0],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.sniper, g.sniper, g.assassin, {range: 1.2}]),
-                TYPE: "bullet",
-            },
-        }, {
-            POSITION: [5, 9.5, -1.4, 8, 0, 0, 0],
-        },
-    ],
-}
 Class.roguePioneerSecondaryTurret = {
     PARENT: "genericTank",
     BODY: { FOV: 2 * base.FOV },

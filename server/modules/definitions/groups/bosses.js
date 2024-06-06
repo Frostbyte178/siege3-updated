@@ -5,12 +5,30 @@ require('./generics.js');
 
 Class.miniboss = {
     PARENT: "genericBoss",
-    CONTROLLERS: ["nearestDifferentMaster", ["drag", {range: 350}]],
+    CONTROLLERS: [["targetSelection", {
+        health: 150, // target high hp
+        score: 0.15, // target higher score
+        danger: 5, // target more dangerous
+        isBoss: 75, // target rogues
+        isHealer: -25, // target healers slightly
+        isSanctuary: 100, // target sanctuaries
+        killCount: 2.5, // target higher kill count
+        cluster: 2, // target clusters
+    }], ["drag", {range: 350}]],
     AI: { NO_LEAD: true, SKYNET: true },
 }
 Class.ramMiniboss = {
     PARENT: "genericBoss",
-    CONTROLLERS: ["nearestDifferentMaster", "canRepel", "mapTargetToGoal"],
+    CONTROLLERS: [["targetSelection", {
+        health: 100, // target high hp
+        score: 0.25, // target higher score
+        danger: 5, // target more dangerous
+        isBoss: 100, // target rogues
+        isHealer: -25, // target healers slightly
+        isSanctuary: 80, // target sanctuaries
+        killCount: 3.5, // target higher kill count
+        cluster: 5, // target clusters
+    }], "canRepel", "mapTargetToGoal"],
 }
 
 // ELITE CRASHERS
@@ -369,7 +387,7 @@ Class.sorcerer = {
     VALUE: 2e5,
     BODY: {
         FOV: 0.5,
-        SPEED: 0.12 * base.SPEED,
+        SPEED: 0.6 * base.SPEED,
         HEALTH: 6 * base.HEALTH,
         DAMAGE: 2 * base.DAMAGE,
     },
@@ -397,7 +415,7 @@ Class.summoner = {
     VALUE: 3e5,
     BODY: {
         FOV: 0.5,
-        SPEED: 0.1 * base.SPEED,
+        SPEED: 0.55 * base.SPEED,
         HEALTH: 7 * base.HEALTH,
         DAMAGE: 2.6 * base.DAMAGE,
     },
@@ -425,7 +443,7 @@ Class.enchantress = {
     VALUE: 4e5,
     BODY: {
         FOV: 0.5,
-        SPEED: 0.09 * base.SPEED,
+        SPEED: 0.5 * base.SPEED,
         HEALTH: 10 * base.HEALTH,
         DAMAGE: 3 * base.DAMAGE,
     },
@@ -453,7 +471,7 @@ Class.exorcistor = {
     VALUE: 5e5,
     BODY: {
         FOV: 0.5,
-        SPEED: 0.08 * base.SPEED,
+        SPEED: 0.45 * base.SPEED,
         HEALTH: 15 * base.HEALTH,
         DAMAGE: 4 * base.DAMAGE,
     },
@@ -481,7 +499,7 @@ Class.shaman = {
     VALUE: 6e5,
     BODY: {
         FOV: 0.5,
-        SPEED: 0.07 * base.SPEED,
+        SPEED: 0.4 * base.SPEED,
         HEALTH: 20 * base.HEALTH,
         DAMAGE: 5 * base.DAMAGE,
     },

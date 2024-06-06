@@ -118,7 +118,7 @@ class io_bossRushAI extends IO {
         this.goalDefault = room.center;
     }
     think(input) {
-        if (new Vector( this.body.x - this.goalDefault.x, this.body.y - this.goalDefault.y ).isShorterThan(50)) {
+        if (new Vector( this.body.x - this.goalDefault.x, this.body.y - this.goalDefault.y ).isShorterThan(2000)) {
             this.enabled = false;
         }
         if (this.enabled) {

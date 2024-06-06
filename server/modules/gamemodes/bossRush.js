@@ -233,7 +233,9 @@ class BossRush {
         this.setTurretStats(enemy, statFactor);
         enemy.HEALTH *= statFactor;
         enemy.refreshBodyAttributes();
-        enemy.controllers.push(new ioTypes.bossRushAI(enemy));
+        if (c.ROOM_SETUP[1] != "map_siege_blitz") {
+            enemy.controllers.push(new ioTypes.bossRushAI(enemy));
+        }
         enemyTeamEntities.push(enemy);
 
         this.remainingEnemies++;
