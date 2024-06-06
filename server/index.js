@@ -352,14 +352,33 @@ if (c.REPL_WINDOW) {
     require('repl').start({/* stdin, stdout, stderr,*/ useGlobal: true });
 }
 
+function calculateClusterScore(entityArray) {
+    for (let entity of entityArray) {
+        entity.clusterScore = 0;
+        for (let otherEntity of entityArray) {
+            // Exclude self
+            if (otherEntity.id == entity.id) continue;
+
+            let distance = Math.sqrt((otherEntity.x - entity.x) ** 2 + (otherEntity.y - entity.y) ** 2);
+            // Ignore if >750 units away (~1/10 of the map)
+            if (distance > 750) continue;
+
+            // 300 divided by the euclidean distance, capped at 100
+            entity.clusterScore += 300 / Math.max(3, distance);
+        }
+    }
+}
+
 // Bring it to life
 let counter = 0;
 setInterval(() => {
-    gameloop()
+    gameloop();
     gamemodeLoop();
     roomLoop();
 
-    if (counter++ / c.runSpeed > 30) {
+    if (counter++ / c.runSpeed >= 30) {
+        calculateClusterScore(playerTeamEntities);
+        calculateClusterScore(enemyTeamEntities);
         chatLoop();
         maintainloop();
         speedcheckloop();

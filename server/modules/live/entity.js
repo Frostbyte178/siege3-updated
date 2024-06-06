@@ -919,6 +919,7 @@ class Entity extends EventEmitter {
         this.autospinBoost = 1;
         this.antiNaN = new antiNaN(this);
         this.forceTwiggle = false;
+        this.clusterScore = 1;
         // Get a new unique id
         this.id = entitiesIdLog++;
         this.team = this.id;

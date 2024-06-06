@@ -470,7 +470,7 @@ class io_targetSelection extends IO {
         priority += entity.isHealer * this.weights.isHealer;
         priority += (entity.label === "Sanctuary") * this.weights.isSanctuary;
         priority += (entity.killCount.solo + entity.killCount.assists * 0.5 + entity.killCount.bosses * 5) * this.weights.killCount;
-        priority += (entity.clusterScore ?? 1) * this.weights.cluster;
+        priority += entity.clusterScore * this.weights.cluster;
         return priority;
     }
     findTarget() {
