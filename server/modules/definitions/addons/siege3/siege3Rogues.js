@@ -400,7 +400,8 @@ Class.healerSwarm = {
         killCount: 1.5, // target higher kill count
         cluster: 0, // ignore cluster
         
-        sameTeam: true // go for same team
+        sameTeam: true, // go for same team
+        avoidNearest: false // don't run from nearest valid target
     }], "targetPrediction", "mapTargetToGoal"],
     AI: {BLIND: true},
     HEALER: true,

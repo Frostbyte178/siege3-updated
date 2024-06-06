@@ -92,6 +92,7 @@ class io_drag extends IO {
         super(body);
         this.idealRange = opts.range ?? 400;
         this.useAlt = opts.useAlt ?? false;
+        this.runAwayDistance = opts.runRange ?? (this.idealRange / 2);
     }
     think(input) {
         if (input.target != null && input.main) {
@@ -99,7 +100,9 @@ class io_drag extends IO {
                 orbit = this.idealRange * sizeFactor,
                 goal,
                 power = 1,
+                nearestEntity = input.target.nearestEntity,
                 target = new Vector(input.target.x, input.target.y);
+            
             if (input.main) {
                 // Sit at range from point
                 let dir = target.direction;
@@ -107,8 +110,26 @@ class io_drag extends IO {
                     x: this.body.x + target.x - orbit * Math.cos(dir),
                     y: this.body.y + target.y - orbit * Math.sin(dir),
                 }
-                if (Math.abs(target.length - orbit) < this.body.size * 2) {
-                    power = Math.abs(target.length - orbit) / this.body.size / 2;
+
+                // Avoid nearest if provided
+                if (nearestEntity) {
+                    let relativeX = nearestEntity.x - this.body.x;
+                    let relativeY = nearestEntity.y - this.body.y;
+                    let distance = Math.sqrt(relativeX ** 2 + relativeY ** 2);
+                    
+                    // Only run if close
+                    if (distance < this.runAwayDistance * sizeFactor) {
+                        let angleToNearest = Math.atan2(relativeY, relativeX);
+                        let runAwayScale = this.runAwayDistance * sizeFactor - distance;
+                        goal.x -= Math.cos(angleToNearest) * runAwayScale;
+                        goal.y -= Math.sin(angleToNearest) * runAwayScale;
+                    }
+                }
+
+                // Decelerate when close to goal
+                let distanceToGoal = Math.sqrt((goal.x - this.body.x) ** 2 + (goal.y - this.body.x) ** 2);
+                if (distanceToGoal < this.body.size * 2) {
+                    power = 1 - distanceToGoal / (this.body.size * 2);
                 }
             }
             return {
@@ -448,7 +469,9 @@ class io_targetSelection extends IO {
             cluster: opts.cluster ?? 10, // cluster score
         };
         this.targetsSameTeam = opts.sameTeam ?? false; // if we're a healer we should aim at allies
+        this.avoidNearest = opts.avoidNearest ?? true; // run from the nearest valid target
         this.targetedEntity = undefined;
+        this.nearestEntity = undefined;
         this.tick = ran.irandom(20);
     }
     baseValidation(e) {
@@ -475,6 +498,7 @@ class io_targetSelection extends IO {
     }
     findTarget() {
         let greatestPriority = -1e50; // Intentionally not -Infinity so anything below this is ignored
+        let shortestDistance = Infinity;
         let targetList;
         if (this.body.team == TEAM_ENEMIES && this.targetsSameTeam || this.body.team == TEAM_BLUE && !this.targetsSameTeam) {
             targetList = enemyTeamEntities;
@@ -499,6 +523,12 @@ class io_targetSelection extends IO {
             if (!isNaN(priority) && priority > greatestPriority) {
                 greatestPriority = priority;
                 this.targetedEntity = entity;
+            }
+            // Find shortest distance
+            let distance = Math.sqrt((this.body.x - entity.x) ** 2 + (this.body.y - entity.y) ** 2);
+            if (distance < shortestDistance) {
+                shortestDistance = distance;
+                this.nearestEntity = entity;
             }
         }
     }
@@ -544,8 +574,18 @@ class io_targetSelection extends IO {
             return {}
         }
 
+        let target = {
+            x: this.targetedEntity.x - this.body.x, 
+            y: this.targetedEntity.y - this.body.y, 
+            velocity: this.targetedEntity.velocity
+        };
+
+        if (this.avoidNearest) {
+            target.nearestEntity = this.nearestEntity;
+        }
+
         return {
-            target: {x: this.targetedEntity.x - this.body.x, y: this.targetedEntity.y - this.body.y, velocity: this.targetedEntity.velocity},
+            target,
             fire: true,
             main: true
         }

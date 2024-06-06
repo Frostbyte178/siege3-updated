@@ -243,7 +243,7 @@ Class.eliteSniper = {
         isSanctuary: -25, // 100
         killCount: 3, // 2.5
         cluster: -0.5, // 2
-    }], ["drag", {range: 600}]],
+    }], ["drag", {range: 600, useAlt: true}]],
     SKILL: skillSet({
         rld: 0.7,
         dam: 0.5,
