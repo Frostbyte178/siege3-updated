@@ -186,6 +186,7 @@ for (let tier of sancHealerTiers) {
 
 Class.sanctuary = {
     PARENT: "dominator",
+    DISPLAY_NAME: false,
     LABEL: "Sanctuary",
     LEVEL: 45,
     SIZE: 20,
