@@ -133,6 +133,29 @@ Class.rogueBalustrade = {
 }
 
 // Septa rogues
+Class.rogueBattalionTurret = {
+    PARENT: "genericTank",
+    LABEL: "Turret",
+    BODY: {
+        FOV: 2,
+    },
+    INDEPENDENT: true,
+    CONTROLLERS: ['nearestDifferentMaster', 'onlyAcceptInArc'],
+    COLOR: "grey",
+    GUNS: [
+        {
+            POSITION: [16, 14, 1, 0, 0, 0, 0],
+        }, {
+            POSITION: [4, 14, 1.8, 16, 0, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.trap, g.pounder, g.hexaTrapper, {speed: 1.1, shudder: 0.2}]),
+                TYPE: "trap",
+                STAT_CALCULATOR: gunCalcNames.trap,
+                AUTOFIRE: true,
+            },
+        },
+    ],
+}
 Class.rogueBattalion = {
     PARENT: "miniboss",
     LABEL: "Rogue Battalion",
@@ -162,19 +185,23 @@ Class.rogueBattalion = {
     GUNS: weaponArray({
         POSITION: [13, 6, 1, 0, 0, 360/14, 0],
         PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.pounder, g.destroyer, {speed: 1.1, maxSeed: 1.1, health: 1.25}]),
+            SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.pounder, g.destroyer, {speed: 1.1, maxSeed: 1.1, health: 1.1}]),
             TYPE: "bullet",
         }
     }, 7),
     TURRETS: weaponArray({
         POSITION: [5, 10, 0, 0, 130, 0],
-        TYPE: "baseTrapTurret",
+        TYPE: "rogueBattalionTurret",
     }, 7),
 }
 Class.rogueCoalitionTurret = {
     PARENT: "genericTank",
     LABEL: "Turret",
+    BODY: {
+        FOV: 2,
+    },
     INDEPENDENT: true,
+    CONTROLLERS: ['nearestDifferentMaster', 'onlyAcceptInArc'],
     COLOR: "grey",
     GUNS: [
         {
@@ -182,7 +209,7 @@ Class.rogueCoalitionTurret = {
         }, {
             POSITION: [17, 15, 1, 0, 0, 0, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.destroyer, g.artillery, g.artillery, g.skimmer, {damage: 0.9}]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.destroyer, g.artillery, g.artillery, g.skimmer, {damage: 0.65}]),
                 TYPE: "missile",
                 STAT_CALCULATOR: gunCalcNames.sustained,
                 AUTOFIRE: true,
