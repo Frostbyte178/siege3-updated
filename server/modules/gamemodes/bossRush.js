@@ -61,39 +61,66 @@ class BossRush {
             [  2, "shaman"],
 
             //elites
-            [  2, "eliteDestroyer"],
-            [  2, "eliteGunner"],
-            [  2, "eliteSprayer"],
-            [  2, "eliteBattleship"],
-            [  2, "eliteSpawner"],
-            [  2, "eliteTrapGuard"],
-            [  2, "eliteSpinner"],
-            [  2, "eliteSkimmer"],
+            [  3, "eliteDestroyer"],
+            [  3, "eliteGunner"],
+            [  3, "eliteSprayer"],
+            [  3, "eliteBattleship"],
+            [  3, "eliteSpawner"],
+            [  3, "eliteTrapGuard"],
+            [  3, "eliteSpinner"],
+            [  3, "eliteSkimmer"],
 
             //nesters
-            [  3, "nestKeeper"],
-            [  3, "nestWarden"],
-            [  3, "nestGuardian"],
+            [  5, "nestKeeper"],
+            [  5, "nestWarden"],
+            [  5, "nestGuardian"],
 
             //terrestrials
-            [ 15, "ares"],
-            [ 15, "gersemi"],
-            [ 15, "ezekiel"],
-            [ 15, "eris"],
-            [ 15, "selene"],
+            [ 25, "ares"],
+            [ 25, "gersemi"],
+            [ 25, "ezekiel"],
+            [ 25, "eris"],
+            [ 25, "selene"],
 
             //celestials
-            [ 35, "paladin"],
-            [ 35, "freyja"],
-            [ 35, "zaphkiel"],
-            [ 35, "nyx"],
-            [ 35, "theia"],
+            [ 55, "paladin"],
+            [ 55, "freyja"],
+            [ 55, "zaphkiel"],
+            [ 55, "nyx"],
+            [ 55, "theia"],
 
             //eternals
             [ 99, "legionaryCrasher" /*fucking mid*/],
             [100, "kronos"],
             [100, "odin"],
         ];
+        this.bossChoiceExtensions = [
+            [ // elites
+                [  3, "eliteHarbor"],
+                [  3, "eliteAssembler"],
+                [  3, "eliteSniper"],
+                [  3, "eliteNailgun"],
+            ],
+            [ // harvesters
+                [  3, "furrower"],
+                [  3, "stockyard"],
+                [  3, "quarterstaff"],
+                [  3, "shepherd"],
+                [  3, "pressurizer"],
+                [  3, "cultivator"],
+                [  3, "irrigator"],
+                [  3, "scarecrow"],
+            ],
+            [ // nesters
+                [  5, "nestPurger"],
+                [  5, "nestGrenadier"],
+                [  5, "nestBrigadier"],
+                [  5, "nestIndustry"],
+                [  5, "nestSynthesizer"],
+                [  5, "nestPurifier"],
+                [  5, "nestWatchman"],
+            ]
+        ]
         this.bossStatMultipliers = {
             nestKeeper: 1.2,
             nestWarden: 1.2,
@@ -124,7 +151,17 @@ class BossRush {
             [3, "rogueAlchemist"], [3, "rogueInventor"], [3, "roguePioneer"],
             [1, "julius"], [1, "genghis"], [1, "napoleon"],
         ];
-        this.bigFodderChoices = ["sentryGun", "sentrySwarm", "sentryTrap", "shinySentryGun"];
+        this.bigFodderChoices = [
+            [1000, 
+                ["sentryGun", "sentrySwarm", "sentryTrap", "sentryThruster", "sentryRoadspike", "sentryDesmos"],
+            ],
+            [750, 
+                ["sentinelLauncher", "sentinelCrossbow", "sentinelMinigun", "sentinelTriplex", "sentinelBees", "sentinelBomber"],
+            ],
+            [1, 
+                ["shinySentryGun", "shinySentrySwarm", "shinySentryTrap"],
+            ],
+        ];
         this.smallFodderChoices = ["crasher"];
         this.length = c.CLASSIC_SIEGE ? this.waveCodes.length : c.WAVES;
         this.waves = this.generateWaves();
@@ -181,7 +218,9 @@ class BossRush {
     spawnSanctuary(tile, team, type = false) {
         type = type ? type : "sanctuaryTier3";
         let o = new Entity(tile.loc);
-        playerTeamEntities.push(o);
+        if (team == TEAM_BLUE) {
+            playerTeamEntities.push(o);
+        }
         this.defineSanctuary(o, team, type, tile);
         this.sanctuaries.push(o);
     }
@@ -204,6 +243,8 @@ class BossRush {
                 this.spawnSanctuary(tile, TEAM_ENEMIES, "dominator");
                 tile.color.interpret(getTeamColor(TEAM_ENEMIES));
                 sockets.broadcast('A sanctuary has been destroyed!');
+                let removeId = entity.id;
+                playerTeamEntities = playerTeamEntities.filter((x) => x.id != removeId);
             }
             sockets.broadcastRoom();
         });
@@ -257,6 +298,19 @@ class BossRush {
         //yell at everyone
         sockets.broadcast(`Wave ${waveId + 1} has started!`);
 
+        // extend the boss spawn options over time
+        switch (waveId) {
+            case 10:
+                this.bossChoices.push(...this.bossChoiceExtensions[0]);
+                break;
+            case 15:
+                this.bossChoices.push(...this.bossChoiceExtensions[1]);
+                break;
+            case 25:
+                this.bossChoices.push(...this.bossChoiceExtensions[2]);
+                break;
+        }
+
         //spawn bosses
         for (let boss of this.waves[waveId]) {
             let spot = null,
@@ -272,8 +326,9 @@ class BossRush {
 
         if (!c.CLASSIC_SIEGE) {
             //spawn fodder enemies
+            let bigFodderOptions = this.bigFodderChoices[ran.chooseChance(...this.bigFodderChoices.map((x) => x[0]))][1];
             for (let i = 0; i < this.waveId / 5; i++) {
-                this.spawnEnemyWrapper(getSpawnableArea(TEAM_ENEMIES), ran.choose(this.bigFodderChoices));
+                this.spawnEnemyWrapper(getSpawnableArea(TEAM_ENEMIES), ran.choose(bigFodderOptions));
             }
             for (let i = 0; i < this.waveId / 2; i++) {
                 this.spawnEnemyWrapper(getSpawnableArea(TEAM_ENEMIES), ran.choose(this.smallFodderChoices));
