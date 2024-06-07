@@ -205,7 +205,7 @@ Class.healer = {
         {
             POSITION: [18, 10, 1, 0, 0, 0, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.healer]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.healer, {damage: 0.33}]),
                 TYPE: "healerBullet"
             }
         }
@@ -3279,7 +3279,7 @@ Class.medic = {
         {
             POSITION: [22, 10, 1, 0, 0, 0, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.healer, g.sniper]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.healer, g.sniper, {damage: 0.33}]),
                 TYPE: "healerBullet",
             },
         },
@@ -3308,7 +3308,7 @@ Class.ambulance = {
         {
             POSITION: [18, 10, 1, 0, 0, 0, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.flankGuard, g.triAngle, g.triAngleFront, { recoil: 4 }, g.healer]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.flankGuard, g.triAngle, g.triAngleFront, { recoil: 4 }, g.healer, {damage: 0.33}]),
                 TYPE: "healerBullet",
                 LABEL: "Front",
             },
@@ -3390,7 +3390,7 @@ Class.paramedic = {
         {
             POSITION: [15.5, 10, 1, 0, 0, -17.5, 0.5],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.tripleShot, g.healer]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.tripleShot, g.healer, {damage: 0.33}]),
                 TYPE: "healerBullet",
             },
         },
@@ -3400,7 +3400,7 @@ Class.paramedic = {
         {
             POSITION: [15.5, 10, 1, 0, 0, 17.5, 0.5],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.tripleShot, g.healer]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.tripleShot, g.healer, {damage: 0.33}]),
                 TYPE: "healerBullet",
             },
         },
@@ -3410,7 +3410,7 @@ Class.paramedic = {
         {
             POSITION: [18, 10, 1, 0, 0, 0, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.tripleShot, g.healer]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.tripleShot, g.healer, {damage: 0.33}]),
                 TYPE: "healerBullet",
             },
         },

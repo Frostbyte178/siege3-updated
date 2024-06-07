@@ -343,7 +343,7 @@ Class.sentinelMissile = {
             POSITION: [12, 10, 0, 0, 0, 180, 0],
             PROPERTIES: {
                 AUTOFIRE: true,
-                SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.destroyer]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.skimmer, {reload: 0.7}]),
                 TYPE: ["bullet", { PERSISTS_AFTER_DEATH: true }],
                 STAT_CALCULATOR: gunCalcNames.thruster,
             },
@@ -351,7 +351,7 @@ Class.sentinelMissile = {
             POSITION: [14, 6, 1, 0, -2, 130, 0],
             PROPERTIES: {
                 AUTOFIRE: true,
-                SHOOT_SETTINGS: combineStats([g.basic, g.skimmer]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.skimmer, {reload: 0.7}]),
                 TYPE: ["bullet", { PERSISTS_AFTER_DEATH: true }],
                 STAT_CALCULATOR: gunCalcNames.thruster,
             },
@@ -359,7 +359,7 @@ Class.sentinelMissile = {
             POSITION: [14, 6, 1, 0, 2, 230, 0],
             PROPERTIES: {
                 AUTOFIRE: true,
-                SHOOT_SETTINGS: combineStats([g.basic, g.skimmer]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.skimmer, {reload: 0.7}]),
                 TYPE: ["bullet", { PERSISTS_AFTER_DEATH: true }],
                 STAT_CALCULATOR: gunCalcNames.thruster,
             },

@@ -32,7 +32,7 @@ ioTypes.circleTarget = io_circleTarget;
 class io_bombingRun extends IO {
     constructor(body, opts = {}) {
         super(body);
-        this.goAgainRange = opts.goAgainRange ?? 1200;
+        this.goAgainRange = opts.goAgainRange ?? 1000;
         this.breakAwayRange = opts.breakAwayRange ?? 350;
         this.firingRange = opts.firingRange ?? 400;
         this.breakAwayAngle = opts.breakAwayAngle ?? 45;
@@ -470,6 +470,7 @@ class io_targetSelection extends IO {
         };
         this.targetsSameTeam = opts.sameTeam ?? false; // if we're a healer we should aim at allies
         this.avoidNearest = opts.avoidNearest ?? true; // run from the nearest valid target
+        this.lastPriority = -1e50 // Intentionally not -Infinity so anything below this is ignored
         this.targetedEntity = undefined;
         this.nearestEntity = undefined;
         this.tick = ran.irandom(20);
@@ -497,7 +498,7 @@ class io_targetSelection extends IO {
         return priority;
     }
     findTarget() {
-        let greatestPriority = -1e50; // Intentionally not -Infinity so anything below this is ignored
+        let greatestPriority = this.lastPriority; // Only retarget if the new priority is greater
         let shortestDistance = Infinity;
         let targetList;
         if (this.body.team == TEAM_ENEMIES && this.targetsSameTeam || this.body.team == TEAM_BLUE && !this.targetsSameTeam) {
@@ -531,6 +532,7 @@ class io_targetSelection extends IO {
                 this.nearestEntity = entity;
             }
         }
+        this.lastPriority = greatestPriority;
     }
     think(input) {
         // Override target lock upon other commands
@@ -553,6 +555,7 @@ class io_targetSelection extends IO {
             // Base validation
             if (!this.baseValidation(this.targetedEntity)) {
                 this.targetedEntity = undefined;
+                this.lastPriority = -1e50; // Reset
             }
             // Firing arc validation
             else if (

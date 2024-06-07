@@ -512,43 +512,43 @@ Class.sentinelMinigun = {
         {
             POSITION: [16, 7.5, 1, 0, 4.5, 0, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.minigun, g.twin]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.minigun, g.twin, g.spam, g.spam, {reload: 1.15}]),
                 TYPE: "bullet",
             },
         }, {
             POSITION: [11.5, 7.5, -1.33, 1, 4.5, 0, 0.5],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.minigun, g.twin]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.minigun, g.twin, g.spam, g.spam, {reload: 1.15}]),
                 TYPE: "bullet",
             },
         }, {
             POSITION: [16, 7.5, 1, 0, -4.5, 0, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.minigun, g.twin]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.minigun, g.twin, g.spam, g.spam, {reload: 1.15}]),
                 TYPE: "bullet",
             },
         }, {
             POSITION: [11.5, 7.5, -1.33, 1, -4.5, 0, 0.5],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.minigun, g.twin]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.minigun, g.twin, g.spam, g.spam, {reload: 1.15}]),
                 TYPE: "bullet",
             },
         }, {
             POSITION: [22.5, 9, 1, 0, 0, 0, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.minigun, g.twin]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.minigun, g.twin, g.spam, g.spam, {reload: 1.15}]),
                 TYPE: "bullet",
             },
         }, {
             POSITION: [20.4, 9, 1, 0, 0, 0, 1/3],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.minigun, g.twin]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.minigun, g.twin, g.spam, g.spam, {reload: 1.15}]),
                 TYPE: "bullet",
             },
         }, {
             POSITION: [18.3, 9, 1, 0, 0, 0, 2/3],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.minigun, g.twin]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.minigun, g.twin, g.spam, g.spam, {reload: 1.15}]),
                 TYPE: "bullet",
             },
         },

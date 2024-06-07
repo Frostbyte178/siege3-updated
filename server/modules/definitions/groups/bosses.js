@@ -116,6 +116,16 @@ Class.eliteSprayer = {
     PARENT: "elite",
     UPGRADE_LABEL: "Elite Sprayer",
     UPGRADE_COLOR: "pink",
+    CONTROLLERS: [["targetSelection", {
+        health: 150, // 150
+        score: 0.001, // 0.00075
+        danger: 10, // 5
+        isBoss: 90, // 75
+        isHealer: -50, // -25
+        isSanctuary: 125, // 100
+        killCount: 2, // 2.5
+        cluster: 4, // 2
+    }], ["drag", {range: 300}]],
     SKILL: [0, 9, 3, 9, 2, 9, 9, 9, 9, 0],
     AI: { NO_LEAD: false },
     HAS_NO_RECOIL: true,
@@ -434,7 +444,7 @@ Class.sorcerer = {
     GUNS: weaponArray({
         POSITION: [3.5, 8.65, 1.2, 8, 0, 0, 0],
         PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.drone, g.summoner, g.machineGun, g.machineGunner, { size: 0.4, spray: 150, speed: 2, shudder: 1.75 }]),
+            SHOOT_SETTINGS: combineStats([g.drone, g.summoner, g.machineGun, g.machineGunner, { size: 0.4, spray: 150, speed: 2, shudder: 1.75, speed: 1.7, maxSpeed: 1.7 }]),
             TYPE: "minichip",
             AUTOFIRE: true,
             SYNCS_SKILLS: true,
@@ -462,7 +472,7 @@ Class.summoner = {
     GUNS: weaponArray({
         POSITION: [3.5, 8.65, 1.2, 8, 0, 0, 0],
         PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.drone, g.summoner, { size: 0.8 }]),
+            SHOOT_SETTINGS: combineStats([g.drone, g.summoner, { size: 0.8, speed: 1.3, maxSpeed: 1.3 }]),
             TYPE: ["sunchip"],
             AUTOFIRE: true,
             SYNCS_SKILLS: true,
@@ -490,7 +500,7 @@ Class.enchantress = {
     GUNS: weaponArray({
         POSITION: [3.5, 8.65, 1.2, 8, 0, 0, 0],
         PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.drone, g.summoner, { size: 0.9 }]),
+            SHOOT_SETTINGS: combineStats([g.drone, g.summoner, g.pounder, { speed: 1.4, maxSpeed: 1.4 }]),
             TYPE: "dorito",
             AUTOFIRE: true,
             SYNCS_SKILLS: true,
@@ -518,7 +528,7 @@ Class.exorcistor = {
     GUNS: weaponArray({
         POSITION: [3.5, 8.65, 1.2, 8, 0, 0, 0],
         PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.drone, g.summoner, g.destroyer]),
+            SHOOT_SETTINGS: combineStats([g.drone, g.summoner, g.destroyer, { speed: 1.5, maxSpeed: 1.5 }]),
             TYPE: "demonchip",
             AUTOFIRE: true,
             SYNCS_SKILLS: true,
@@ -546,7 +556,7 @@ Class.shaman = {
     GUNS: weaponArray({
         POSITION: [3.5, 8.65, 1.2, 8, 0, 0, 0],
         PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.drone, g.summoner, g.destroyer, { size: 1.1 }]),
+            SHOOT_SETTINGS: combineStats([g.drone, g.summoner, g.destroyer, { size: 1.1, speed: 1.5, maxSpeed: 1.5 }]),
             TYPE: "realchip",
             AUTOFIRE: true,
             SYNCS_SKILLS: true,
@@ -601,7 +611,7 @@ Class.nestKeeper = {
         }, 5),
         {
             POSITION: [9, 0, 0, 0, 360, 1],
-            TYPE: [ "boomerTurret", { INDEPENDENT: true, COLOR: -1 } ],
+            TYPE: [ "boomerTurret", { COLOR: -1 } ],
         },
     ],
 };
@@ -995,7 +1005,7 @@ let ares = new LayeredBoss(null, "Ares", "terrestrial", 7, "purple", "terrestria
 ares.addLayer({gun: {
     POSITION: [3.75, 7, 1.2, 8, 0, null, 0],
     PROPERTIES: {
-        SHOOT_SETTINGS: combineStats([g.drone, g.summoner, g.destroyer, { speed: 0.5, maxSpeed: 0.5 }]),
+        SHOOT_SETTINGS: combineStats([g.drone, g.summoner, g.destroyer]),
         TYPE: ["demonchip", { INDEPENDENT: true, }],
         AUTOFIRE: true,
         SYNCS_SKILLS: true,
@@ -1022,7 +1032,7 @@ let ezekiel = new LayeredBoss(null, "Ezekiel", "terrestrial", 7, "orange", "terr
 ezekiel.addLayer({gun: {
     POSITION: [3.75, 7, 1.2, 8, 0, null, 0],
     PROPERTIES: {
-        SHOOT_SETTINGS: combineStats([g.drone, g.summoner, g.destroyer, { speed: 0.5, maxSpeed: 0.5 }]),
+        SHOOT_SETTINGS: combineStats([g.drone, g.summoner, g.destroyer]),
         TYPE: ["dorito", { COLOR: "orange", INDEPENDENT: true, }],
         AUTOFIRE: true,
         SYNCS_SKILLS: true,
@@ -1056,7 +1066,7 @@ let selene = new LayeredBoss(null, "Selene", "terrestrial", 7, "gold", "terrestr
 selene.addLayer({gun: {
     POSITION: [3.75, 7, 1.2, 8, 0, null, 0],
     PROPERTIES: {
-        SHOOT_SETTINGS: combineStats([g.drone, g.summoner, g.destroyer, { speed: 0.5, maxSpeed: 0.5 }]),
+        SHOOT_SETTINGS: combineStats([g.drone, g.summoner, g.destroyer]),
         TYPE: ["sunchip", { COLOR: "gold", INDEPENDENT: true }],
         AUTOFIRE: true,
         SYNCS_SKILLS: true,

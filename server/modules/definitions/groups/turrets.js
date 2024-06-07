@@ -128,10 +128,6 @@ Class.trapTurret = {
     INDEPENDENT: true,
     CONTROLLERS: ["nearestDifferentMaster", 'onlyAcceptInArc'],
     COLOR: "grey",
-    AI: {
-        SKYNET: true,
-        FULL_VIEW: true,
-    },
     GUNS: [
         {
             POSITION: [16, 14, 1, 0, 0, 0, 0],
@@ -199,10 +195,6 @@ Class.shottrapTurret = {
     INDEPENDENT: true,
     CONTROLLERS: ['nearestDifferentMaster', 'onlyAcceptInArc'], 
     COLOR: "grey",
-    AI: {
-        SKYNET: true,
-        FULL_VIEW: true,
-    },
     GUNS: [ {
             POSITION: [ 4, 1.5, 1, 11, -3, 0, 0 ], PROPERTIES: makeshottrapTurretProps(),
     }, {
@@ -414,10 +406,6 @@ Class.boomerTurret = {
     GUNS: [
         {
             POSITION: [7.75, 10, 1, 12, 0, 0, 0],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.trap, g.setTrap, g.boomerang, g.fake]),
-                TYPE: "bullet",
-            },
         }, {
             POSITION: [6, 10, -1.5, 7, 0, 0, 0],
         }, {
@@ -491,15 +479,11 @@ Class.barricadeTurret = {
     PARENT: "genericTank",
     LABEL: "Turret",
     BODY: {
-        FOV: 0.5,
+        FOV: 2,
     },
     INDEPENDENT: true,
     CONTROLLERS: ["nearestDifferentMaster"],
     COLOR: "grey",
-    AI: {
-        SKYNET: true,
-        FULL_VIEW: true,
-    },
     GUNS: [
         {
             POSITION: [24, 8, 1, 0, 0, 0, 0],
@@ -792,7 +776,7 @@ Class.cruiserTurret = {
     PARENT: "genericTank",
     LABEL: "Cruiser",
     BODY: { FOV: 2 },
-    CONTROLLERS: [ "canRepel", "onlyAcceptInArc", "mapAltToFire", "nearestDifferentMaster" ],
+    CONTROLLERS: [ "nearestDifferentMaster" ],
     COLOR: "grey",
     GUNS: [
         {
@@ -909,7 +893,7 @@ Class.swarmerTurret = {
         {
             POSITION: [14, 14, -1.2, 5, 0, 0, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.destroyer, g.hive]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.destroyer, g.hive, {speed: 1.2}]),
                 TYPE: "hive",
             },
         }, {
@@ -1090,23 +1074,7 @@ Class.surgeonPillboxTurret = {
         {
             POSITION: [17, 11, 1, 0, 0, 90, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.healer, g.minionGun, g.turret, g.power, g.autoTurret, { density: 0.1 }]),
-                TYPE: "healerBullet",
-                AUTOFIRE: true,
-            },
-        },
-        {
-            POSITION: [14, 11, 1, 0, 0, 90, 0.5],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.healer, g.minionGun, g.turret, g.power, g.autoTurret, { density: 0.1 }]),
-                TYPE: "healerBullet",
-                AUTOFIRE: true,
-            },
-        },
-        {
-            POSITION: [17, 11, 1, 0, 0, 270, 0],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.healer, g.minionGun, g.turret, g.power, g.autoTurret, { density: 0.1 }]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.healer, g.minionGun, g.turret, g.power, g.autoTurret, { density: 0.1, damage: 0.33 }]),
                 TYPE: "healerBullet",
                 AUTOFIRE: true,
             },
@@ -1114,7 +1082,7 @@ Class.surgeonPillboxTurret = {
         {
             POSITION: [14, 11, 1, 0, 0, 270, 0.5],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.healer, g.minionGun, g.turret, g.power, g.autoTurret, { density: 0.1 }]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.healer, g.minionGun, g.turret, g.power, g.autoTurret, { density: 0.1, damage: 0.33 }]),
                 TYPE: "healerBullet",
                 AUTOFIRE: true,
             },

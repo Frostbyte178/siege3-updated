@@ -267,7 +267,7 @@ Class.irrigator = {
         isSanctuary: -75, // 100
         killCount: 3, // 2.5
         cluster: 1.5, // 2
-    }], ["drag", {range: 1250, useAlt: true}]],
+    }], ["drag", {range: 1100, useAlt: true}]],
     BODY: {
         HEALTH: harvesterStats.HEALTH * 1.5,
         SPEED: harvesterStats.SPEED,
@@ -347,7 +347,7 @@ Class.quarterstaff = {
         isSanctuary: -1e80, // 100
         killCount: 2.5, // 2.5
         cluster: -0.5, // 2
-    }], ["bombingRun", {goAgainRange: 1600, firingRange: 550, breakAwayRange: 400, alwaysFireInRange: true}]],
+    }], ["bombingRun", {goAgainRange: 1200, firingRange: 550, breakAwayRange: 400, alwaysFireInRange: true}]],
     BODY: {
         HEALTH: harvesterStats.HEALTH * 0.7,
         SPEED: harvesterStats.SPEED * 1.8,
@@ -529,7 +529,7 @@ Class.shepherd = {
         isSanctuary: -1e80, // 100
         killCount: 2.5, // 2.5
         cluster: -0.5, // 2
-    }], ["bombingRun", {goAgainRange: 1800, firingRange: 525, breakAwayRange: 450, breakAwayAngle: 6}], ["burstFire", {alt: true, length: 1750}]],
+    }], ["bombingRun", {goAgainRange: 1300, firingRange: 525, breakAwayRange: 450, breakAwayAngle: 6}], ["burstFire", {alt: true, length: 1750}]],
     BODY: {
         HEALTH: harvesterStats.HEALTH * 0.8e90,
         SPEED: harvesterStats.SPEED * 1.65,
@@ -582,7 +582,6 @@ Class.sniperPillbox = {
     CONTROLLERS: ["nearestDifferentMaster"],
     DIE_AT_RANGE: true,
     INDEPENDENT: true,
-    AI: {SKYNET: true},
     BODY: {FOV: 5},
     TURRETS: [
         {
@@ -668,7 +667,7 @@ Class.cultivatorTurret = {
     CONTROLLERS: ["nearestDifferentMaster", "onlyAcceptInArc"],
     INDEPENDENT: true,
     BODY: {FOV: 15},
-    AI: {IGNORE_SHAPES: true, SKYNET: true},
+    AI: {IGNORE_SHAPES: true},
     COLOR: 16,
     GUNS: [
         {
@@ -695,7 +694,7 @@ Class.cultivator = {
         isSanctuary: -125, // 100
         killCount: 2.5, // 2.5
         cluster: 3, // 2
-    }], "circleTarget"],
+    }], ["circleTarget", {range: 475}]],
     BODY: {
         HEALTH: harvesterStats.HEALTH * 0.8,
         SPEED: harvesterStats.SPEED * 1.4,
@@ -730,7 +729,7 @@ Class.cultivator = {
         }, {
             POSITION: [3, 9.5, 1.5, 13, 0, 180, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.trap, g.setTrap, {reload: 1.3, health: 1.45}]),
+                SHOOT_SETTINGS: combineStats([g.trap, g.setTrap, {reload: 1.45, health: 1.45, range: 0.9}]),
                 TYPE: "unsetPillbox",
                 STAT_CALCULATOR: gunCalcNames.trap,
                 AUTOFIRE: true,

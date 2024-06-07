@@ -273,7 +273,7 @@ Class.nestWatchman = {
         }, {
             POSITION: [1.5, 8, 1.2, 10.7, 0, 36, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.trap, { speed: 1.2 }, g.setTrap, g.constructor, {range: 0.9}]),
+                SHOOT_SETTINGS: combineStats([g.trap, { speed: 1.2 }, g.setTrap, g.constructor, {range: 0.5}]),
                 TYPE: "unsetTrap",
                 STAT_CALCULATOR: gunCalcNames.block,
             },

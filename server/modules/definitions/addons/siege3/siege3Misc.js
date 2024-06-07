@@ -135,7 +135,7 @@ Class.fireworkTurret = {
         {
             POSITION: [12, 10, 1.4, 8, 0, 0, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.launcher, g.rocketeer, { range: 0.9, reload: 1.5 }]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.launcher, g.rocketeer, { range: 0.75, reload: 1.5 }]),
                 TYPE: "fireworkRocket",
                 STAT_CALCULATOR: gunCalcNames.sustained,
             },
