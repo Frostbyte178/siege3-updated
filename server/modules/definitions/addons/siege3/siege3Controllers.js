@@ -93,6 +93,7 @@ class io_drag extends IO {
         this.idealRange = opts.range ?? 400;
         this.useAlt = opts.useAlt ?? false;
         this.runAwayDistance = opts.runRange ?? (this.idealRange / 2);
+        this.turnwise = 0;
     }
     think(input) {
         if (input.target != null && input.main) {
@@ -106,10 +107,6 @@ class io_drag extends IO {
             if (input.main) {
                 // Sit at range from point
                 let dir = target.direction;
-                goal = {
-                    x: this.body.x + target.x - orbit * Math.cos(dir),
-                    y: this.body.y + target.y - orbit * Math.sin(dir),
-                }
 
                 // Avoid nearest if provided
                 if (nearestEntity) {
@@ -120,10 +117,22 @@ class io_drag extends IO {
                     // Only run if close
                     if (distance < this.runAwayDistance * sizeFactor) {
                         let angleToNearest = Math.atan2(relativeY, relativeX);
-                        let runAwayScale = this.runAwayDistance * sizeFactor - distance;
-                        goal.x -= Math.cos(angleToNearest) * runAwayScale;
-                        goal.y -= Math.sin(angleToNearest) * runAwayScale;
+                        let relativeAngleToNearest = util.angleDifference(angleToNearest, target.direction);
+                        if (relativeAngleToNearest < 0 & relativeAngleToNearest > Math.PI * -1.8) {
+                            this.turnwise = 0.2;
+                        } else if (relativeAngleToNearest > 0 & relativeAngleToNearest < Math.PI * 1.8) {
+                            this.turnwise = -0.2;
+                        }
+                    } else {
+                        this.turnwise = 0;
                     }
+                } else {
+                    this.turnwise = 0;
+                }
+
+                goal = {
+                    x: this.body.x + target.x - orbit * Math.cos(dir + this.turnwise),
+                    y: this.body.y + target.y - orbit * Math.sin(dir + this.turnwise),
                 }
 
                 // Decelerate when close to goal
