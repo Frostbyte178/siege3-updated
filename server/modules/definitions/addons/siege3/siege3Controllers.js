@@ -105,9 +105,6 @@ class io_drag extends IO {
                 target = new Vector(input.target.x, input.target.y);
             
             if (input.main) {
-                // Sit at range from point
-                let dir = target.direction;
-
                 // Avoid nearest if provided
                 if (nearestEntity) {
                     let relativeX = nearestEntity.x - this.body.x;
@@ -130,6 +127,8 @@ class io_drag extends IO {
                     this.turnwise = 0;
                 }
 
+                // Sit at range from point
+                let dir = target.direction;
                 goal = {
                     x: this.body.x + target.x - orbit * Math.cos(dir + this.turnwise),
                     y: this.body.y + target.y - orbit * Math.sin(dir + this.turnwise),
