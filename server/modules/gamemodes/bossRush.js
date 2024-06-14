@@ -274,6 +274,7 @@ class BossRush {
         this.setTurretStats(enemy, statFactor);
         enemy.HEALTH *= statFactor;
         enemy.refreshBodyAttributes();
+        enemy.aiSettings.SKYNET = true;
         if (c.ROOM_SETUP[1] != "map_siege_blitz") {
             enemy.controllers.push(new ioTypes.bossRushAI(enemy));
         }
@@ -364,7 +365,7 @@ class BossRush {
     loop() {
         //the timer has ran out? reset timer and spawn the next wave
         if (this.timer <= 0) {
-            this.timer = 150; // 5 seconds
+            this.timer = Math.max(150, Math.floor(this.waveId / 3 * 30)); // (Wave ID / 3) seconds, minimum of 5 seconds
             this.waveId++;
             if (this.waves[this.waveId]) {
                 this.spawnWave(this.waveId);

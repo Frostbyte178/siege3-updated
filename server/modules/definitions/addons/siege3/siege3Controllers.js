@@ -540,7 +540,7 @@ class io_targetSelection extends IO {
                 this.nearestEntity = entity;
             }
         }
-        this.lastPriority = greatestPriority;
+        this.lastPriority = greatestPriority * 2; // Factor of 2 to stick with current target for longer
     }
     think(input) {
         // Override target lock upon other commands

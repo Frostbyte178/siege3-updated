@@ -38,7 +38,6 @@ Class.elite = {
     COLOR: "pink",
     SHAPE: 3,
     SIZE: 27,
-    VARIES_IN_SIZE: true,
     VALUE: 15e4,
     BODY: {
         FOV: 1.25,
@@ -968,7 +967,7 @@ Class.celestial = {
     SKILL: [9, 9, 9, 9, 9, 9, 9, 9, 9, 9],
     VALUE: 1e6,
     SHAPE: 9,
-    SIZE: 45,
+    SIZE: 60,
     BODY: {
         FOV: 1,
         HEALTH: 1000,
@@ -989,7 +988,7 @@ Class.eternal = {
     SKILL: [9, 9, 9, 9, 9, 9, 9, 9, 9, 9],
     VALUE: 4e6,
     SHAPE: 11,
-    SIZE: 90,
+    SIZE: 120,
     BODY: {
         FOV: 1,
         HEALTH: 3000,
