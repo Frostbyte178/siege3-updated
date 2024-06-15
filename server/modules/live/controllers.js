@@ -120,9 +120,9 @@ class io_bossRushAI extends IO {
         // Move closer to corners of map
         for (let axis of ['x', 'y']) {
             if (this.body[axis] < (this.goalDefault[axis] * 0.8)) {
-                this.goalDefault[axis] *= 0.65;
+                this.goalDefault[axis] *= 0.55;
             } else if (this.body[axis] > (this.goalDefault[axis] * 1.2)) {
-                this.goalDefault[axis] *= 1.35;
+                this.goalDefault[axis] *= 1.45;
             }
         }
     }

@@ -955,7 +955,7 @@ Class.terrestrial = {
     BODY: {
         FOV: 1,
         HEALTH: 1000,
-        SHIELD: 2,
+        SHIELD: 200,
         REGEN: base.REGEN * 0.1,
         SPEED: base.SPEED * 0.35,
         DAMAGE: 9,
@@ -970,8 +970,8 @@ Class.celestial = {
     SIZE: 60,
     BODY: {
         FOV: 1,
-        HEALTH: 1000,
-        SHIELD: 2,
+        HEALTH: 2000,
+        SHIELD: 400,
         REGEN: base.REGEN * 0.1,
         SPEED: base.SPEED * 0.25,
         DAMAGE: 12,
@@ -991,8 +991,8 @@ Class.eternal = {
     SIZE: 120,
     BODY: {
         FOV: 1,
-        HEALTH: 3000,
-        SHIELD: 2,
+        HEALTH: 4000,
+        SHIELD: 800,
         REGEN: base.REGEN * 0.1,
         SPEED: base.SPEED * 0.25,
         DAMAGE: 18,

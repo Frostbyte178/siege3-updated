@@ -198,7 +198,7 @@ Class.sanctuary = {
         str: 1.25,
     }),
     BODY: {
-        HEALTH: 750,
+        HEALTH: 250,
         DAMAGE: 7.5,
         SHIELD: base.SHIELD * 1.5,
     },
@@ -212,6 +212,9 @@ for (let tier of sancTiers) {
     let sancIndex = sancTiers.indexOf(tier)
     Class['sanctuaryTier' + (sancIndex + 1)] = {
         PARENT: "sanctuary",
+        BODY: {
+            HEALTH: Class.sanctuary.BODY.HEALTH + 100 * (sancIndex + 1)
+        },
         TURRETS: [],
         UPGRADE_LABEL: 'Tier ' + (sancIndex + 1),
         GUNS: (() => {

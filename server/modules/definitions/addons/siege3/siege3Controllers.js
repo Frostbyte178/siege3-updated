@@ -45,12 +45,34 @@ class io_bombingRun extends IO {
         this.storedAngle = 0;
         this.breakAwayAngle *= Math.PI / 180;
     }
+    // Determine if the desired goal is within the bounds of the map
+    validatePosition() {
+        switch (c.ROOM_SETUP[1]) {
+            case "map_siege_citadel":
+            case "map_siege_fortress":
+                // Clamp to center square
+                return this.body.x > room.center.x * 0.5 &&
+                    this.body.x < room.center.x * 1.5 && 
+                    this.body.y > room.center.y * 0.5 &&
+                    this.body.y < room.center.y * 1.5
+            case "map_siege_blitz":
+                // Clamp to right rectangle
+                return this.body.x > room.center.x * 1.15 &&
+                    this.body.x < room.center.x * 1.75 && 
+                    this.body.y > room.center.y * 0.25 &&
+                    this.body.y < room.center.y * 1.75
+        }
+    }
     think(input) {
         if (input.target != null) {
             let target = new Vector(input.target.x, input.target.y);
             // Set status
-            if (target.length < this.breakAwayRange) this.currentlyBombing = false;
-            if (target.length > this.goAgainRange && (this.bombAtLowHealth || this.body.health.display() > 0.15)) this.currentlyBombing = true;
+            if (target.length < this.breakAwayRange) {
+                this.currentlyBombing = false;
+            }
+            if (target.length > this.goAgainRange && (this.bombAtLowHealth || this.body.health.display() > 0.15) || !this.validatePosition()) {
+                this.currentlyBombing = true;
+            }
 
             let goal, 
                 newX = target.x, 
@@ -71,7 +93,7 @@ class io_bombingRun extends IO {
                     y: newY + this.body.y,
                 };
                 // Avoid twitching when at the turnaround range
-                if ((goal.x ** 2 + goal.y ** 2) < 400) {
+                if ((newX ** 2 + newY ** 2) < 400) {
                     newX = target.x;
                     newY = target.y;
                 }
@@ -95,57 +117,81 @@ class io_drag extends IO {
         this.runAwayDistance = opts.runRange ?? (this.idealRange / 2);
         this.turnwise = 0;
     }
+    clampGoal(goal) {
+        let x = goal.x;
+        let y = goal.y;
+        
+        switch (c.ROOM_SETUP[1]) {
+            case "map_siege_citadel":
+            case "map_siege_fortress":
+                // Clamp to center square
+                x = util.clamp(x, room.center.x * 0.5, room.center.x * 1.5);
+                y = util.clamp(y, room.center.y * 0.5, room.center.y * 1.5);
+                break;
+            case "map_siege_blitz":
+                // Clamp to right rectangle
+                x = util.clamp(x, room.center.x * 1.15, room.center.x * 1.75);
+                y = util.clamp(y, room.center.y * 0.25, room.center.y * 1.75);
+                break;
+        }
+        
+        return {x, y};
+    }
     think(input) {
-        if (input.target != null && input.main) {
-            let sizeFactor = Math.sqrt(this.body.master.size / this.body.master.SIZE),
-                orbit = this.idealRange * sizeFactor,
-                goal,
-                power = 1,
-                nearestEntity = input.target.nearestEntity,
-                target = new Vector(input.target.x, input.target.y);
-            
-            if (input.main) {
-                // Avoid nearest if provided
-                if (nearestEntity) {
-                    let relativeX = nearestEntity.x - this.body.x;
-                    let relativeY = nearestEntity.y - this.body.y;
-                    let distance = Math.sqrt(relativeX ** 2 + relativeY ** 2);
-                    
-                    // Only run if close
-                    if (distance < this.runAwayDistance * sizeFactor) {
-                        let angleToNearest = Math.atan2(relativeY, relativeX);
-                        let relativeAngleToNearest = util.angleDifference(angleToNearest, target.direction);
-                        if (relativeAngleToNearest < 0 & relativeAngleToNearest > Math.PI * -1.8) {
-                            this.turnwise = 0.2;
-                        } else if (relativeAngleToNearest > 0 & relativeAngleToNearest < Math.PI * 1.8) {
-                            this.turnwise = -0.2;
-                        }
-                    } else {
-                        this.turnwise = 0;
+        if (input.target == null || !input.main) {
+            return {};
+        }
+        let sizeFactor = Math.sqrt(this.body.master.size / this.body.master.SIZE),
+            orbit = this.idealRange * sizeFactor,
+            goal,
+            power = 1,
+            nearestEntity = input.target.nearestEntity,
+            target = new Vector(input.target.x, input.target.y);
+        
+        if (input.main) {
+            // Avoid nearest if provided
+            if (nearestEntity) {
+                let relativeX = nearestEntity.x - this.body.x;
+                let relativeY = nearestEntity.y - this.body.y;
+                let distance = Math.sqrt(relativeX ** 2 + relativeY ** 2);
+                
+                // Only run if close
+                if (distance < this.runAwayDistance * sizeFactor) {
+                    let angleToNearest = Math.atan2(relativeY, relativeX);
+                    let relativeAngleToNearest = util.angleDifference(angleToNearest, target.direction);
+                    if (relativeAngleToNearest < 0 & relativeAngleToNearest > Math.PI * -1.8) {
+                        this.turnwise = 0.2;
+                    } else if (relativeAngleToNearest > 0 & relativeAngleToNearest < Math.PI * 1.8) {
+                        this.turnwise = -0.2;
                     }
                 } else {
                     this.turnwise = 0;
                 }
-
-                // Sit at range from point
-                let dir = target.direction;
-                goal = {
-                    x: this.body.x + target.x - orbit * Math.cos(dir + this.turnwise),
-                    y: this.body.y + target.y - orbit * Math.sin(dir + this.turnwise),
-                }
-
-                // Decelerate when close to goal
-                let distanceToGoal = Math.sqrt((goal.x - this.body.x) ** 2 + (goal.y - this.body.x) ** 2);
-                if (distanceToGoal < this.body.size * 2) {
-                    power = 1 - distanceToGoal / (this.body.size * 2);
-                }
+            } else {
+                this.turnwise = 0;
             }
-            return {
-                fire: !this.useAlt | target.length >= (orbit + 50),
-                alt: this.useAlt && target.length <= (orbit + 100),
-                goal,
-                power,
+
+            // Sit at range from point
+            let dir = target.direction;
+            goal = {
+                x: this.body.x + target.x - orbit * Math.cos(dir + this.turnwise),
+                y: this.body.y + target.y - orbit * Math.sin(dir + this.turnwise),
             }
+
+            // Clamp goal to in-bounds area
+            goal = this.clampGoal(goal);
+
+            // Decelerate when close to goal
+            let distanceToGoal = Math.sqrt((goal.x - this.body.x) ** 2 + (goal.y - this.body.x) ** 2);
+            if (distanceToGoal < this.body.size * 2) {
+                power = 1 - distanceToGoal / (this.body.size * 2);
+            }
+        }
+        return {
+            fire: !this.useAlt | target.length >= (orbit + 50),
+            alt: this.useAlt && target.length <= (orbit + 100),
+            goal,
+            power,
         }
     }
 }
