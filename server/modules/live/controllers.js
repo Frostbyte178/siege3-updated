@@ -115,7 +115,18 @@ class io_bossRushAI extends IO {
     constructor(body) {
         super(body);
         this.enabled = true;
-        this.goalDefault = room.center;
+        this.goalDefault = {x: room.center.x, y: room.center.y};
+        console.log(this.body.x, this.body.y, this.goalDefault.x, this.goalDefault.y)
+
+        // Move closer to corners of map
+        for (let axis of ['x', 'y']) {
+            if (this.body[axis] < (this.goalDefault[axis] * 0.8)) {
+                this.goalDefault[axis] *= 0.65;
+            } else if (this.body[axis] > (this.goalDefault[axis] * 1.2)) {
+                this.goalDefault[axis] *= 1.35;
+            }
+        }
+        console.log(this.goalDefault.x, this.goalDefault.y)
     }
     think(input) {
         if (new Vector( this.body.x - this.goalDefault.x, this.body.y - this.goalDefault.y ).isShorterThan(2000)) {
