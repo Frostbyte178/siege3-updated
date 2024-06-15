@@ -5,6 +5,9 @@ let calculatePoints = wave => 5 + Math.floor(wave * 3 ** 0.85); // Easier until 
 // It picks a boss to buy by filtering the list of boss choices by if they are affordable.
 // Then it picks a boss at random, with all choices being equally likely.
 
+// 5 second timer, adding 1 second every 5 waves
+let getWaveTimer = wave => (5 + Math.floor(wave / 5)) * 30;
+
 let oldGroups = {
     elites: [ "eliteDestroyer", "eliteGunner", "eliteSprayer", "eliteBattleship", "eliteSpawner" ],
     mysticals: [ "summoner", "eliteSkimmer", "nestKeeper", "roguePalisade" ],
@@ -269,12 +272,17 @@ class BossRush {
         let enemy = new Entity(loc);
         enemy.define(type);
         enemy.team = TEAM_ENEMIES;
-        enemy.FOV = 10;
+
+        // Set stat curve
         let statFactor = 1.01 ** this.waveId * (this.bossStatMultipliers[type] ?? 1);
         this.setTurretStats(enemy, statFactor);
         enemy.HEALTH *= statFactor;
-        enemy.refreshBodyAttributes();
+
+        // Give full map view
+        enemy.FOV = 10;
         enemy.aiSettings.SKYNET = true;
+        enemy.refreshBodyAttributes();
+
         if (c.ROOM_SETUP[1] != "map_siege_blitz") {
             enemy.controllers.push(new ioTypes.bossRushAI(enemy));
         }
@@ -282,11 +290,13 @@ class BossRush {
 
         this.remainingEnemies++;
         enemy.on('dead', () => {
-            //this enemy has been killed, decrease the remainingEnemies counter
-            //if afterwards the counter happens to be 0, announce that the wave has been defeated
+            // Decrease remainingEnemies counter
             if (!--this.remainingEnemies) {
+                this.timer = getWaveTimer(this.waveId);
+
+                // Broadcast wave end messages
                 sockets.broadcast(`Wave ${this.waveId + 1} has been defeated!`);
-                sockets.broadcast(`The next wave will start shortly.`);
+                sockets.broadcast(`The next wave will start in ${Math.floor(this.timer / 30)} seconds.`);
             }
             // Remove from array of enemy bosses
             let removeId = enemy.id;
@@ -365,7 +375,8 @@ class BossRush {
     loop() {
         //the timer has ran out? reset timer and spawn the next wave
         if (this.timer <= 0) {
-            this.timer = Math.max(150, Math.floor(this.waveId / 3 * 30)); // (Wave ID / 3) seconds, minimum of 5 seconds
+            this.timer = getWaveTimer(this.waveId);
+            
             this.waveId++;
             if (this.waves[this.waveId]) {
                 this.spawnWave(this.waveId);
