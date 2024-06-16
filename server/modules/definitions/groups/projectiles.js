@@ -413,9 +413,10 @@ Class.autoSmasherMissile = {
     LABEL: "Auto-Smasher",
     HITS_OWN_TYPE: "never",
     BODY: {
-        FOV: 1.05 * base.FOV,
+        FOV: 5,
         DENSITY: 2 * base.DENSITY,
     },
+    GUNS: [],
     TURRETS: [
         {
             POSITION: [21.5, 0, 0, 0, 360, 0],

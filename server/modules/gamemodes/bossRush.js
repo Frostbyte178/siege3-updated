@@ -174,6 +174,8 @@ class BossRush {
         this.remainingEnemies = 0;
         this.sanctuaryTier = 1;
         this.friendlyBossCooldown = 15;
+        this.enemySpawnQueue = [];
+        this.enemySpawnBatchSize = 3;
         this.sanctuaries = [];
     }
 
@@ -322,7 +324,8 @@ class BossRush {
                 break;
         }
 
-        //spawn bosses
+        // Queue boss spawning
+        this.enemySpawnQueue = [];
         for (let boss of this.waves[waveId]) {
             let spot = null,
                 attempts = 0;
@@ -330,25 +333,44 @@ class BossRush {
                 spot = getSpawnableArea(TEAM_ENEMIES);
             } while (dirtyCheck(spot, 500) && ++attempts < 30);
 
-            let enemy = this.spawnEnemyWrapper(spot, boss);
-            enemy.define({ DANGER: 25 + enemy.SIZE / 5 });
-            enemy.isBoss = true;
+            this.enemySpawnQueue.push({enemy: boss, location: spot, isBoss: true});
         }
-
+        
+        // Queue fodder spawning
         if (!c.CLASSIC_SIEGE) {
-            //spawn fodder enemies
             let bigFodderOptions = this.bigFodderChoices[ran.chooseChance(...this.bigFodderChoices.map((x) => x[0]))][1];
             for (let i = 0; i < this.waveId / 5; i++) {
-                this.spawnEnemyWrapper(getSpawnableArea(TEAM_ENEMIES), ran.choose(bigFodderOptions));
+                this.enemySpawnQueue.push({enemy: ran.choose(bigFodderOptions), location: getSpawnableArea(TEAM_ENEMIES), isBoss: false});
             }
             for (let i = 0; i < this.waveId / 2; i++) {
-                this.spawnEnemyWrapper(getSpawnableArea(TEAM_ENEMIES), ran.choose(this.smallFodderChoices));
+                this.enemySpawnQueue.push({enemy: ran.choose(this.smallFodderChoices), location: getSpawnableArea(TEAM_ENEMIES), isBoss: false});
             }
 
-            //spawn a friendly boss every [this.friendlyBossCooldown] waves
+            //spawn a friendly boss every (this.friendlyBossCooldown) waves
             if (waveId % this.friendlyBossCooldown == (this.friendlyBossCooldown - 1)) {
                 setTimeout(() => this.spawnFriendlyBoss(), 5000);
             }
+        }
+
+        // Spawn queued enemies in batches of (this.enemySpawnBatchSize)
+        this.enemySpawnQueue = ran.shuffle(this.enemySpawnQueue);
+        this.enemySpawnBatchSize = 3 + Math.floor(this.enemySpawnQueue.length / 10)
+        for (let i = 0; i < this.enemySpawnQueue.length; i += this.enemySpawnBatchSize) {
+            let delay = 3000 * i / this.enemySpawnBatchSize;
+            setTimeout(() => {
+                for (let j = 0; j < this.enemySpawnBatchSize; j++) {
+                    let data = this.enemySpawnQueue[i + j];
+
+                    // If the number of queued enemies is not a multiple of (this.enemySpawnBatchSize)
+                    if (!data) return;
+
+                    let enemy = this.spawnEnemyWrapper(data.location, data.enemy);
+                    if (data.isBoss) {
+                        enemy.define({ DANGER: 25 + enemy.SIZE / 5 });
+                        enemy.isBoss = true;
+                    }
+                }
+            }, delay);
         }
 
         // Update sanctuary tiers

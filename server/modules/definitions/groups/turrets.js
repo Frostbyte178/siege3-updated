@@ -334,7 +334,7 @@ Class.autosmashTurret = {
         }, {
             POSITION: [18, 20, -0.7, 0, 0, 0, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.artillery, g.artillery, g.skimmer, { reload: 2 }, { speed: 1.3, maxSpeed: 1.3 }, { speed: 1.3, maxSpeed: 1.3 }, {range: 2.5}]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.artillery, g.artillery, g.skimmer, g.destroyer, { speed: 1.9, maxSpeed: 1.9, range: 2.5}]),
                 TYPE: "autoSmasherMissile",
             },
         },
