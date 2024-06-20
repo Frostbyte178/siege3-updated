@@ -113,6 +113,7 @@ class BossRush {
                 [  3, "cultivator"],
                 [  3, "irrigator"],
                 [  3, "scarecrow"],
+                [  3, "harrower"],
             ],
             [ // nesters
                 [  5, "nestPurger"],
@@ -182,6 +183,19 @@ class BossRush {
     generateWaves() {
         let waves = [];
         for (let i = 0; i < this.length; i++) {
+            // extend the boss spawn options over time
+            switch (i) {
+                case 10:
+                    this.bossChoices.push(...this.bossChoiceExtensions[0]);
+                    break;
+                case 15:
+                    this.bossChoices.push(...this.bossChoiceExtensions[1]);
+                    break;
+                case 25:
+                    this.bossChoices.push(...this.bossChoiceExtensions[2]);
+                    break;
+            }
+
             let wave = [],
                 points = calculatePoints(i),
                 choices = this.bossChoices;
@@ -310,19 +324,6 @@ class BossRush {
     spawnWave(waveId) {
         //yell at everyone
         sockets.broadcast(`Wave ${waveId + 1} has started!`);
-
-        // extend the boss spawn options over time
-        switch (waveId) {
-            case 10:
-                this.bossChoices.push(...this.bossChoiceExtensions[0]);
-                break;
-            case 15:
-                this.bossChoices.push(...this.bossChoiceExtensions[1]);
-                break;
-            case 25:
-                this.bossChoices.push(...this.bossChoiceExtensions[2]);
-                break;
-        }
 
         // Queue boss spawning
         this.enemySpawnQueue = [];

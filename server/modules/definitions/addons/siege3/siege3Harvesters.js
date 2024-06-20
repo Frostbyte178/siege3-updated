@@ -531,7 +531,7 @@ Class.shepherd = {
         cluster: -0.5, // 2
     }], ["bombingRun", {goAgainRange: 1300, firingRange: 525, breakAwayRange: 450, breakAwayAngle: 6}], ["burstFire", {alt: true, length: 1750}]],
     BODY: {
-        HEALTH: harvesterStats.HEALTH * 0.8e90,
+        HEALTH: harvesterStats.HEALTH * 0.8,
         SPEED: harvesterStats.SPEED * 1.65,
         FOV: harvesterStats.FOV * 1.2,
     },
@@ -747,8 +747,59 @@ Class.cultivator = {
     ]
 }
 
+// Healer
+Class.harrower = {
+    PARENT: "genericHarvester",
+    LABEL: "Harrower",
+    CONTROLLERS: [["targetSelection", {
+        health: -175, // 150
+        score: 0.0015, // 0.00075
+        danger: 10, // 5
+        isBoss: 75, // 75
+        isHealer: 0, // -25
+        isSanctuary: -1e80, // 100
+        killCount: 4, // 2.5
+        cluster: 1, // 2
+
+        sameTeam: true, // go for same team
+        avoidNearest: false // don't run from nearest valid target
+    }], ["drag", {range: 400, useAlt: true}]],
+    BODY: {
+        HEALTH: harvesterStats.HEALTH * 1.1,
+        SPEED: harvesterStats.SPEED * 1.4,
+    },
+    AI: {IGNORE_SHAPES: true, BLIND: true, chase: true},
+    GUNS: [
+        {
+            POSITION: [13, 20, 0.45, 2, 0, 0, 0]
+        },
+        {
+            POSITION: [8, 8, -0.5, 11, 0, 0, 0]
+        },
+        {
+            POSITION: [16.5, 9, 1, 0, 0, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.healer, {size: 0.9, speed: 2.5}]),
+                TYPE: "healerBulletIndicated",
+                ALT_FIRE: true,
+            }
+        },
+        ...addThruster(1.7),
+    ],
+    TURRETS: [
+        {
+            POSITION: [13.5, 0, 0, 180, 360, 1],
+            TYPE: ["hexagon", {COLOR: -1, MIRROR_MASTER_ANGLE: true}]
+        },
+        {
+            POSITION: [10, 0, 0, 0, 360, 1],
+            TYPE: "healerSymbol"
+        }
+    ]
+}
+
 Class.harvesters = menu("Harvesters", "hexagon", 6);
-Class.harvesters.UPGRADES_TIER_0 = ["furrower", "stockyard", "quarterstaff", "shepherd", "irrigator", "scarecrow", "pressurizer", "cultivator"];
+Class.harvesters.UPGRADES_TIER_0 = ["furrower", "stockyard", "quarterstaff", "shepherd", "irrigator", "scarecrow", "pressurizer", "cultivator", "harrower"];
 Class.harvesters.PROPS = [{
     POSITION: [15, 0, 0, 180, 1],
     TYPE: ["hexagon", {COLOR: -1}]
