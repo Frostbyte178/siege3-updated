@@ -948,6 +948,7 @@ Class.defender = {
 Class.terrestrial = {
     PARENT: "miniboss",
     LABEL: "Terrestrial",
+    CONTROLLERS: [["drag", {range: 450}]],
     SKILL: [9, 9, 9, 9, 9, 9, 9, 9, 9, 9],
     VALUE: 5e5,
     SHAPE: 7,
@@ -964,6 +965,7 @@ Class.terrestrial = {
 Class.celestial = {
     PARENT: "miniboss",
     LABEL: "Celestial",
+    CONTROLLERS: [["drag", {range: 550}]],
     SKILL: [9, 9, 9, 9, 9, 9, 9, 9, 9, 9],
     VALUE: 1e6,
     SHAPE: 9,
@@ -985,6 +987,7 @@ Class.rogueCelestial = {
 Class.eternal = {
     PARENT: "miniboss",
     LABEL: "Eternal",
+    CONTROLLERS: [["drag", {range: 750}]],
     SKILL: [9, 9, 9, 9, 9, 9, 9, 9, 9, 9],
     VALUE: 4e6,
     SHAPE: 11,
