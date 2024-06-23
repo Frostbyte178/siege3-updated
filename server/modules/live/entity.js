@@ -1043,8 +1043,18 @@ class Entity extends EventEmitter {
         // Handle guns and turrets if we've got them
         for (let i = 0; i < this.guns.length; i++) this.guns[i].live();
         for (let i = 0; i < this.turrets.length; i++) this.turrets[i].life();
-        if (this.skill.maintain()) needsBodyAttribRefresh = true;
+        if (this.skill.maintain()) {
+            needsBodyAttribRefresh = true;
+            let statScale = {health: 1.0035 ** Math.max(0, this.level - 45)};
+            this.setTurretStatScale(statScale);
+        }
         if (needsBodyAttribRefresh) this.refreshBodyAttributes();
+    }
+    setTurretStatScale(stats) {
+        this.gunStatScale = stats;
+        for (let turret of this.turrets) {
+            turret.setTurretStatScale(stats);
+        }
     }
     addController(newIO) {
         if (!Array.isArray(newIO)) newIO = [newIO];
@@ -1584,9 +1594,9 @@ class Entity extends EventEmitter {
         if (this.settings.reloadToAcceleration) this.acceleration *= this.skill.acl;
         this.topSpeed = (topSpeedMultiplier * c.runSpeed * this.SPEED * this.skill.mob) / speedReduce;
         if (this.settings.reloadToAcceleration) this.topSpeed /= Math.sqrt(this.skill.acl);
-        this.health.set(((this.settings.healthWithLevel ? 2 * this.level : 0) + this.HEALTH) * this.skill.hlt * healthMultiplier);
+        this.health.set(((this.settings.healthWithLevel ? 2 * this.level - Math.max(0, this.level - 45) : 0) + this.HEALTH) * this.skill.hlt * healthMultiplier);
         this.health.resist = 1 - 1 / Math.max(1, this.RESIST + this.skill.brst);
-        this.shield.set(((this.settings.healthWithLevel ? 0.6 * this.level : 0) + this.SHIELD) * this.skill.shi, Math.max(0, ((this.settings.healthWithLevel ? 0.006 * this.level : 0) + 1) * this.REGEN * this.skill.rgn * regenMultiplier));
+        this.shield.set(((this.settings.healthWithLevel ? 0.6 * this.level - 0.3 * Math.max(0, this.level - 45) : 0) + this.SHIELD) * this.skill.shi, Math.max(0, ((this.settings.healthWithLevel ? 0.006 * this.level : 0) + 1) * this.REGEN * this.skill.rgn * regenMultiplier));
         this.damage = damageMultiplier * this.DAMAGE * this.skill.atk;
         this.penetration = penetrationMultiplier * (this.PENETRATION + 1.5 * (this.skill.brst + 0.8 * (this.skill.atk - 1)));
         if (!this.settings.dieAtRange || !this.range) this.range = rangeMultiplier * this.RANGE;
@@ -1651,7 +1661,7 @@ class Entity extends EventEmitter {
         return Math.min(this.levelCap ?? c.LEVEL_CAP, this.skill.level);
     }
     get size() {
-        return this.bond == null ? (this.coreSize || this.SIZE) * this.sizeMultiplier * (1 + this.level / 45) : this.bond.size * this.bound.size;
+        return this.bond == null ? (this.coreSize || this.SIZE) * this.sizeMultiplier * (this.level > 45 ? (1.667 + this.level / 135) : (1 + this.level / 45)) : this.bond.size * this.bound.size;
     }
     get mass() {
         return this.density * (this.size ** 2 + 1);

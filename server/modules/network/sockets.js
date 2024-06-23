@@ -407,7 +407,6 @@ function incoming(message, socket) {
             if (player.body == null || player.body.underControl) return;
             if (player.body.skill.level < c.LEVEL_CHEAT_CAP || (socket.permissions && socket.permissions.infiniteLevelUp)) {
                 player.body.skill.score += player.body.skill.levelScore;
-                player.body.skill.maintain();
                 player.body.refreshBodyAttributes();
             }
             break;

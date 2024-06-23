@@ -222,7 +222,7 @@ class BossRush {
         o.name = ran.chooseBossName('castle');
         o.FOV = 10;
         let statFactor = this.bossStatMultipliers[type] ?? 1;
-        this.setTurretStats(o, statFactor);
+        o.setTurretStatScale({health: statFactor});
         o.HEALTH *= statFactor;
         o.settings.broadcastMessage = `${o.name} has fallen!`;
         sockets.broadcast(o.name + ' has arrived and joined your team!');
@@ -277,13 +277,6 @@ class BossRush {
         }
     }
 
-    setTurretStats(entity, statFactor) {
-        entity.gunStatScale = {health: statFactor};
-        for (let turret of entity.turrets) {
-            this.setTurretStats(turret, statFactor);
-        }
-    }
-
     spawnEnemyWrapper(loc, type) {
         let enemy = new Entity(loc);
         enemy.define(type);
@@ -291,7 +284,7 @@ class BossRush {
 
         // Set stat curve
         let statFactor = 1.01 ** this.waveId * (this.bossStatMultipliers[type] ?? 1);
-        this.setTurretStats(enemy, statFactor);
+        enemy.setTurretStatScale({health: statFactor});
         enemy.HEALTH *= statFactor;
 
         // Give full map view
