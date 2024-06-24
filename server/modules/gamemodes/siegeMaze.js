@@ -21,9 +21,10 @@ let checkMazeForBlocks = (initX, initY, size) => {
         size = 34;
         padding = 2;
         maze = JSON.parse(JSON.stringify(Array(size).fill(Array(size).fill(false))));
-        const fullWalls = [1, 2, 3, 4, size - 5, size - 4, size - 3, size - 2];
+        const fullWalls = [1, 2, 3, 4, 5, size - 6, size - 5, size - 4, size - 3, size - 2];
         const outerWalls = [0, size - 1];
-        const innerWalls = [5, size - 6];
+        // const innerWalls = [5, size - 6];
+        const innerWalls = [];
         for (let i = 10; i < size - 10; i++) {
             for (let pos of fullWalls) {
                 maze[pos][i] = true;
@@ -70,9 +71,10 @@ let checkMazeForBlocks = (initX, initY, size) => {
         size = 32;
         padding = 3;
         maze = JSON.parse(JSON.stringify(Array(size).fill(Array(size).fill(false))));
-        const fullWalls = [1, 2, 3, size - 4, size - 3, size - 2];
+        const fullWalls = [1, 2, 3, 4, size - 5, size - 4, size - 3, size - 2];
         const outerWalls = [0, size - 1];
-        const innerWalls = [4, size - 5];
+        // const innerWalls = [4, size - 5];
+        const innerWalls = [];
         for (let i = 4; i < size / 2 - 4; i++) {
             for (let pos of fullWalls) {
                 maze[pos][i] = true;
@@ -133,9 +135,10 @@ let checkMazeForBlocks = (initX, initY, size) => {
         size = 36;
         padding = 1;
         maze = JSON.parse(JSON.stringify(Array(size).fill(Array(size).fill(false))));
-        const fullWalls = [1, size - 2];
+        const fullWalls = [1, 2, size - 3, size - 2];
         const outerWalls = [0, size - 1];
-        const innerWalls = [2, size - 3];
+        // const innerWalls = [2, size - 3];
+        const innerWalls = [];
         for (let i = 1; i < size - 1; i++) {
             for (let pos of outerWalls) {
                 maze[pos][i] ||= rollMazeSpawn(0.4);
