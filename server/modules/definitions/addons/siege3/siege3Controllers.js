@@ -184,7 +184,7 @@ class io_drag extends IO {
             // Decelerate when close to goal
             let distanceToGoal = Math.sqrt((goal.x - this.body.x) ** 2 + (goal.y - this.body.y) ** 2);
             if (distanceToGoal < this.body.size * 2) {
-                power = 1 - distanceToGoal / (this.body.size * 2);
+                power = Math.max(0, 1 - distanceToGoal / this.body.size);
             }
         }
         return {
