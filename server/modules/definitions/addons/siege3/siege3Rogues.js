@@ -334,7 +334,7 @@ Class.rogueAlchemistTurret = {
         {
             POSITION: [27, 9, 1, 0, 0, 0, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.sniper, g.assassin, g.pounder]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.sniper, g.assassin, g.pounder, {range: 1.1}]),
                 TYPE: "bullet",
                 AUTOFIRE: true,
             },
@@ -360,7 +360,7 @@ Class.rogueAlchemist = {
         isSanctuary: -25, // 100
         killCount: 3, // 2.5
         cluster: -0.5, // 2
-    }], ["drag", {range: 500}]],
+    }], ["drag", {range: 525}]],
     BODY: {
         FOV: 1.6,
         SPEED: base.SPEED * 0.35,
@@ -445,7 +445,7 @@ Class.rogueInventor = {
         isSanctuary: -25, // 100
         killCount: 3, // 2.5
         cluster: -0.5, // 2
-    }], ["drag", {range: 500}]],
+    }], ["drag", {range: 525}]],
     BODY: {
         FOV: 1.6,
         SPEED: base.SPEED * 0.35,
@@ -511,7 +511,7 @@ Class.roguePioneer = {
         isSanctuary: -25, // 100
         killCount: 3, // 2.5
         cluster: 0.5, // 2
-    }], ["drag", {range: 500}]],
+    }], ["drag", {range: 525}]],
     BODY: {
         FOV: 1.6,
         SPEED: base.SPEED * 0.35,

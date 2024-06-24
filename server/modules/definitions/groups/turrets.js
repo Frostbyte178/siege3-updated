@@ -181,7 +181,7 @@ Class.terrestrialTrapTurret = {
     ],
 }
 let makeshottrapTurretProps = () => ({
-    SHOOT_SETTINGS: combineStats([g.trap, g.setTrap, g.shotgun, g.machineGun, { speed: 0.7, maxSpeed: 0.2, damage: 1.2, range: 0.6 }]),
+    SHOOT_SETTINGS: combineStats([g.trap, g.setTrap, g.shotgun, g.machineGun, { speed: 0.7, maxSpeed: 0.2, range: 0.6 }]),
     AUTOFIRE: true,
     TYPE: "shotTrapBox",
     STAT_CALCULATOR: gunCalcNames.block,

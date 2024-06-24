@@ -213,7 +213,7 @@ Class.eliteSpawner = {
         }, {
             POSITION: [2, 18, 1, 11, 0, 60, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.drone, g.weak, g.weak, g.weak, { size: 0.5, health: 1.5 }]),
+                SHOOT_SETTINGS: combineStats([g.drone, g.weak, g.weak, { size: 0.5, health: 0.8 }]),
                 TYPE: ["sentrySwarm", {ACCEPTS_SCORE: false, VARIES_IN_SIZE: false, GIVE_KILL_MESSAGE: false}],
                 SYNCS_SKILLS: true,
                 AUTOFIRE: true,
@@ -222,7 +222,7 @@ Class.eliteSpawner = {
         }, {
             POSITION: [2, 18, 1, 11, 0, 180, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.drone, g.weak, g.weak, g.weak, { size: 0.5, health: 1.5 }]),
+                SHOOT_SETTINGS: combineStats([g.drone, g.weak, g.weak, { size: 0.5, health: 0.8 }]),
                 TYPE: ["sentryTrap", {ACCEPTS_SCORE: false, VARIES_IN_SIZE: false, GIVE_KILL_MESSAGE: false}],
                 SYNCS_SKILLS: true,
                 AUTOFIRE: true,
@@ -231,7 +231,7 @@ Class.eliteSpawner = {
         }, {
             POSITION: [2, 18, 1, 11, 0, 300, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.drone, g.weak, g.weak, g.weak, { size: 0.5, health: 1.5 }]),
+                SHOOT_SETTINGS: combineStats([g.drone, g.weak, g.weak, { size: 0.5, health: 0.8 }]),
                 TYPE: ["sentryGun", {ACCEPTS_SCORE: false, VARIES_IN_SIZE: false, GIVE_KILL_MESSAGE: false}],
                 SYNCS_SKILLS: true,
                 AUTOFIRE: true,
@@ -271,10 +271,10 @@ Class.eliteTrapGuard = {
         ...weaponArray([
             {
                 POSITION: [5, 8, -7, 60, 160, 0],
-                TYPE: ["autoTurret", { INDEPENDENT: false }],
+                TYPE: ["autoTurret", { INDEPENDENT: false, GUN_STAT_SCALE: {health: 1.1} }],
             }, {
                 POSITION: [5, 8, 7, 60, 160, 0],
-                TYPE: ["autoTurret", { INDEPENDENT: false }],
+                TYPE: ["autoTurret", { INDEPENDENT: false, GUN_STAT_SCALE: {health: 1.1} }],
             },
         ], 3)
     ],
@@ -390,7 +390,7 @@ Class.legionaryCrasher = {
             }, {
                 POSITION: [3, 13, 1.7, 14.5, 0, 0, 0],
                 PROPERTIES: {
-                    SHOOT_SETTINGS: combineStats([g.trap, g.setTrap, g.pounder, g.destroyer, { speed: 2.5, size: 0.6, maxSpeed: 3 }]),
+                    SHOOT_SETTINGS: combineStats([g.trap, g.setTrap, g.pounder, g.destroyer, { speed: 2, size: 0.6, maxSpeed: 3 }]),
                     TYPE: "legionaryPillbox",
                     STAT_CALCULATOR: gunCalcNames.trap,
                 },
@@ -407,7 +407,7 @@ Class.legionaryCrasher = {
         },
         ...weaponArray({
             POSITION: [14, 8, 0, 60, 180, 0],
-            TYPE: [ "sprayer", { COLOR: -1, } ],
+            TYPE: [ "sprayer", { COLOR: -1, GUN_STAT_SCALE: {health: 1.6} } ],
         }, 3)
     ],
 }
@@ -443,7 +443,7 @@ Class.sorcerer = {
     GUNS: weaponArray({
         POSITION: [3.5, 8.65, 1.2, 8, 0, 0, 0],
         PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.drone, g.summoner, g.machineGun, g.machineGunner, { size: 0.4, spray: 150, speed: 2, shudder: 1.75, speed: 1.7, maxSpeed: 1.7 }]),
+            SHOOT_SETTINGS: combineStats([g.drone, g.summoner, g.machineGun, g.machineGunner, { health: 2, size: 0.4, spray: 150, speed: 2, shudder: 1.75, speed: 1.7, maxSpeed: 1.7 }]),
             TYPE: "minichip",
             AUTOFIRE: true,
             SYNCS_SKILLS: true,

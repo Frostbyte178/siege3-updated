@@ -57,7 +57,7 @@ class BossRush {
             // [ cost , definition reference ],
 
             //mysticals
-            [  1, "sorcerer"],
+            [  2, "sorcerer"],
             [  2, "summoner"],
             [  2, "enchantress"],
             [  2, "exorcistor"],
@@ -93,7 +93,7 @@ class BossRush {
             [ 55, "theia"],
 
             //eternals
-            [ 99, "legionaryCrasher" /*fucking mid*/],
+            [100, "legionaryCrasher"],
             [100, "kronos"],
             [100, "odin"],
         ];
@@ -202,6 +202,7 @@ class BossRush {
 
             while (points > 0 && choices.length) {
                 choices = choices.filter(([ cost ]) => cost <= points);
+                if (choices.length == 0) break;
                 let [ cost, boss ] = ran.choose(choices);
                 points -= cost;
                 wave.push(boss);
@@ -239,6 +240,8 @@ class BossRush {
         let o = new Entity(tile.loc);
         if (team == TEAM_BLUE) {
             playerTeamEntities.push(o);
+        } else {
+            enemyTeamEntities.push(o);
         }
         this.defineSanctuary(o, team, type, tile);
         this.sanctuaries.push(o);
@@ -258,6 +261,8 @@ class BossRush {
                 this.spawnSanctuary(tile, TEAM_BLUE, `sanctuaryTier${this.sanctuaryTier}`);
                 tile.color.interpret(getTeamColor(TEAM_BLUE));
                 sockets.broadcast('A sanctuary has been repaired!');
+                let removeId = entity.id;
+                enemyTeamEntities = enemyTeamEntities.filter((x) => x.id != removeId);
             } else {
                 this.spawnSanctuary(tile, TEAM_ENEMIES, "dominator");
                 tile.color.interpret(getTeamColor(TEAM_ENEMIES));
