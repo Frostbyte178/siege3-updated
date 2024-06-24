@@ -44,7 +44,7 @@ Class.homingMissile = {
     BODY: { FOV: 10, SPEED: 2, RANGE: 100 },
     CONTROLLERS: ["nearestDifferentMaster", "missileGuidance"],
     FACING_TYPE: "withMotion",
-    AI: {chase: true, SKYNET: true, },
+    AI: {chase: true, SKYNET: true},
     INDEPENDENT: true,
     GUNS: [{
         POSITION: [16.5, 10, 1.5, 0, 0, 180, 0],
@@ -129,7 +129,6 @@ Class.fireworkTurret = {
     LABEL: "Turret",
     BODY: { FOV: 2 * base.FOV },
     COLOR: -1,
-    INDEPENDENT: true,
     CONTROLLERS: [ "onlyAcceptInArc", "nearestDifferentMaster" ],
     GUNS: [
         {
@@ -197,7 +196,6 @@ Class.sidewinderTurret = {
     LABEL: "Turret",
     BODY: { FOV: 2 * base.FOV },
     COLOR: -1,
-    INDEPENDENT: true,
     CONTROLLERS: [ "onlyAcceptInArc", "nearestDifferentMaster" ],
     GUNS: [
         {
@@ -258,7 +256,6 @@ Class.undertowTurret = {
     PARENT: "genericTank",
     BODY: { FOV: 2 * base.FOV },
     COLOR: -1,
-    INDEPENDENT: true,
     CONTROLLERS: [ "onlyAcceptInArc", "nearestDifferentMaster" ],
     GUNS: [
         {
@@ -312,8 +309,8 @@ Class.predatorTurret = {
     LABEL: "Flamethrower",
     CONTROLLERS: ["nearestDifferentMaster"],
     BODY: {FOV: 3 * base.FOV},
+    AI: {BLIND: true},
     COLOR: -1,
-    INDEPENDENT: true,
     GUNS: [
         {
             POSITION: [24, 8, 1, 0, 0, 0, 0],
@@ -341,7 +338,6 @@ Class.culverinTurret = {
     LABEL: "Shotgun",
     CONTROLLERS: ["nearestDifferentMaster"],
     COLOR: 14,
-    INDEPENDENT: true,
     GUNS: [
         {
             POSITION: [4, 3, 1, 11, -3, 0, 0],

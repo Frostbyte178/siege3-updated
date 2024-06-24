@@ -655,7 +655,7 @@ Class.nestWarden = {
     TURRETS: [
         {
             POSITION: [9, 0, 0, 0, 360, 1],
-            TYPE: [ "barricadeTurret", { INDEPENDENT: true, COLOR: -1 } ],
+            TYPE: [ "barricadeTurret", { COLOR: -1 } ],
         },
         ...weaponArray({
             POSITION: [8, 9, 0, 0, 120, 0],
@@ -700,7 +700,7 @@ Class.nestGuardian = {
     TURRETS: [
         {
             POSITION: [9, 0, 0, 0, 360, 1],
-            TYPE: [ "twisterTurret", { INDEPENDENT: true, COLOR: -1 } ],
+            TYPE: [ "twisterTurret", { COLOR: -1 } ],
         },
         ...weaponArray({
             POSITION: [8, 9, 0, 0, 120, 0],

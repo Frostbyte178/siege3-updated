@@ -1,4 +1,4 @@
-let map = ran.choose(['fortress', 'citadel', 'blitz']);
+let map = ran.choose(['fortress', 'citadel', 'blitz']); // volcano is cancelled
 module.exports = {
     MODE: "tdm",
     TEAMS: 1,

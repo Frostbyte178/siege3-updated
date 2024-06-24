@@ -163,6 +163,19 @@ let checkMazeForBlocks = (initX, initY, size) => {
         maze[size - 3][2] = true;
         maze[size - 3][size - 3] = true;
     }
+    generateVolcanoMaze = () => {
+        size = 36;
+        padding = 1;
+        maze = JSON.parse(JSON.stringify(Array(size).fill(Array(size).fill(false))));
+        const fullWalls = [size / 2 - 3];
+        for (let theta = 0; theta < 2 * Math.PI; theta += 0.005 * Math.PI) {
+            for (let radius of fullWalls) {
+                let x = Math.floor(size / 2 + radius * Math.cos(theta));
+                let y = Math.floor(size / 2 + radius * Math.sin(theta));
+                maze[x][y] = true;
+            }
+        }
+    }
     generateSiegeMaze = (mode) => {
         switch (mode) {
             case "map_siege_citadel":
@@ -173,6 +186,9 @@ let checkMazeForBlocks = (initX, initY, size) => {
                 break;
             case "map_siege_blitz":
                 generateBlitzMaze();
+                break;
+            case "map_siege_volcano":
+                generateVolcanoMaze();
                 break;
         }
         // Remove invalid walls
