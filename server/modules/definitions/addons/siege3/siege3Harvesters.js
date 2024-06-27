@@ -347,7 +347,7 @@ Class.quarterstaff = {
         isSanctuary: -1e80, // 100
         killCount: 2.5, // 2.5
         cluster: -0.5, // 2
-    }], ["bombingRun", {goAgainRange: 1200, firingRange: 550, breakAwayRange: 400, alwaysFireInRange: true}]],
+    }], ["bombingRun", {goAgainRange: 1300, firingRange: 550, breakAwayRange: 400, alwaysFireInRange: true}]],
     BODY: {
         HEALTH: harvesterStats.HEALTH * 0.7,
         SPEED: harvesterStats.SPEED * 1.8,
@@ -502,7 +502,7 @@ Class.quarterstaff = {
         }, {
             POSITION: [11, 10.5, 1.4, 5, 0, 180, 0.8],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.launcher, {range: 0.22, speed: 1.9, maxSpeed: 0.4, size: 1.4, reload: 3, recoil: 0.6}]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.launcher, {range: 0.22, speed: 1.8, maxSpeed: 0.38, size: 1.4, reload: 3, recoil: 0.6}]),
                 TYPE: "trueBomb",
                 STAT_CALCULATOR: gunCalcNames.sustained,
                 ALT_FIRE: true,
@@ -798,8 +798,60 @@ Class.harrower = {
     ]
 }
 
+Class.harvesterDemo = {
+    PARENT: 'genericTank',
+    LABEL: 'Demo',
+    GUNS: [
+        {
+            POSITION: [30, 8, 1, 0, 0, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([{reload: 30}]),
+                TYPE: 'furrower',
+                INDEPENDENT_CHILDREN: true,
+            }
+        }, {
+            POSITION: [30, 8, 1, 0, 0, -90, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([{reload: 30}]),
+                TYPE: 'stockyard',
+                INDEPENDENT_CHILDREN: true,
+            }
+        }, {
+            POSITION: [30, 8, 1, 0, 0, 70, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([{reload: 30}]),
+                TYPE: 'quarterstaff',
+                INDEPENDENT_CHILDREN: true,
+            }
+        }, {
+            POSITION: [30, 8, 1, 0, 0, 180, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([{reload: 30}]),
+                TYPE: 'shepherd',
+                INDEPENDENT_CHILDREN: true,
+            }
+        }, {
+            POSITION: [30, 8, 1, 0, 0, -45, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([{reload: 30}]),
+                TYPE: 'cultivator',
+                INDEPENDENT_CHILDREN: true,
+                ALT_FIRE: true
+            }
+        }, {
+            POSITION: [30, 8, 1, 0, 0, 90, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([{reload: 30}]),
+                TYPE: 'pressurizer',
+                INDEPENDENT_CHILDREN: true,
+                ALT_FIRE: true
+            }
+        },
+    ]
+}
+
 Class.harvesters = menu("Harvesters", "hexagon", 6);
-Class.harvesters.UPGRADES_TIER_0 = ["furrower", "stockyard", "quarterstaff", "shepherd", "irrigator", "scarecrow", "pressurizer", "cultivator", "harrower"];
+Class.harvesters.UPGRADES_TIER_0 = ["furrower", "stockyard", "quarterstaff", "shepherd", "irrigator", "scarecrow", "pressurizer", "cultivator", "harrower", "harvesterDemo"];
 Class.harvesters.PROPS = [{
     POSITION: [15, 0, 0, 180, 1],
     TYPE: ["hexagon", {COLOR: -1}]
