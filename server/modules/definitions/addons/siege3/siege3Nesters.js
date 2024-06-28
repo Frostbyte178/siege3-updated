@@ -204,27 +204,24 @@ Class.nestSynthesizer = {
         killCount: 3, // 2.5
         cluster: 1, // 2
     }], ["drag", {range: 500}]],
-    GUNS: weaponArray([
-        {
-            POSITION: [10, 10, -0.5, 4, 0, 36, 0],
-        }, {
-            POSITION: [12, 11, -1.3, 0, 0, 36, 0],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.sniper, g.sniper, g.hunter, g.sidewinder, {range: 2, size: 0.55}]),
-                TYPE: "snakeOld",
-                STAT_CALCULATOR: gunCalcNames.sustained,
-                AUTOFIRE: true,
-            },
+    GUNS: weaponArray({
+        POSITION: [3.5, 6.65, 1.2, 8, 0, 36, 0],
+        PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.drone, g.nestKeeper]),
+            TYPE: "drone",
+            AUTOFIRE: true,
+            LABEL: "Mega Crasher",
+            STAT_CALCULATOR: gunCalcNames.drone,
         },
-    ], 5),
+    }, 5),
     TURRETS: [
         {
             POSITION: [9, 0, 0, 0, 360, 1],
             TYPE: 'predatorTurret'
         },
         ...weaponArray({
-            POSITION: [8, 9, 0, 0, 0, 0],
-            TYPE: 'flameTurret',
+            POSITION: [8, 9, 0, 0, 120, 0],
+            TYPE: 'sidewinderTurret2',
         }, 5)
     ],
 };
@@ -254,7 +251,7 @@ Class.nestPurifier = {
     TURRETS: [
         {
             POSITION: [9, 0, 0, 0, 360, 1],
-            TYPE: 'culverinTurret'
+            TYPE: 'shotgunTurret'
         },
         ...weaponArray({
             POSITION: [8, 9, 0, 0, 0, 0],
@@ -282,7 +279,7 @@ Class.nestWatchman = {
     TURRETS: [
         {
             POSITION: [9, 0, 0, 0, 360, 1],
-            TYPE: ['rocketeerTurret', {COLOR: -1}]
+            TYPE: ['rocketeerTurret', {INDEPENDENT: false, COLOR: -1}]
         },
         ...weaponArray({
             POSITION: [8, 9, 0, 0, 0, 0],
