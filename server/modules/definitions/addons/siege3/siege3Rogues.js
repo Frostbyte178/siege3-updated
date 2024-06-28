@@ -209,7 +209,7 @@ Class.rogueCoalitionTurret = {
         }, {
             POSITION: [17, 15, 1, 0, 0, 0, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.destroyer, g.artillery, g.artillery, g.skimmer, {damage: 0.65}]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.artillery, g.artillery, g.skimmer, {reload: 2, damage: 2.15}]),
                 TYPE: "missile",
                 STAT_CALCULATOR: gunCalcNames.sustained,
                 AUTOFIRE: true,

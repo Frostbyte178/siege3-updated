@@ -106,10 +106,10 @@ Class.furrower = {
         },
         ...addThruster(2),
     ],
-    TURRETS: [
+    PROPS: [
         {
-            POSITION: [13, 0, 0, 180, 360, 1],
-            TYPE: ["hexagon", {COLOR: -1, MIRROR_MASTER_ANGLE: true}]
+            POSITION: [13, 0, 0, 0, 1],
+            TYPE: "hexagon"
         }
     ]
 }
@@ -128,7 +128,7 @@ Class.pressurizerTurret = {
         }, {
             POSITION: [13, 12.5, 1.4, 5, 0, 0, 0.1],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.launcher, {damage: 0.8, range: 0.65, speed: 2.5, maxSpeed: 0.55, size: 1.4, reload: 1.8, recoil: 0.15}]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.launcher, {damage: 0.6, range: 0.65, speed: 2.5, maxSpeed: 0.55, size: 1.4, reload: 1.8, recoil: 0.15}]),
                 TYPE: "trueBomb",
                 STAT_CALCULATOR: gunCalcNames.sustained,
             },
@@ -157,12 +157,12 @@ Class.pressurizer = {
     GUNS: [
         {
             POSITION: [13, 12, 0.001, 6, 0, 0, 0],
-        }, { // Machine traps
+        }, {
             POSITION: [12.5, 8, 1, 0, 0, 60, 0]
         }, {
             POSITION: [2.5, 8, 1.55, 12.5, 0, 60, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.trap, { speed: 0.7, maxSpeed: 0.7 }, {size: 0.95, damage: 0.8}]),
+                SHOOT_SETTINGS: combineStats([g.trap, {speed: 0.7, maxSpeed: 0.7, size: 0.95, damage: 1.5}]),
                 TYPE: "trap",
                 STAT_CALCULATOR: gunCalcNames.trap,
                 AUTOFIRE: true,
@@ -172,7 +172,7 @@ Class.pressurizer = {
         }, {
             POSITION: [2.5, 8, 1.55, 12.5, 0, -60, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.trap, { speed: 0.7, maxSpeed: 0.7 }, {size: 0.95, damage: 0.8}]),
+                SHOOT_SETTINGS: combineStats([g.trap, {speed: 0.7, maxSpeed: 0.7, size: 0.95, damage: 1.5}]),
                 TYPE: "trap",
                 STAT_CALCULATOR: gunCalcNames.trap,
                 AUTOFIRE: true,
@@ -607,7 +607,7 @@ Class.scarecrow = {
         HEALTH: harvesterStats.HEALTH * 1.5,
         SPEED: harvesterStats.SPEED,
         SHIELD: harvesterStats.SHIELD * 1.7,
-        FOV: harvesterStats.FOV * 2,
+        FOV: harvesterStats.FOV * 1.3,
     },
     SKILL: skillSet({
         rld: 0.7,
