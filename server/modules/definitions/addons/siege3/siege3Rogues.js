@@ -480,7 +480,7 @@ Class.roguePioneerTurret = {
     CONTROLLERS: [ "onlyAcceptInArc", "nearestDifferentMaster" ],
     GUNS: [
         {
-            POSITION: [10, 12.5, -0.7, 10, 0, 0, 0],
+            POSITION: [10, 12.25, -0.7, 12, 0, 0, 0],
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.launcher, g.rocketeer, {speed: 3, maxSpeed: 2, damage: 0.38, size: 0.7, range: 1.45, reload: 2.5}]),
                 TYPE: ["homingMissile", {BODY: {RECOIL_MULTIPLIER: 0.18}}],
@@ -488,9 +488,9 @@ Class.roguePioneerTurret = {
                 AUTOFIRE: true,
             },
         }, {
-            POSITION: [17, 18, 0.65, 0, 0, 0, 0],
+            POSITION: [19, 18, 0.65, 0, 0, 0, 0],
         }, {
-            POSITION: [13.5, 13, -0.55, 0, 0, 0, 0],
+            POSITION: [15.5, 13, -0.55, 0, 0, 0, 0],
         },
     ],
 }
@@ -522,15 +522,16 @@ Class.roguePioneer = {
     },
     GUNS: weaponArray([
         {
-            POSITION: [12.75, 5, 1, 0, 0, 0, 0],
+            POSITION: [12.25, 4.75, 1, 0, 0, 0, 0],
         }, {
-            POSITION: [1.75, 5, 1.5, 12.75, 0, 0, 0],
+            POSITION: [1.5, 4.75, 1.45, 12.25, 0, 0, 0],
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.trap, g.setTrap, g.construct, { speed: 1.2 }, g.hexaTrapper, {health: 1.5, reload: 5}]),
                 TYPE: "unsetSurgeonPillbox",
                 STAT_CALCULATOR: gunCalcNames.block,
                 DESTROY_OLDEST_CHILD: true,
                 MAX_CHILDREN: 2,
+                AUTOFIRE: true,
             }
         }
     ], 8, 1/2),
