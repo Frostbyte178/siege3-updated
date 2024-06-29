@@ -345,7 +345,6 @@ Class.sentry = {
     HAS_NO_MASTER: true,
     DRAW_HEALTH: true,
     GIVE_KILL_MESSAGE: true,
-    CLEAR_ON_MASTER_UPGRADE: true,
 };
 Class.sentrySwarm = {
     PARENT: "sentry",

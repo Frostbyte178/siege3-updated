@@ -214,7 +214,7 @@ Class.eliteSpawner = {
             POSITION: [2, 18, 1, 11, 0, 60, 0],
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.drone, g.weak, g.weak, { size: 0.5, health: 0.8 }]),
-                TYPE: ["sentrySwarm", {ACCEPTS_SCORE: false, VARIES_IN_SIZE: false, GIVE_KILL_MESSAGE: false}],
+                TYPE: ["sentrySwarm", {CLEAR_ON_MASTER_UPGRADE: true, ACCEPTS_SCORE: false, VARIES_IN_SIZE: false, GIVE_KILL_MESSAGE: false}],
                 SYNCS_SKILLS: true,
                 AUTOFIRE: true,
                 STAT_CALCULATOR: gunCalcNames.drone,
@@ -223,7 +223,7 @@ Class.eliteSpawner = {
             POSITION: [2, 18, 1, 11, 0, 180, 0],
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.drone, g.weak, g.weak, { size: 0.5, health: 0.8 }]),
-                TYPE: ["sentryTrap", {ACCEPTS_SCORE: false, VARIES_IN_SIZE: false, GIVE_KILL_MESSAGE: false}],
+                TYPE: ["sentryTrap", {CLEAR_ON_MASTER_UPGRADE: true, ACCEPTS_SCORE: false, VARIES_IN_SIZE: false, GIVE_KILL_MESSAGE: false}],
                 SYNCS_SKILLS: true,
                 AUTOFIRE: true,
                 STAT_CALCULATOR: gunCalcNames.drone,
@@ -232,7 +232,7 @@ Class.eliteSpawner = {
             POSITION: [2, 18, 1, 11, 0, 300, 0],
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.drone, g.weak, g.weak, { size: 0.5, health: 0.8 }]),
-                TYPE: ["sentryGun", {ACCEPTS_SCORE: false, VARIES_IN_SIZE: false, GIVE_KILL_MESSAGE: false}],
+                TYPE: ["sentryGun", {CLEAR_ON_MASTER_UPGRADE: true, ACCEPTS_SCORE: false, VARIES_IN_SIZE: false, GIVE_KILL_MESSAGE: false}],
                 SYNCS_SKILLS: true,
                 AUTOFIRE: true,
                 STAT_CALCULATOR: gunCalcNames.drone,
