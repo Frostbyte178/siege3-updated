@@ -406,6 +406,12 @@ Class.healerSwarm = {
     AI: {BLIND: true},
     HEALER: true,
     INDEPENDENT: true,
+    TURRETS: [
+        {
+            POSITION: [14, 0, 0, 0, 0, 1],
+            TYPE: "healerSymbol"
+        }
+    ]
 }
 Class.rogueInventorTurret = {
     PARENT: "genericTank",
