@@ -188,7 +188,7 @@ Class.sanctuary = {
     PARENT: "dominator",
     DISPLAY_NAME: false,
     LABEL: "Sanctuary",
-    LEVEL: 45,
+    LEVEL_CAP: 45,
     SIZE: 20,
     FACING_TYPE: ["spin", {speed: 0.02}],
     CONTROLLERS: ["alwaysFire"],
