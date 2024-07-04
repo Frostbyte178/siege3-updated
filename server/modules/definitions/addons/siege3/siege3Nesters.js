@@ -159,9 +159,9 @@ Class.nestIndustry = {
     }], ["drag", {range: 450}]],
     GUNS: weaponArray([
         {
-            POSITION: [11.75, 8, 1, 0, 0, 36, 0],
+            POSITION: [11.5, 7.5, 1, 0, 0, 36, 0],
         }, {
-            POSITION: [1.5, 9, 1, 11.75, 0, 36, 0],
+            POSITION: [1.5, 8.5, 1, 11.5, 0, 36, 0],
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.drone, g.weak, g.weak, { health: 0.7, size: 0.45 }]),
                 TYPE: ["sentinelCrossbow", {CLEAR_ON_MASTER_UPGRADE: true, ACCEPTS_SCORE: false, VARIES_IN_SIZE: false, GIVE_KILL_MESSAGE: false}],
