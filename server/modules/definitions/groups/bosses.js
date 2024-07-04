@@ -959,8 +959,8 @@ Class.terrestrial = {
         SHIELD: 200,
         REGEN: base.REGEN * 0.1,
         SPEED: base.SPEED * 0.35,
+        DAMAGE: 9,
     },
-    DAMAGE: 9,
 };
 Class.celestial = {
     PARENT: "miniboss",
@@ -976,8 +976,8 @@ Class.celestial = {
         SHIELD: 400,
         REGEN: base.REGEN * 0.1,
         SPEED: base.SPEED * 0.25,
+        DAMAGE: 12,
     },
-    DAMAGE: 12,
 };
 Class.rogueCelestial = {
     PARENT: "celestial",
@@ -998,8 +998,8 @@ Class.eternal = {
         SHIELD: 800,
         REGEN: base.REGEN * 0.1,
         SPEED: base.SPEED * 0.25,
+        DAMAGE: 18,
     },
-    DAMAGE: 18,
 };
 
 // Terrestrials
