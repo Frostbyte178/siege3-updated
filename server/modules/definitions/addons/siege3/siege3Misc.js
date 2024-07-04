@@ -153,7 +153,7 @@ Class.builderTurret = {
         }, {
             POSITION: [2, 12, 1.1, 18, 0, 0, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.trap, g.pounder, g.setTrap, { speed: 2.5 }]),
+                SHOOT_SETTINGS: combineStats([g.trap, g.pounder, g.setTrap, { speed: 1.3 }]),
                 TYPE: "unsetTrap",
                 AUTOFIRE: true,
             },
