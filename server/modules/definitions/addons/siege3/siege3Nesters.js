@@ -46,9 +46,9 @@ Class.nestPurger = {
     }], ["drag", {range: 500}]],
     GUNS: weaponArray([
         {
-            POSITION: [-1.5, 8, 1.2, 11, 0, 36, 0],
+            POSITION: [-1.5, 7.5, 1.2, 11, 0, 36, 0],
         }, {
-            POSITION: [1.5, 8, 1.2, 11, 0, 36, 0],
+            POSITION: [1.5, 7.5, 1.2, 11, 0, 36, 0],
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.trap, { reload: 1.75, health: 1.5, range: 0.7, speed: 0.5, maxSpeed: 0.5, size: 0.65, recoil: 0 } ]),
                 TYPE: "autoTrap",
@@ -84,9 +84,9 @@ Class.nestGrenadier = {
     }], ["drag", {range: 425}]],
     GUNS: weaponArray([
         {
-            POSITION: [11, 7.5, -0.4, 0, 0, 36, 0],
+            POSITION: [11, 7, -0.4, 0, 0, 36, 0],
         }, {
-            POSITION: [1.5, 7.5, 1.3, 11, 0, 36, 0],
+            POSITION: [1.5, 7, 1.3, 11, 0, 36, 0],
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.basic, g.machineGun, g.hexaTrapper, { shudder: 0.75, size: 0.25, recoil: 0 } ]),
                 TYPE: "trap"
@@ -121,9 +121,9 @@ Class.nestBrigadier = {
     }], ["drag", {range: 450}]],
     GUNS: weaponArray([
         {
-            POSITION: [2.5, 6.5, 1, 9.5, 0, 36, 0],
+            POSITION: [2.5, 5.75, 1, 9.5, 0, 36, 0],
         }, {
-            POSITION: [1.5, 9, 1, 9.5, 0, 36, 0],
+            POSITION: [1.5, 8, 1, 9.5, 0, 36, 0],
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.launcher, g.pounder, g.destroyer, { speed: 0.78, maxSpeed: 0.125, reload: 0.7, damage: 0.17, health: 7, size: 0.85, range: 1.3, recoil: 0 } ]),
                 TYPE: "bigminimissile",
@@ -159,11 +159,11 @@ Class.nestIndustry = {
     }], ["drag", {range: 450}]],
     GUNS: weaponArray([
         {
-            POSITION: [11.75, 9.5, 1, 0, 0, 36, 0],
+            POSITION: [11.75, 8, 1, 0, 0, 36, 0],
         }, {
-            POSITION: [1.5, 10.5, 1, 11.75, 0, 36, 0],
+            POSITION: [1.5, 9, 1, 11.75, 0, 36, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.drone, g.weak, g.weak, { health: 0.7, size: 0.4 }]),
+                SHOOT_SETTINGS: combineStats([g.drone, g.weak, g.weak, { health: 0.7, size: 0.45 }]),
                 TYPE: ["sentinelCrossbow", {CLEAR_ON_MASTER_UPGRADE: true, ACCEPTS_SCORE: false, VARIES_IN_SIZE: false, GIVE_KILL_MESSAGE: false}],
                 SYNCS_SKILLS: true,
                 AUTOFIRE: true,
@@ -266,9 +266,9 @@ Class.nestWatchman = {
     LABEL: "Nest Watchman",
     GUNS: weaponArray([
         {
-            POSITION: [10.7, 8, 1, 0, 0, 36, 0],
+            POSITION: [10.7, 7.5, 1, 0, 0, 36, 0],
         }, {
-            POSITION: [1.5, 8, 1.2, 10.7, 0, 36, 0],
+            POSITION: [1.5, 7.5, 1.2, 10.7, 0, 36, 0],
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.trap, { speed: 1.2 }, g.setTrap, g.constructor, {range: 0.5}]),
                 TYPE: "unsetTrap",
