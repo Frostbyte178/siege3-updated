@@ -14,7 +14,7 @@ Class.desmosTurret = {
         FOV: 0.5,
     },
     INDEPENDENT: true,
-    CONTROLLERS: ["nearestDifferentMaster", 'onlyAcceptInArc'],
+    CONTROLLERS: ["nearestDifferentMaster"],
     COLOR: "grey",
     AI: {
         SKYNET: true,
@@ -24,7 +24,7 @@ Class.desmosTurret = {
         {
             POSITION: [26, 10, 0.8, 0, 0, 0, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.lowPower, { reload: 0.5 }]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.desmos, g.pelleter, g.power, g.turret]),
                 TYPE: "bullet"
             }
         },
@@ -54,7 +54,7 @@ Class.sentryThruster = {
         {
             POSITION: [7, 18, -.6, 7, 0, 180, 0.5],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.machineGun, { recoil: 1.15 }, g.lowPower, g.swarm]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.machineGun, { recoil: 1.3, reload: 2, size: 2/3 }, g.lowPower]),
                 TYPE: "bullet",
                 STAT_CALCULATOR: gunCalcNames.swarm,
             },
@@ -62,7 +62,7 @@ Class.sentryThruster = {
         {
             POSITION: [9, 12, -.6, 7, 0, 180, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.machineGun, { recoil: 1.15 }, g.lowPower, g.swarm]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.machineGun, { recoil: 1.3, reload: 2 }, g.lowPower]),
                 TYPE: "bullet",
                 STAT_CALCULATOR: gunCalcNames.swarm,
             },
@@ -81,7 +81,7 @@ Class.sentryRoadspike = {
         {
             POSITION: [4, 12, 1.8, 13.5, 0, 180, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.machineGun, g.trap, g.lowPower, { speed: 0.5, maxSpeed: 0.5 }, { speed: 0.5, maxSpeed: 0.5 }]),
+                SHOOT_SETTINGS: combineStats([g.trap, g.pounder, g.lowPower, {shudder: 0.3, speed: 0.8}]),
                 TYPE: "trap",
                 STAT_CALCULATOR: gunCalcNames.trap,
             },
