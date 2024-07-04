@@ -129,6 +129,13 @@ class BossRush {
             nestKeeper: 1.2,
             nestWarden: 1.2,
             nestGuardian: 1.2,
+            nestPurger: 1.2,
+            nestGrenadier: 1.2,
+            nestBrigadier: 1.2,
+            nestIndustry: 1.2,
+            nestSynthesizer: 1.2,
+            nestPurifier: 1.2,
+            nestWatchman: 1.2,
 
             ares: 1.75,
             gersemi: 1.75,
