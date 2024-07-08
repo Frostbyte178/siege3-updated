@@ -276,8 +276,10 @@ Class.irrigator = {
     },
     AI: {IGNORE_SHAPES: true, SKYNET: true},
     GUNS: [
-        { // BR Missile
-            POSITION: [9, 7, -0.7, 6, 3, 55, 0.18],
+        {
+            POSITION: [13, 12, 0.001, 6, 0, 0, 0],
+        }, { // BR Missile
+            POSITION: [9, 8, -0.7, 6, 5, 75, 0.18],
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.launcher, g.rocketeer, {speed: 8, damage: 0.4, size: 0.7, range: 1.1, reload: 3.5}]),
                 TYPE: ["homingMissile", {BODY: {RECOIL_MULTIPLIER: 0.35}, CONTROLLERS: [["missileGuidance", {slowTurnDelay: 800, fastTurnDelay: 1700}]]}],
@@ -285,11 +287,11 @@ Class.irrigator = {
                 ALT_FIRE: true,
             },
         }, {
-            POSITION: [17, 10.5, 0.65, -4, 3, 55, 0],
+            POSITION: [17, 11.5, 0.65, -4, 5, 75, 0],
         }, {
-            POSITION: [13.5, 7.5, -0.55, -4, 3, 55, 0],
+            POSITION: [13.5, 8.5, -0.55, -4, 5, 75, 0],
         }, { // BL Missile
-            POSITION: [9, 7, -0.7, 6, -3, -55, 0.18],
+            POSITION: [9, 8, -0.7, 6, -5, -75, 0.18],
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.launcher, g.rocketeer, {speed: 8, damage: 0.4, size: 0.7, range: 1.1, reload: 3.5}]),
                 TYPE: ["homingMissile", {BODY: {RECOIL_MULTIPLIER: 0.35}, CONTROLLERS: [["missileGuidance", {slowTurnDelay: 800, fastTurnDelay: 1700}]]}],
@@ -297,11 +299,11 @@ Class.irrigator = {
                 ALT_FIRE: true,
             },
         }, {
-            POSITION: [17, 10.5, 0.65, -4, -3, -55, 0],
+            POSITION: [17, 11.5, 0.65, -4, -5, -75, 0],
         }, {
-            POSITION: [13.5, 7.5, -0.55, -4, -3, -55, 0],
+            POSITION: [13.5, 8.5, -0.55, -4, -5, -75, 0],
         }, { // FR Missile
-            POSITION: [9, 7, -0.7, 7.5, 1, 25, 0.06],
+            POSITION: [9, 8, -0.7, 8, 1.5, 45, 0.06],
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.launcher, g.rocketeer, {speed: 8, damage: 0.4, size: 0.7, range: 1.1, reload: 3.5}]),
                 TYPE: ["homingMissile", {BODY: {RECOIL_MULTIPLIER: 0.35}, CONTROLLERS: [["missileGuidance", {slowTurnDelay: 800, fastTurnDelay: 1400}]]}],
@@ -309,21 +311,21 @@ Class.irrigator = {
                 ALT_FIRE: true,
             },
         }, {
-            POSITION: [17, 10.5, 0.65, -2.5, 1, 25, 0],
+            POSITION: [17, 11.5, 0.65, -2, 1.5, 45, 0],
         }, {
-            POSITION: [13.5, 7.5, -0.55, -2.5, 1, 25, 0],
+            POSITION: [13.5, 8.5, -0.55, -2, 1.5, 45, 0],
         }, { // FL Missile
-            POSITION: [9, 7, -0.7, 7.5, -1, -25, 0.06],
+            POSITION: [9, 8, -0.7, 8, -1.5, -45, 0.06],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.launcher, g.rocketeer, {speed: 8, damage: 0.5, size: 0.7, range: 1.1, reload: 3.5}]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.launcher, g.rocketeer, {speed: 8, damage: 0.4, size: 0.7, range: 1.1, reload: 3.5}]),
                 TYPE: ["homingMissile", {BODY: {RECOIL_MULTIPLIER: 0.35}, CONTROLLERS: [["missileGuidance", {slowTurnDelay: 800, fastTurnDelay: 1400}]]}],
                 STAT_CALCULATOR: gunCalcNames.sustained,
                 ALT_FIRE: true,
             },
         }, {
-            POSITION: [17, 10.5, 0.65, -2.5, -1, -25, 0],
+            POSITION: [17, 11.5, 0.65, -2, -1.5, -45, 0],
         }, {
-            POSITION: [13.5, 7.5, -0.55, -2.5, -1, -25, 0],
+            POSITION: [13.5, 8.5, -0.55, -2, -1.5, -45, 0],
         }, 
         ...addThruster(2)
     ],
