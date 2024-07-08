@@ -67,16 +67,17 @@ class io_bombingRun extends IO {
         if (input.target != null) {
             let target = new Vector(input.target.x, input.target.y);
             // Set status
-            if (target.length < this.breakAwayRange) {
+            if (target.length < this.breakAwayRange || (!this.bombAtLowHealth && this.body.health.display < 0.2)) {
                 this.currentlyBombing = false;
             }
-            if (target.length > this.goAgainRange && (this.bombAtLowHealth || this.body.health.display() > 0.15) || !this.validatePosition()) {
+            if (target.length > this.goAgainRange && (this.bombAtLowHealth || this.body.health.display() > 0.65) || !this.validatePosition()) {
                 this.currentlyBombing = true;
             }
 
             let goal, 
                 newX = target.x, 
-                newY = target.y;
+                newY = target.y,
+                fire = true;
             if (this.currentlyBombing) {
                 goal = {
                     x: target.x + this.body.x,
@@ -93,15 +94,17 @@ class io_bombingRun extends IO {
                     y: newY + this.body.y,
                 };
                 // Avoid twitching when at the turnaround range
-                if ((newX ** 2 + newY ** 2) < 400) {
+                if ((newX ** 2 + newY ** 2) < 900) {
                     newX = target.x;
                     newY = target.y;
+                    fire = false;
                 }
             }
             
             return {
                 goal,
                 target: {x: newX, y: newY},
+                fire,
                 alt: (this.alwaysFireInRange || this.currentlyBombing) && target.length < this.firingRange,
             }
         }
