@@ -117,7 +117,7 @@ class io_drag extends IO {
         super(body);
         this.idealRange = opts.range ?? 400;
         this.useAlt = opts.useAlt ?? false;
-        this.runAwayDistance = opts.runRange ?? (this.idealRange / 2);
+        this.runAwayDistance = opts.runRange ?? (this.idealRange / 2.5);
         this.turnwise = 0;
     }
     clampGoal(goal) {
@@ -144,7 +144,7 @@ class io_drag extends IO {
         if (input.target == null || !input.main) {
             return {};
         }
-        let sizeFactor = Math.sqrt(this.body.master.size / this.body.master.SIZE),
+        let sizeFactor = this.body.master.size / this.body.master.SIZE,
             orbit = this.idealRange * sizeFactor,
             goal,
             power = 1,
@@ -159,7 +159,7 @@ class io_drag extends IO {
                 let distance = Math.sqrt(relativeX ** 2 + relativeY ** 2);
                 
                 // Only run if close
-                if (distance < this.runAwayDistance * sizeFactor) {
+                if (distance < (this.runAwayDistance * sizeFactor + this.body.master.size)) {
                     let angleToNearest = Math.atan2(relativeY, relativeX);
                     let relativeAngleToNearest = util.angleDifference(angleToNearest, target.direction);
                     if (relativeAngleToNearest < 0 & relativeAngleToNearest > Math.PI * -1.8) {
