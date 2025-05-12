@@ -355,7 +355,7 @@ class io_underseerRepel extends IO {
         let repelTriggerRange = this.repelTriggerRange * sizeFactor;
 
         let meanDistance = this.getDroneMeanDistance();
-        if (this.actionId == 3 && meanDistance < target.length * 0.45) {
+        if (this.actionId == 3 && meanDistance < target.length * 0.45 || this.actionId != 3 && this.drones.length < this.minDroneCount) {
             this.actionId = 0;
         } else if (this.actionId == 0 && this.drones.length >= this.repelAtDroneCount && target.length <= repelTriggerRange) {
             setTimeout(() => this.actionId = 1, this.droneRepelStartDelay);

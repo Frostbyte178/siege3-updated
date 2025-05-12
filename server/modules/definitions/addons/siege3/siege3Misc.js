@@ -31,7 +31,7 @@ Class.bigminimissile = {
             POSITION: [14, 6, 1, 0, 0, 180, 1.5],
             PROPERTIES: {
                 AUTOFIRE: true,
-                SHOOT_SETTINGS: combineStats([g.basic, g.skimmer, g.lowPower, { recoil: 1.35 }, { speed: 1.3, maxSeed: 1.3 }]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.skimmer, g.lowPower, {recoil: 1.35, speed: 1.3, maxSpeed: 1.3}]),
                 TYPE: ["bullet", { PERSISTS_AFTER_DEATH: true }],
                 STAT_CALCULATOR: gunCalcNames.thruster,
             },
@@ -485,7 +485,7 @@ Class.boomerTurretWeak = {
         {
             POSITION: [2, 10, 1.3, 18, 0, 0, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.trap, g.setTrap, g.boomerang, {reload: 2, speed: 3, range: 1.3}]),
+                SHOOT_SETTINGS: combineStats([g.trap, g.setTrap, g.boomerang, {reload: 2, speed: 2, maxSpeed: 2, range: 1.25}]),
                 TYPE: "boomerang",
                 STAT_CALCULATOR: gunCalcNames.block
             },

@@ -729,7 +729,7 @@ Class.roguePalisade = {
         cluster: 0.5, // 2
     }], ["drag", {range: 450}]],
     BODY: {
-        FOV: 1.4,
+        FOV: 1.7,
         SPEED: 0.4 * base.SPEED,
         HEALTH: 16 * base.HEALTH,
         SHIELD: 3 * base.SHIELD,

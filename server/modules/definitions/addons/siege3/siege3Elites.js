@@ -44,7 +44,7 @@ Class.eliteHarbor = {
         isSanctuary: -100, // 100
         killCount: 3, // 2.5
         cluster: 3, // 2
-    }], ["drag", {range: 450}], ["underseerRepel", {trigger: 825, repelDrones: 31, minDrones: 12, repelCenterDistance: -0.25}]],
+    }], ["drag", {range: 450}], ["underseerRepel", {trigger: 825, repelDrones: 31, minDrones: 12, repelDistance: 1}]],
     SKILL: skillSet({
         rld: 0.7,
         dam: 0.5,

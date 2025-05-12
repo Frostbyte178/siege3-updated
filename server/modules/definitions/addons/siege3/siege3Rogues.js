@@ -41,7 +41,7 @@ Class.rogueBarricade = {
         cluster: 0.5, // 2
     }], ["drag", {range: 450}]],
     BODY: {
-        FOV: 1.4,
+        FOV: 1.7,
         SPEED: 0.4 * base.SPEED,
         HEALTH: 16 * base.HEALTH,
         SHIELD: 3 * base.SHIELD,
@@ -76,7 +76,7 @@ Class.rogueBalustradeTurret = {
         }, {
             POSITION: [2, 16, 1.2, 18, 0, 0, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.trap, g.setTrap, { speed: 1.2 }, g.hexaTrapper]),
+                SHOOT_SETTINGS: combineStats([g.trap, g.setTrap, g.hexaTrapper, g.pounder, {reload: 0.73, speed: 1.4, range: 0.8}]),
                 TYPE: "unsetTrap",
                 STAT_CALCULATOR: gunCalcNames.trap,
                 AUTOFIRE: true,
@@ -101,31 +101,27 @@ Class.rogueBalustrade = {
         isSanctuary: -25, // 100
         killCount: 3, // 2.5
         cluster: 0.5, // 2
-    }], ["drag", {range: 450}]],
+    }], ["drag", {range: 450}], ["underseerRepel", {trigger: 825, repelDrones: 25, minDrones: 15}]],
     BODY: {
-        FOV: 1.4,
+        FOV: 1.7,
         SPEED: 0.4 * base.SPEED,
         HEALTH: 16 * base.HEALTH,
         SHIELD: 3 * base.SHIELD,
         DAMAGE: 3 * base.DAMAGE,
         REGEN: base.REGEN * 0.3,
     },
-    GUNS: weaponArray([
-        {
-            POSITION: [4, 6, 1.3, 8, 0, 0, 0],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.drone, g.pounder, {size: 1.3}]),
-                TYPE: "turretedDrone",
-                STAT_CALCULATOR: gunCalcNames.drone,
-                WAIT_TO_CYCLE: true,
-                AUTOFIRE: true,
-                MAX_CHILDREN: 3,
-                SYNCS_SKILLS: true
-            }
-        }, {
-            POSITION: [2.6, 3.5, 1, 8, 0, 0, 0],
+    GUNS: weaponArray([{
+        POSITION: [4, 5, 1.3, 8, 0, 0, 0],
+        PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.drone, {health: 1.4, damage: 1.4, density: 2, resist: 1.15, reload: 1.65, maxSpeed: 0.9, size: 1.15}]),
+            TYPE: "drone",
+            STAT_CALCULATOR: gunCalcNames.drone,
+            WAIT_TO_CYCLE: true,
+            AUTOFIRE: true,
+            MAX_CHILDREN: 5,
+            SYNCS_SKILLS: true
         }
-    ], 6),
+    }], 6),
     TURRETS: weaponArray({
         POSITION: [5, 10, 0, 30, 0, 0],
         TYPE: "rogueBalustradeTurret",
@@ -185,7 +181,7 @@ Class.rogueBattalion = {
     GUNS: weaponArray({
         POSITION: [13, 6, 1, 0, 0, 360/14, 0],
         PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.pounder, g.destroyer, {speed: 1.1, maxSeed: 1.1}]),
+            SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.pounder, g.destroyer, {speed: 1.1, maxSpeed: 1.1}]),
             TYPE: "bullet",
         }
     }, 7),
@@ -422,7 +418,7 @@ Class.rogueInventorTurret = {
         {
             POSITION: [9, 10, 0.6, 7, 0, 0, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.swarm, { speed: 1.3, maxSeed: 1.3 }, {range: 1.8, reload: 1.6}]),
+                SHOOT_SETTINGS: combineStats([g.swarm, {speed: 1.3, maxSpeed: 1.3, range: 1.8, reload: 1.6}]),
                 TYPE: "healerSwarm",
                 AUTOFIRE: true,
                 STAT_CALCULATOR: gunCalcNames.swarm,
