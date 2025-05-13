@@ -203,7 +203,7 @@ Class.stockyard = {
         isHealer: 0, // -25
         isSanctuary: -1e80, // 100
         killCount: 2.5, // 2.5
-        cluster: -0.5, // 2
+        cluster: 5, // 2
     }], ["bombingRun", {breakAwayAngle: 10, alwaysFireInRange: true}]],
     BODY: {
         HEALTH: harvesterStats.HEALTH * 0.75,
@@ -212,22 +212,34 @@ Class.stockyard = {
     },
     AI: {IGNORE_SHAPES: true, SKYNET: true, chase: true},
     GUNS: [
-        { // Shockwave
-            POSITION: [14, 12, -0.7, 3, 0, 0, 0],
+        {
+            POSITION: [20, 7.5, -1.3, 0, 0, 0, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.machineGun, g.machineGun, {speed: 0.5, health: 2, density: 3, spray: 0.5, size: 0.5, shudder: 0.1}]),
-                TYPE: "bullet",
+                SHOOT_SETTINGS: combineStats([g.basic, g.minigun, {health: 1.5, maxSpeed: 0.7, recoil: 0.4}]),
+                TYPE: "bullet"
+            }
+        }, {
+            POSITION: [18, 7.8, -1.3, 0, 0, 0, 1/3],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.minigun, {health: 1.5, maxSpeed: 0.7, recoil: 0.4, size: 7.5/7.8}]),
+                TYPE: "bullet"
+            }
+        }, {
+            POSITION: [16, 8.1, -1.3, 0, 0, 0, 2/3],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.minigun, {health: 1.5, maxSpeed: 0.7, recoil: 0.4, size: 7.5/8.1}]),
+                TYPE: "bullet"
             }
         }, { // Thrusters
             POSITION: [12.5, 7.5, -0.5, 1, -5, 165, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.machineGun, g.flankGuard, g.triAngle, g.thruster, {reload: 0.7, recoil: 1, size: 0.8}]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.machineGun, g.flankGuard, g.triAngle, g.thruster, {reload: 0.7, recoil: 1.2, size: 0.8}]),
                 TYPE: "bullet",
             },
         }, {
             POSITION: [12.5, 7.5, -0.5, 1, 5, -165, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.machineGun, g.flankGuard, g.triAngle, g.thruster, {reload: 0.7, recoil: 1, size: 0.8}]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.machineGun, g.flankGuard, g.triAngle, g.thruster, {reload: 0.7, recoil: 1.2, size: 0.8}]),
                 TYPE: "bullet",
             },
         }, {
@@ -239,7 +251,7 @@ Class.stockyard = {
         }, {
             POSITION: [1.5, 10, 1.3, 13.5, 0, 180, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.trap, g.setTrap, g.machineGun, g.machineGun, {health: 1.85, reload: 0.55, spray: 0.3}]),
+                SHOOT_SETTINGS: combineStats([g.trap, g.setTrap, g.machineGun, g.machineGun, {health: 1.85, reload: 0.55, spray: 0.3, recoil: 0.25, range: 0.3}]),
                 TYPE: "unsetTrap",
                 STAT_CALCULATOR: gunCalcNames.block,
                 ALT_FIRE: true,
