@@ -155,7 +155,7 @@ Class.pressurizer = {
     },
     AI: {IGNORE_SHAPES: true, SKYNET: true, chase: true},
     GUNS: [
-        {
+        { // Front spike
             POSITION: [13, 12, 0.001, 6, 0, 0, 0],
         }, {
             POSITION: [12.5, 8, 1, 0, 0, 60, 0]
@@ -279,67 +279,76 @@ Class.irrigator = {
         isSanctuary: -75, // 100
         killCount: 3, // 2.5
         cluster: 1.5, // 2
-    }], ["drag", {range: 1100, useAlt: true}]],
+    }], ["drag", {range: 900, useAlt: true}]],
     BODY: {
         HEALTH: harvesterStats.HEALTH * 1.5,
         SPEED: harvesterStats.SPEED,
-        SHIELD: harvesterStats.SHIELD * 1.7,
-        FOV: harvesterStats.FOV * 0.7,
+        SHIELD: harvesterStats.SHIELD * 1.75,
+        FOV: harvesterStats.FOV * 2,
     },
     AI: {IGNORE_SHAPES: true, SKYNET: true},
     GUNS: [
-        {
+        { // Front spike
             POSITION: [13, 12, 0.001, 6, 0, 0, 0],
+        }, { // Thruster
+            POSITION: [12.5, 12, -0.5, 3, 0, 180, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.machineGun, g.flankGuard, g.triAngle, g.thruster, {reload: 0.7, recoil: 2, size: 0.45}]),
+                TYPE: "bullet",
+            },
+        }, {
+            POSITION: [9, 7.5, 0.001, 6, 0, -152, 0],
+        }, {
+            POSITION: [9, 7.5, 0.001, 6, 0, 152, 0],
         }, { // BR Missile
-            POSITION: [9, 8, -0.7, 6, 5, 75, 0.18],
+            POSITION: [9, 8, -0.7, 7, 2, 105, 0.06],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.launcher, g.rocketeer, {speed: 8, damage: 0.4, size: 0.7, range: 1.1, reload: 3.5}]),
-                TYPE: ["homingMissile", {BODY: {RECOIL_MULTIPLIER: 0.35}, CONTROLLERS: [["missileGuidance", {slowTurnDelay: 800, fastTurnDelay: 1700}]]}],
+                SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.launcher, g.rocketeer, {speed: 8, damage: 0.55, size: 0.7, range: 2, reload: 4.5}]),
+                TYPE: ["homingMissile", {INDEPENDENT: false, BODY: {RECOIL_MULTIPLIER: 0.35}, CONTROLLERS: [["missileGuidance", {slowTurnDelay: 300, fastTurnDelay: 1900}]]}],
                 STAT_CALCULATOR: gunCalcNames.sustained,
                 ALT_FIRE: true,
             },
         }, {
-            POSITION: [17, 11.5, 0.65, -4, 5, 75, 0],
+            POSITION: [11, 11.5, 0.65, 3, 2, 105, 0],
         }, {
-            POSITION: [13.5, 8.5, -0.55, -4, 5, 75, 0],
+            POSITION: [9.5, 7.75, -0.2, 2.5, 2, 105, 0],
         }, { // BL Missile
-            POSITION: [9, 8, -0.7, 6, -5, -75, 0.18],
+            POSITION: [9, 8, -0.7, 7, -2, -105, 0.06],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.launcher, g.rocketeer, {speed: 8, damage: 0.4, size: 0.7, range: 1.1, reload: 3.5}]),
-                TYPE: ["homingMissile", {BODY: {RECOIL_MULTIPLIER: 0.35}, CONTROLLERS: [["missileGuidance", {slowTurnDelay: 800, fastTurnDelay: 1700}]]}],
+                SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.launcher, g.rocketeer, {speed: 8, damage: 0.55, size: 0.7, range: 2, reload: 4.5}]),
+                TYPE: ["homingMissile", {INDEPENDENT: false, BODY: {RECOIL_MULTIPLIER: 0.35}, CONTROLLERS: [["missileGuidance", {slowTurnDelay: 300, fastTurnDelay: 1900}]]}],
                 STAT_CALCULATOR: gunCalcNames.sustained,
                 ALT_FIRE: true,
             },
         }, {
-            POSITION: [17, 11.5, 0.65, -4, -5, -75, 0],
+            POSITION: [11, 11.5, 0.65, 3, -2, -105, 0],
         }, {
-            POSITION: [13.5, 8.5, -0.55, -4, -5, -75, 0],
+            POSITION: [9.5, 7.75, -0.2, 2.5, -2, -105, 0],
         }, { // FR Missile
-            POSITION: [9, 8, -0.7, 8, 1.5, 45, 0.06],
+            POSITION: [9, 8, -0.7, 7, 2, 45, 0.06],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.launcher, g.rocketeer, {speed: 8, damage: 0.4, size: 0.7, range: 1.1, reload: 3.5}]),
-                TYPE: ["homingMissile", {BODY: {RECOIL_MULTIPLIER: 0.35}, CONTROLLERS: [["missileGuidance", {slowTurnDelay: 800, fastTurnDelay: 1400}]]}],
+                SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.launcher, g.rocketeer, {speed: 8, damage: 0.55, size: 0.7, range: 1.4, reload: 4.5}]),
+                TYPE: ["homingMissile", {INDEPENDENT: false, BODY: {RECOIL_MULTIPLIER: 0.35}, CONTROLLERS: [["missileGuidance", {slowTurnDelay: 300, fastTurnDelay: 1400}]]}],
                 STAT_CALCULATOR: gunCalcNames.sustained,
                 ALT_FIRE: true,
             },
         }, {
-            POSITION: [17, 11.5, 0.65, -2, 1.5, 45, 0],
+            POSITION: [11, 11.5, 0.65, 3, 2, 45, 0],
         }, {
-            POSITION: [13.5, 8.5, -0.55, -2, 1.5, 45, 0],
+            POSITION: [9.5, 7.75, -0.2, 2.5, 2, 45, 0],
         }, { // FL Missile
-            POSITION: [9, 8, -0.7, 8, -1.5, -45, 0.06],
+            POSITION: [9, 8, -0.7, 7, -2, -45, 0.06],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.launcher, g.rocketeer, {speed: 8, damage: 0.4, size: 0.7, range: 1.1, reload: 3.5}]),
-                TYPE: ["homingMissile", {BODY: {RECOIL_MULTIPLIER: 0.35}, CONTROLLERS: [["missileGuidance", {slowTurnDelay: 800, fastTurnDelay: 1400}]]}],
+                SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.launcher, g.rocketeer, {speed: 8, damage: 0.55, size: 0.7, range: 1.4, reload: 4.5}]),
+                TYPE: ["homingMissile", {INDEPENDENT: false, BODY: {RECOIL_MULTIPLIER: 0.35}, CONTROLLERS: [["missileGuidance", {slowTurnDelay: 300, fastTurnDelay: 1400}]]}],
                 STAT_CALCULATOR: gunCalcNames.sustained,
                 ALT_FIRE: true,
             },
         }, {
-            POSITION: [17, 11.5, 0.65, -2, -1.5, -45, 0],
+            POSITION: [11, 11.5, 0.65, 3, -2, -45, 0],
         }, {
-            POSITION: [13.5, 8.5, -0.55, -2, -1.5, -45, 0],
-        }, 
-        ...addThruster(2)
+            POSITION: [9.5, 7.75, -0.2, 2.5, -2, -45, 0],
+        }
     ],
     TURRETS: [
         {
@@ -716,7 +725,7 @@ Class.cultivator = {
     },
     AI: {IGNORE_SHAPES: true, SKYNET: true, chase: true},
     GUNS: [
-        {
+        { // Front spike
             POSITION: [13, 12, 0.001, 6, 0, 0, 0],
         }, {
             POSITION: [3, 9, 0.75, 9, 0, 60, 0],
