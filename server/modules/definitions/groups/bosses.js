@@ -740,7 +740,7 @@ Class.roguePalisade = {
         POSITION: [4, 6, -1.6, 8, 0, 0, 0], 
         PROPERTIES: {
             SHOOT_SETTINGS: combineStats([ g.factory, g.pounder, { reload: 2 }]),
-            TYPE: "minion",
+            TYPE: "palisadeMinion",
             STAT_CALCULATOR: gunCalcNames.drone,
             AUTOFIRE: true,
             MAX_CHILDREN: 3,
